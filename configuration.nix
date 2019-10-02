@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -17,13 +17,19 @@
     firefox
     brave
     docker
-    dockerTools
     python
     python3
     stack
+    ghc
   ];
   nixpkgs.config.allowUnfree = true; # for Chrome
 
+  virtualisation.docker.enable = true;
+
+
+  ####
+  #### Below: Unlikely to change much
+  ####
 
   # Networking
 
@@ -77,12 +83,9 @@
     services.xserver.displayManager.sddm.enable = true;
     services.xserver.desktopManager.plasma5.enable = true;
 
-  # Docker
-  virtualisation.docker.enable = true;
-
 
   ####
-  #### Below: Unlikely to change much
+  #### Below: Even less likely to change much
   ####
 
   imports =
@@ -108,7 +111,7 @@
   users.users.jeff = {
     isNormalUser = true;
     extraGroups = [
-      "docker"         # for sudo
+      "docker"
       "wheel"          # for sudo
       "networkmanager" # for the plasma-nm widget
       "audio"
