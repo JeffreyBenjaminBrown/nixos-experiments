@@ -1,29 +1,30 @@
 { config, pkgs, nixpkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    tree
-    file
-    networkmanager
-    plasma-nm
-    emacs
-    gitMinimal
-    gnumeric
-    borgbackup
-    encfs
-    tmux
-    ark
-    kdeApplications.dolphin-plugins
-    kdeApplications.okular
-    libreoffice
-    firefox
-    brave
-    docker
-    python
-    python3
-    stack
-    ghc
-  ];
+  environment.systemPackages =
+    [ (import /etc/nixos/emacs.nix { inherit pkgs; }) ] ++
+    (with pkgs; [
+      tree
+      file
+      networkmanager
+      plasma-nm
+      gitMinimal
+      gnumeric
+      borgbackup
+      encfs
+      tmux
+      ark
+      kdeApplications.dolphin-plugins
+      kdeApplications.okular
+      libreoffice
+      firefox
+      brave
+      docker
+      python
+      python3
+      stack
+      ghc
+  ]);
   nixpkgs.config.allowUnfree = true; # for Chrome
 
   virtualisation.docker.enable = true;

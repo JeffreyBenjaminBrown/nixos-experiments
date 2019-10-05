@@ -1,0 +1,104 @@
+* TODO solve the user ID problem
+On my KUbuntu system, "jeff" has uid 1000;
+here it's 1001.
+* TODO add automatic upgrading
+** system.autoUpgrade.enable = true;
+* how it works
+** getting started (installing, mostly)
+*** move everything critical to an available USB
+  NixOS.org (this file)
+  installs/how-to-reinstall-linux.org
+  borg-backup*.sh
+*** know the USBs
+**** white one has Kubuntu 18.04, just in case
+**** slate = "Patriot 14.8G" is empty
+**** shuttle
+**** blue one = "PATRIOT" is 128G and empty
+*** downloading it
+**** the white USB (1.8 GB) is big enough
+***** even for the graphical live booter
+**** start with the live booter
+***** use the 128GB stick as a store
+**** will eventually need the unstable OS
+***** because it works with JACK
+*** configuring it post-build
+**** git problems
+  Sometimes repos need to be re-cloned or chmodded.
+    Maybe this is because I borg-extracted as root?
+    But strangely, the hode repo did not need this.
+*** use MusNix
+  https://github.com/musnix/musnix
+  Alas, cannot install from this; must switch to it.
+*** installing stuff (ch 3)
+**** basically
+***** modify /etc/nixos/configuration.nix
+***** then run nixos-rebuild test
+****** this tries it without making it the default
+***** if it works, run nixos-rebuild switch
+**** can add it to Grub menu
+*** ch 4: upgrading Nix
+**** is via channels, but voluntary
+**** PITFALL: needs root to matter?
+**** nixos-rebuild switch --upgrade
+**** PITFALL: can't always rollback Nix channels
+***** "Warning: It is generally safe to switch back and forth between channels. The only exception is that a newer NixOS may also have a newer Nix version, which may involve an upgrade of Nix’s database schema. This cannot be undone easily, so in that case you will not be able to go back to your original channel."
+**** can be automatic, periodic
+** tricky | hard to look up
+*** ch 5: configuration syntax
+**** nix calls maps "sets"
+**** package is a type
+**** values are expressions, but attributes are not
+  Let statements are valid wherever expression are valid.
+**** merge sets with //
+**** let, functions, map
+**** string splice with $
+  For instance, this function splices the string "name" into another:
+  makeVirtualHost = name:
+    { hostName = name;
+      documentRoot = "/sites/${name}";
+      adminAddr = "alice@example.org";
+    };
+**** options can be merged from multiple files
+  when it makes sense -- e.g. lists, not strings
+**** `config` arg: the complete merged configuration
+**** discovering attribute values
+ Helpful for complicated configurations, where options are getting merged from multiple files.
+***** command line: nixos-option <option>
+***** or use the repl: "nix repl <package>"
+**** lambda expressions
+ map (x: x.hostName) config.services.httpd.virtualHosts
+**** select attributes with (.)
+ { x = 1; y = 2; }.x == 1
+***** can include a default
+ ({ x = 1; y = 2; }.z or 3) == 4
+**** add attributes to a scope
+ (with pkgs.lib; head [ 1 2 3 ]) == 1
+**** functions 
+***** are called Python-style
+ name(argument)
+***** PITFALL: bind after list construction
+ so, for instance, you'll need to wrap applied functions in parens if they are expressions in lists:
+   environment.systemPackages = [ (pkgs.emacs.override { gtk = pkgs.gtk3; }) ];
+***** are always of one argument (which could be a set)x
+***** can have default values
+ { x, y ? "bar" }: x + y
+***** can accept irrelevant values
+ This function requires x and y, and ignroes anything else:
+ { x, y, ... }: x + y
+***** can bind the entire set argument to a name
+ { x, y } @ args: x + y
+**** import <file>
+ "Load and return Nix expression in given file"
+*** ch 6: package management
+**** packages can have optional settings
+ nixpkgs.config.firefox.enableGoogleTalkPlugin = true;
+ PITFALL: this kind of option is not queriable
+**** customizing packages
+***** package dependencies can be overridden
+  environment.systemPackages = [ (pkgs.emacs.override { gtk = pkgs.gtk3; }) ];
+***** package attributes can be overridden
+ e.g. to change the source code
+ use overrideAttrs
+***** customized packages do not break things that depend on the uncustommized one
+ Nix will instead keep two versions of the package.
+ But that too can be changed, with a "global override".
