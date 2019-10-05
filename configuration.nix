@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     tree
+    file
     networkmanager
     plasma-nm
     emacs
@@ -14,6 +15,7 @@
     ark
     kdeApplications.dolphin-plugins
     kdeApplications.okular
+    libreoffice
     firefox
     brave
     docker
