@@ -10,7 +10,8 @@ let
 in
   emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
     magit          # ; Integrate git <C-x g>
-    zerodark-theme # ; Nicolas' theme
+    nix-mode
+
   ]) ++ (with epkgs.melpaPackages; [
     python-mode
     haskell-mode

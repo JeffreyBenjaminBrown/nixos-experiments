@@ -1,9 +1,21 @@
 * TODO solve the user ID problem
+** TODO Nix code for it
+  # users.groups.students.gid = 1000;  # TODO: Enable.
+                                       # for congruence with KUbuntu system
+  users.users.jeff = {
+    # id = 1000;         # TODO: Enable
+    #                    # for congruence with KUbuntu system
+** see NixOS manualchapter 7
+** the problem
 On my KUbuntu system, "jeff" has uid 1000;
 here it's 1001.
 * TODO add automatic upgrading
 ** system.autoUpgrade.enable = true;
-* how it works
+* TODO put NextCloud on the Rapsberry
+chapter 15 in NixOS manual.
+There's also TaskServer, for todo lists,
+  GitLab,
+* reading the manual
 ** getting started (installing, mostly)
 *** move everything critical to an available USB
   NixOS.org (this file)
@@ -102,3 +114,12 @@ here it's 1001.
 ***** customized packages do not break things that depend on the uncustommized one
  Nix will instead keep two versions of the package.
  But that too can be changed, with a "global override".
+* configuring Emacs
+** guidance
+https://www.reddit.com/r/NixOS/comments/ad6miw/building_an_emacs_configuration_using_nixpkg/
+https://nixos.org/nixpkgs/manual/#sec-emacs
+** overlays -- better than one config.nix blob?
+https://www.reddit.com/r/NixOS/comments/9swtg3/do_you_put_all_packages_you_install_into/e8s4u9f/
+** some peoples' configs
+https://github.com/tazjin/nixos-config
+https://github.com/telent/config-nixpkgs
