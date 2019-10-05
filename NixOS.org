@@ -1,4 +1,11 @@
 * TODO solve the user ID problem
+** To chmod back to 644 (normal): omit folders
+Otherwise the folder contents cannot be read without sudo.
+sudo find . -type f -print0 | xargs -0 chmod 644
+sudo find . -type d -print0 | xargs -0 chmod 744
+
+find . -type d -print0 | xargs -0 chown 1001
+find . -type f -print0 | xargs -0 chown 1001
 ** first make backups
 ** the problem
 On my KUbuntu system, "jeff" has uid 1000;
