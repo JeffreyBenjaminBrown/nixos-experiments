@@ -1,14 +1,19 @@
 * TODO solve the user ID problem
-** TODO Nix code for it
+** first make backups
+** the problem
+On my KUbuntu system, "jeff" has uid 1000;
+on NixOS it's 1001.
+** TODO what is the default group in Kubuntu?
+I have to change not only the id (to jeff=1000),
+but the default group, too.
+** TODO demo Nix code for it
+TODO : gruop: substitute the right name, id value.
   # users.groups.students.gid = 1000;  # TODO: Enable.
                                        # for congruence with KUbuntu system
   users.users.jeff = {
     # id = 1000;         # TODO: Enable
     #                    # for congruence with KUbuntu system
 ** see NixOS manualchapter 7
-** the problem
-On my KUbuntu system, "jeff" has uid 1000;
-here it's 1001.
 * TODO add automatic upgrading
 ** system.autoUpgrade.enable = true;
 * TODO put NextCloud on the Rapsberry

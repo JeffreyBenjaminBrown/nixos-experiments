@@ -16,16 +16,20 @@
       ark
       kdeApplications.dolphin-plugins
       kdeApplications.okular
-      libreoffice
-      firefox
-      brave
+
       docker
       python
       python3
       stack
       ghc
+
+      # mammoths
+      libreoffice
+      firefox
+      brave
+      spotify
   ]);
-  nixpkgs.config.allowUnfree = true; # for Chrome
+  nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
 
   virtualisation.docker.enable = true;
 
