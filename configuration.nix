@@ -96,6 +96,8 @@
   #### Below: Even less likely to change much
   ####
 
+  system.autoUpgrade.enable = true;
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -142,7 +144,6 @@
 
   # User accounts.
   # Don't forget to set a password with ‘passwd’.
-
   users.users.jeff = {
     uid = 1000;        # for compatibility with Ubuntu
     isNormalUser = true;
