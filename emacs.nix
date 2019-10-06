@@ -8,18 +8,22 @@ let
   myEmacs = pkgs.emacs;
   emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
 in
-  emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
-    magit          # ; Integrate git <C-x g>
-    nix-mode
+  emacsWithPackages (epkgs: (
+    with epkgs.melpaStablePackages; [
+      magit        # ; Integrate git <C-x g>
+      nix-mode
 
-  ]) ++ (with epkgs.melpaPackages; [
-    python-mode
-    haskell-mode
-    intero         # for haskell
-  ]) ++ (with epkgs.elpaPackages; [
-    undo-tree
-    org
-    auctex         # ; LaTeX mode
-  ]) ++ [
-    pkgs.notmuch   # elisp-scriptable email
+    ]) ++ (with epkgs.melpaPackages; [
+      elpy         # will it conflict with python-mode?
+      python-mode
+      haskell-mode
+      intero       # for haskell
+
+    ]) ++ (with epkgs.elpaPackages; [
+      undo-tree
+      org
+      auctex       # ; LaTeX mode
+    ]) ++ [
+      pkgs.notmuch # email, scriptable
   ])
+

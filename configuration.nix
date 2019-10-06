@@ -6,6 +6,7 @@
     (with pkgs; [
       tree
       file
+      killall
       networkmanager
       plasma-nm
       gitMinimal
@@ -143,11 +144,13 @@
   # Don't forget to set a password with ‘passwd’.
 
   users.users.jeff = {
+    uid = 1000;        # for compatibility with Ubuntu
     isNormalUser = true;
     extraGroups = [
       "docker"
       "wheel"          # for sudo
-      "networkmanager" # for the plasma-nm widget
+      "networkmanager" # for the plasma-nm widget, and
+        # the privilege of changing settings (adding networks)
       "audio"
       ];
   };

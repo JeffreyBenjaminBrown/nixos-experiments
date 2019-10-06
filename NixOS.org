@@ -1,26 +1,31 @@
-* TODO solve the user ID problem
-** To chmod back to 644 (normal): omit folders
+* user ID problems
+** changing user ID in NixOS is complicated
+*** because it won't let you change the ID of an existing user
+at least not by modifying configuration.nix.
+(It'll compile the changes,
+and announce that it won't apply that change.)
+*** so do this
+Log in as root, not self.
+Remove all users from configuration.nix
+Rebuild and switch.
+Add user again, this time with the ID specified.
+Rebuild and switch.
+** to chmod back to 644 (normal): omit folders
 Otherwise the folder contents cannot be read without sudo.
 sudo find . -type f -print0 | xargs -0 chmod 644
 sudo find . -type d -print0 | xargs -0 chmod 744
 
 find . -type d -print0 | xargs -0 chown 1001
 find . -type f -print0 | xargs -0 chown 1001
-** first make backups
-** the problem
-On my KUbuntu system, "jeff" has uid 1000;
-on NixOS it's 1001.
 ** TODO what is the default group in Kubuntu?
 I have to change not only the id (to jeff=1000),
 but the default group, too.
-** TODO demo Nix code for it
-TODO : gruop: substitute the right name, id value.
-  # users.groups.students.gid = 1000;  # TODO: Enable.
-                                       # for congruence with KUbuntu system
-  users.users.jeff = {
-    # id = 1000;         # TODO: Enable
-    #                    # for congruence with KUbuntu system
-** see NixOS manualchapter 7
+*** demo code
+users.groups.students.gid = 1000;  # TODO: Enable.
+                                   # for congruence with KUbuntu system
+** the Ubuntu-NixOS user ID problem
+On my KUbuntu system, "jeff" has default uid 1000;
+on NixOS it's 1001. This creates permissions problems.
 * TODO add automatic upgrading
 ** system.autoUpgrade.enable = true;
 * TODO put NextCloud on the Rapsberry
@@ -97,7 +102,7 @@ There's also TaskServer, for todo lists,
  ({ x = 1; y = 2; }.z or 3) == 4
 **** add attributes to a scope
  (with pkgs.lib; head [ 1 2 3 ]) == 1
-**** functions 
+**** functions
 ***** are called Python-style
  name(argument)
 ***** PITFALL: bind after list construction
