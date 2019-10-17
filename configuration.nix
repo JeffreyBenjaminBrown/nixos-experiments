@@ -4,6 +4,11 @@
   environment.systemPackages =
     [ (import /etc/nixos/emacs.nix { inherit pkgs; }) ] ++
     (with pkgs; [
+      archiver
+      zip
+      unzip
+      gzip
+
       tree
       file
       killall

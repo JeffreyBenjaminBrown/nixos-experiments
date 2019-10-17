@@ -10,6 +10,7 @@ let
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
+      hide-lines
       magit        # ; Integrate git <C-x g>
       nix-mode
 
