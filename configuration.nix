@@ -2,12 +2,14 @@
 
 {
   environment.systemPackages =
-    [ (import /etc/nixos/emacs.nix { inherit pkgs; }) ] ++
+    [ (import /etc/nixos/emacs.nix { inherit pkgs; })
+    ] ++
     (with pkgs; [
       archiver
       zip
       unzip
       gzip
+      capture
 
       tree
       file
@@ -28,6 +30,8 @@
       python3
       stack
       ghc
+      scala
+      sbt   # scala build tool
 
       # mammoths
       libreoffice
