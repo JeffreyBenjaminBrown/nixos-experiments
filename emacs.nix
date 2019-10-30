@@ -15,9 +15,10 @@ in
       nix-mode
 
     ]) ++ (with epkgs.melpaPackages; [
-      elpy         # will it conflict with python-mode?
+      # elpy         # will it conflict with python-mode?
       python-mode
       haskell-mode
+      scala-mode
       intero       # for haskell
 
     ]) ++ (with epkgs.elpaPackages; [

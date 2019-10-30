@@ -9,7 +9,6 @@
       zip
       unzip
       gzip
-      capture
 
       tree
       file
@@ -23,21 +22,31 @@
       tmux
       ark
       kdeApplications.dolphin-plugins
-      kdeApplications.okular
 
       docker
       python
       python3
       stack
       ghc
+      haskellPackages.hasktags
       scala
       sbt   # scala build tool
+
+      gimp         # manipulate images
+      ghostscript  # manipulate images
+      imagemagick7 # manipulate images
+      pdftk        # manipulate pdfs
+      kdeApplications.okular
+      vlc
+      capture     # screen capture (video, I think)
+      qscreenshot # shows up as a KDE menu widget
 
       # mammoths
       libreoffice
       firefox
       brave
       spotify
+      google-chrome
   ]);
   nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
 
@@ -167,6 +176,10 @@
 
   # PITFALL: To avoid breaking some software,
   # change this only when NixOS release notes say.
+  # PITFALL: Surprisingly, it does not have to match the version of
+  # NixOS you are running -- for instance, the release notes for 19.09
+  # (https://nixos.org/nixos/manual/release-notes.html#sec-release-19.09)
+  # state, "When upgrading from NixOS 19.03, please make sure that system.stateVersion is set to "19.03", or lower if the installation dates back to an earlier version of NixOS."
   system.stateVersion = "19.03";
     # PITFALL: read preceding comment.
 }
