@@ -13,6 +13,7 @@
       tree
       file
       killall
+      xsel
       networkmanager
       plasma-nm
       gitMinimal
@@ -22,7 +23,9 @@
       tmux
       ark
       kdeApplications.dolphin-plugins
+      ktorrent
 
+      awscli
       docker
       python
       python3

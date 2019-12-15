@@ -16,16 +16,17 @@ in
 
     ]) ++ (with epkgs.melpaPackages; [
       # elpy         # will it conflict with python-mode?
+      markdown-mode
       python-mode
       haskell-mode
       scala-mode
       intero       # for haskell
 
     ]) ++ (with epkgs.elpaPackages; [
+      csv-mode
       undo-tree
       org
       auctex       # ; LaTeX mode
     ]) ++ [
       pkgs.notmuch # email, scriptable
   ])
-
