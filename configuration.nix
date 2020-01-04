@@ -25,12 +25,20 @@
       kdeApplications.dolphin-plugins
       ktorrent
 
+      dmidecode # to learn about system RAM
+      i2c-tools # includes decode-dimms
+
       awscli
       docker
       python
       python3
       stack
       ghc
+      # I hoped these next two would let me build a new Stack project
+      # (stack new, cd, stack build) but I still get the error
+      # "libffi.so.6: cannot open shared object file: No such file or directory"
+      haskellPackages.libffi
+      libffi
       haskellPackages.hasktags
       scala
       sbt   # scala build tool
@@ -92,6 +100,10 @@
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+    services.printing.drivers = [ pkgs.gutenprint
+                                  pkgs.gutenprintBin
+                                  pkgs.hplip
+                                  pkgs.hplipWithPlugin ];
 
     # Enable sound.
     sound.enable = true;
