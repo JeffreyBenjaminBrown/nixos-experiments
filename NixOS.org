@@ -26,6 +26,37 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 ** the Ubuntu-NixOS user ID problem
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
+* TODO audio in NixOS
+** TODO try emulating magnetophon's config
+https://github.com/magnetophon/nixosConfig/blob/master/music.nix
+*** TODO review committed changes before asking
+*** TODO ask
+**** is it okay I included so many arguments in audio.nix?
+Some of those words -- e.g. modulesPath --
+I don't see anywhere in the configuration.nix file that imports it.
+**** no pulseaudio? does sound work in the browser for you?
+**** why using older kernel?
+commonRT.nix contains this line:
+    kernel.packages = pkgs.linuxPackages_4_19_rt;
+** asking around
+*** IRC and Discourse ?= the major NixOS communities
+https://nixos.org/nixos/learn.html
+*** resources I've used
+https://github.com/musnix/musnix
+  Not sure what it gets me.
+https://nixos.wiki/wiki/JACK
+  The first part is not obsolete, right?
+https://nixos.wiki/wiki/Audio
+  pretty weak -- ALSA section is out of date, doesn't link to JACK section
+*** places I've spoken
+https://github.com/JeffreyBenjaminBrown/nixos-experiments
+  My config
+https://github.com/NixOS/nixpkgs/issues/71283
+  magnetophon, MDeltaX and others on Github
+https://www.reddit.com/r/NixOS/comments/enkbus/getting_started_with_audio_programming_in_nixos/
+  Me asking why I can't use JACK.
+*** these procedures seem to have helped someone
+https://github.com/NixOS/nixpkgs/issues/74742#issuecomment-570745604
 * TODO resume review at pill 7.5
 * TODO learn to write Nix expressions
 ** stdenv.mkDerivation:
