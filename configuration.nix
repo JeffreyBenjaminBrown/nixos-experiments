@@ -28,6 +28,10 @@
       dmidecode # to learn about system RAM
       i2c-tools # includes decode-dimms
 
+      jack2
+      cadence
+      qjackctl
+
       awscli
       docker
       python
@@ -40,6 +44,12 @@
       haskellPackages.libffi
       libffi
       haskellPackages.hasktags
+      haskellPackages.tidal
+      supercollider
+      supercollider_scel
+      #haskellPackages.vivid  # marked as broken; Nix refuses to evaluate
+      #haskellPackages.vivid-supercollider
+      #haskellPackages.vivid-osc
       scala
       sbt   # scala build tool
 
@@ -52,7 +62,7 @@
       capture     # screen capture (video, I think)
       qscreenshot # shows up as a KDE menu widget
 
-      # mammoths
+      # big and/or sketchy
       libreoffice
       firefox
       brave
@@ -108,6 +118,27 @@
     # Enable sound.
     sound.enable = true;
     hardware.pulseaudio.enable = true;
+    hardware.pulseaudio.package = pkgs.pulseaudioFull;
+    # If I comment out this whole services.jack section,
+    # Youtube becomes audible in Brave and Chrome.
+    # If I uncomment it, rebuild, and reboot, Youtube is no longer audible.
+#    services.jack = {
+#      # REFERENCE: https://nixos.wiki/wiki/JACK
+#      # This passage is copied from the first section.
+#      # After that there's a warning that "this section is obsolete";
+#      # I haven't tried most of what's listed thereafter.
+#      # (I did try configuring Qjackctl as described in that obsolete section,
+#      # and the instructions were inapplicable to my version of it (0.5.9).
+#      jackd.enable = true;
+#      # support ALSA only programs via ALSA JACK PCM plugin
+#      alsa.enable = false;
+#      # support ALSA only programs via loopback device (supports programs like Steam)
+#      loopback = {
+#        enable = true;
+#        # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
+#        dmixConfig = ''period_size 2048'';
+#      };
+#    };
 
     # Enable touchpad support.
     services.xserver.libinput.enable = true;
@@ -134,7 +165,17 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      /home/jeff/nix/musnix
     ];
+
+  # To disable musnix, remove these lines,
+  # and remove the "musnix" line in "imports".
+  # Leave "audio" in "extragroups" -- it was already there.
+  musnix.enable = true;
+  musnix.alsaSeq.enable = true;
+  # These might be worth it. They require rebuilding the kernel.
+    # musnix.kernel.optimize = true;
+    # musnix.kernel.realtime = true;
 
   # Boot loader
     boot.loader.grub.enable = true;
@@ -186,6 +227,7 @@
       "networkmanager" # for the plasma-nm widget, and
         # the privilege of changing settings (adding networks)
       "audio"
+      "jackaudio"
       ];
   };
 
