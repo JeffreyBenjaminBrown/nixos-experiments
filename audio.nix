@@ -26,8 +26,11 @@ with pkgs; {
       # https://github.com/magnetophon/nixosConfig/blob/master/machines/mixos/default.nix
     kernel.optimize = true;
     kernel.realtime = true;
-      # PITFALL: magnetophon specifies an older kernel.
-      # I don't know why. I have not done so.
+    kernel.packages = pkgs.linuxPackages_4_19_rt;
+      # PITFALL: magnetophon specifies this. I don't know why.
+      # When I tried the default (5_0_rt), NixOS couldn't download
+      # http://www.rncbc.org/archive/rtirq-20190129.tar.gz,
+      # so now I'm trying this.
     rtirq.enable = true;
     das_watchdog.enable = true;
   };
