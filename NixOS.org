@@ -27,18 +27,16 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
 * TODO audio in NixOS
-** TODO try emulating magnetophon's config
+** TODO consider AcouBass's config
+https://gist.github.com/AcouBass/4f5bcb3410f14bd5063a718b1d53bc4c
+** magnetophon's config
+some top-level .nix files from which I have emulated
 https://github.com/magnetophon/nixosConfig/blob/master/music.nix
-*** TODO review committed changes before asking
-*** TODO ask
-**** is it okay I included so many arguments in audio.nix?
-Some of those words -- e.g. modulesPath --
-I don't see anywhere in the configuration.nix file that imports it.
-**** no pulseaudio? does sound work in the browser for you?
+*** TODO ask magnetophon
 **** why using older kernel?
 commonRT.nix contains this line:
-    kernel.packages = pkgs.linuxPackages_4_19_rt;
-** asking around
+  kernel.packages = pkgs.linuxPackages_4_19_rt;
+** references
 *** IRC and Discourse ?= the major NixOS communities
 https://nixos.org/nixos/learn.html
 *** resources I've used
@@ -48,15 +46,22 @@ https://nixos.wiki/wiki/JACK
   The first part is not obsolete, right?
 https://nixos.wiki/wiki/Audio
   pretty weak -- ALSA section is out of date, doesn't link to JACK section
-*** places I've spoken
-https://github.com/JeffreyBenjaminBrown/nixos-experiments
-  My config
+*** TODO promising places I've spoken
+https://discourse.nixos.org/t/declarative-audio-config-using-jack/5458
+  Discourse \ NixOS
 https://github.com/NixOS/nixpkgs/issues/71283
   magnetophon, MDeltaX and others on Github
+https://github.com/magnetophon/nixosConfig/issues/2
+  where I ask about JACK connections in magnetophon's config
+*** other places I've spoken
+https://github.com/JeffreyBenjaminBrown/nixos-experiments
+  My config
 https://www.reddit.com/r/NixOS/comments/enkbus/getting_started_with_audio_programming_in_nixos/
-  Me asking why I can't use JACK.
-*** these procedures seem to have helped someone
+  Me asking Reddit why I can't use JACK.
+*** these procedures (not declarative) seem to have helped someone
 https://github.com/NixOS/nixpkgs/issues/74742#issuecomment-570745604
+
+
 * TODO resume review at pill 7.5
 * TODO learn to write Nix expressions
 ** stdenv.mkDerivation:

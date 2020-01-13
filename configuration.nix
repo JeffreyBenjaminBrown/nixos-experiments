@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages =
-    [ (import /etc/nixos/emacs.nix { inherit pkgs; })
+    [ (import ./emacs.nix { inherit pkgs; })
     ] ++
     (with pkgs; [
       archiver
@@ -113,28 +113,6 @@
                                   pkgs.hplipWithPlugin ];
 
     sound.enable = true;
-
-    # This is based on the JACK section of the NixOS WIKI.
-    # If I comment out this whole services.jack section,
-    # Youtube becomes audible in Brave and Chrome.
-    # If I uncomment it, rebuild, and reboot, Youtube is no longer audible.
-    #services.jack = {
-      #  # REFERENCE: https://nixos.wiki/wiki/JACK
-      #  # This passage is copied from the first section.
-      #  # After that there's a warning that "this section is obsolete";
-      #  # I haven't tried most of what's listed thereafter.
-      #  # (I did try configuring Qjackctl as described in that obsolete section,
-      #  # and the instructions were inapplicable to my version of it (0.5.9).
-      #  jackd.enable = true;
-      #  # support ALSA only programs via ALSA JACK PCM plugin
-      #  alsa.enable = false;
-      #  # support ALSA only programs via loopback device (supports programs like Steam)
-      #  loopback = {
-      #    enable = true;
-      #    # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
-      #    dmixConfig = ''period_size 2048'';
-      #  };
-      #};
 
     # Enable touchpad support.
     services.xserver.libinput.enable = true;

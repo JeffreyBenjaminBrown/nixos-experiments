@@ -2,12 +2,12 @@
 # magnetophon's commonRT.nix and music.nix files:
   # https://github.com/magnetophon/nixosConfig/blob/master/commonRT.nix
 
-# PITFALL: magnetophon notes that one should:
-  # set soundcardPciId
-    # which I have done, I think, vvia one of the musnix options.
-  # set rtirq.nameList
-    # but I haven't, because I haven't yet rebuilt the kernel for realtime.
-    # (see the musnix readme, which discusses both kernel and rtirq).
+# PITFALL: magnetophon notes that one should set
+  # soundcardPciId and rtirq.nameList
+  # I hope I have in fact done that.
+  # I'm assuming he means the so-named musnix options.
+  # PITFALL: In the case of rtirq.nameList, I just copied what he uses;
+  # that could be wrong.
 
 {config, lib, pkgs, options, modulesPath}:
 
@@ -21,9 +21,15 @@ with pkgs; {
       # PITFALL: This is the id of the built-in soundcard.
       # When I start using the external one, change it.
       # Find it with `lspci | grep -i audio` (per the musnix readme).
-    # TODO. These require rebuilding the kernel.
-      # musnix.kernel.optimize = true;
-      # musnix.kernel.realtime = true;
+    rtirq.nameList = "rtc0 snd";
+      # PITFALL: copied with no idea what I'm doing. from
+      # https://github.com/magnetophon/nixosConfig/blob/master/machines/mixos/default.nix
+    kernel.optimize = true;
+    kernel.realtime = true;
+      # PITFALL: magnetophon specifies an older kernel.
+      # I don't know why. I have not done so.
+    rtirq.enable = true;
+    das_watchdog.enable = true;
   };
 
   services.tlp.enable = false; # a power management daemon
