@@ -26,9 +26,58 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 ** the Ubuntu-NixOS user ID problem
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
-* TODO audio in NixOS
+* TODO BLOCKED audio in NixOS
+** TODO BLOCKED awaiting response from Bart
+here:
+https://github.com/NixOS/nixpkgs/issues/71283
+
+If I'm not using Musnix, should I still set the PCI ID and the irq names? If so, how?
+
+So if I do end up needing an RT kernel, I should first switch from `nixos-19.09` to `nixos-unstable`, and from `nixpkgs` to `nixpkgs-unstable`? (That's how I'm interpreting the [Wiki page on channels](https://nixos.wiki/wiki/Nix_channels).)
+** TODO try without musnix
 ** TODO consider AcouBass's config
 https://gist.github.com/AcouBass/4f5bcb3410f14bd5063a718b1d53bc4c
+** the "Unsupported relocation type" error
+*** It's already known
+https://github.com/musnix/musnix/issues/100
+*** I get it when building
+my configuration, audio branch,
+commit 6a880d983f816db5b4f675c8236df734d09c249e,
+after commenting out the line kernel.packages = pkgs.linuxPackages_4_19_rt;, and build
+*** the error I get
+after building for more than an hour:
+
+make[2]: 'vmlinux' is up to date.
+  CC      arch/x86/boot/a20.o
+  CC      arch/x86/boot/cmdline.o
+  AS      arch/x86/boot/copy.o
+  HOSTCC  arch/x86/boot/mkcpustr
+  CC      arch/x86/boot/cpuflags.o
+  CC      arch/x86/boot/cpucheck.o
+  CC      arch/x86/boot/early_serial_console.o
+  CC      arch/x86/boot/edd.o
+  LDS     arch/x86/boot/compressed/vmlinux.lds
+  AS      arch/x86/boot/compressed/head_64.o
+  VOFFSET arch/x86/boot/compressed/../voffset.h
+  CC      arch/x86/boot/compressed/string.o
+  CC      arch/x86/boot/compressed/cmdline.o
+  CC      arch/x86/boot/compressed/error.o
+  OBJCOPY arch/x86/boot/compressed/vmlinux.bin
+  RELOCS  arch/x86/boot/compressed/vmlinux.relocs
+Unsupported relocation type: R_X86_64_PLT32 (4)
+make[4]: *** [../arch/x86/boot/compressed/Makefile:118: arch/x86/boot/compressed/vml
+inux.relocs] Error 1
+make[3]: *** [../arch/x86/boot/Makefile:111: arch/x86/boot/compressed/vmlinux] Error
+ 2
+make[2]: *** [arch/x86/Makefile:245: bzImage] Error 2
+make[1]: *** [Makefile:150: sub-make] Error 2
+make: *** [Makefile:24: __sub-make] Error 2
+builder for '/nix/store/jnf08s29n2cm0nc2v3dwiglzgykp8n3i-linux-4.9.35-rt25.drv' fail
+ed with exit code 2
+cannot build derivation '/nix/store/nbmvjyrvf2qfa3adwgdbjqx2jaam1fyi-nixos-system-jb
+b-dell-19.09.1850.5dc4d071ffe.drv': 1 dependencies couldn't be built
+error: build of '/nix/store/nbmvjyrvf2qfa3adwgdbjqx2jaam1fyi-nixos-system-jbb-dell-1
+9.09.1850.5dc4d071ffe.drv' failed
 ** references
 *** IRC and Discourse ?= the major NixOS communities
 https://nixos.org/nixos/learn.html
@@ -59,7 +108,6 @@ https://www.reddit.com/r/NixOS/comments/enkbus/getting_started_with_audio_progra
   Me asking Reddit why I can't use JACK.
 *** these procedures (not declarative) seem to have helped someone
 https://github.com/NixOS/nixpkgs/issues/74742#issuecomment-570745604
-
 * TODO resume review at pill 7.5
 * TODO learn to write Nix expressions
 ** stdenv.mkDerivation:
