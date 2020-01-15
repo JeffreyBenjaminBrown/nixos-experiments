@@ -27,14 +27,18 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
 * TODO BLOCKED audio in NixOS
-** TODO BLOCKED awaiting response from Bart
-here:
-https://github.com/NixOS/nixpkgs/issues/71283
-
-If I'm not using Musnix, should I still set the PCI ID and the irq names? If so, how?
-
-So if I do end up needing an RT kernel, I should first switch from `nixos-19.09` to `nixos-unstable`, and from `nixpkgs` to `nixpkgs-unstable`? (That's how I'm interpreting the [Wiki page on channels](https://nixos.wiki/wiki/Nix_channels).)
-** TODO try without musnix
+** TODO try what Bart suggests
+not using musnix
+disabling the jackdbus service and configuring/starting it with qjackctl
+  Get your jackd settings (to be set in the qjackctl GUI) from elsewhere, for example the Arch Pro Audio wiki page
+    I think by that he means this:
+    https://wiki.archlinux.org/index.php/Professional_audio
+  speaking of which - don't need the packageOverrides unless you want to run 2 qjackctl instances on the same x-server
+** TODO merge this (from Bart) into my notes
+https://github.com/NixOS/nixpkgs/issues/71283#issuecomment-574083024
+I think the kernels are actually only broken for unstable.
+The nixos version is what determines the version of everything you configure in configuration.nix, and the nixpkgs version is for everything you install ad-hoc, via nix-env.
+So no need to change both.
 ** TODO consider AcouBass's config
 https://gist.github.com/AcouBass/4f5bcb3410f14bd5063a718b1d53bc4c
 ** the "Unsupported relocation type" error

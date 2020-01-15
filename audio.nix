@@ -6,15 +6,16 @@
 
 with pkgs; {
 
-  services.tlp.enable = false; # a power management daemon
-  services.jack.jackd.enable = true; # note: also mentioned in the
+  # services.tlp.enable = false; # a power management daemon
+  # services.jack.jackd.enable = true; # note: also mentioned in the
     # big commented-out section below about JACK, from the NixOS WIKI.
 
   nixpkgs.config.packageOverrides = pkgs: rec {
     qjackctl = pkgs.stdenv.lib.overrideDerivation pkgs.qjackctl (
       oldAttrs: { configureFlags =
+                    # "fix bug for remote running" (says magnetophon's config).
+                    # Allows you to run multiple instances; probably unnecessary.
                     "--enable-jack-version --disable-xunique";
-                  # fix bug for remote running
                 }); };
 
   security.sudo.extraConfig = ''
