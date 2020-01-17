@@ -26,15 +26,37 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 ** the Ubuntu-NixOS user ID problem
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
-* TODO BLOCKED audio in NixOS
-** TODO try what Bart suggests
+* TODO audio in NixOS
+** TODO fix SC memory error
+*** motivation: dropped voices
+Some montevideo patterns are dropping notes,
+where I don't remember them doing that before.
+*** I asked here:
+https://github.com/NixOS/nixpkgs/issues/71283
+*** an inapplicable anser
+https://askubuntu.com/questions/166126/unable-to-start-jack-cannot-allocate-memory
+They say to modify
+   /etc/security/limits.conf
+-- which doesn't exist on my system.
+*** some maybe-helpful commands
+systemd-cgtop  # but I don't see audio or jackaudio among the groups listed
+ulimit -a      # or -l, which is just one supposedly-useful number
+** WORKING ! how to start, use JACK
+Stop audio in ordinary apps (e.g. Spotify, browser). No need to kill the app.
+Start Qjackctl. If it's not like this, make it so:
+  * 2 periods / buffer
+  * 256 frames / period
+  * hw:0 (or default)
+  * 48 kHz
+** Qjackctl can be used for routing
+Thus spake @magnetophon:
+  https://github.com/NixOS/nixpkgs/issues/71283#issuecomment-574976258
+** TODO file what Bart suggests
 not using musnix
 disabling the jackdbus service and configuring/starting it with qjackctl
   Get your jackd settings (to be set in the qjackctl GUI) from elsewhere, for example the Arch Pro Audio wiki page
-    I think by that he means this:
     https://wiki.archlinux.org/index.php/Professional_audio
   speaking of which - don't need the packageOverrides unless you want to run 2 qjackctl instances on the same x-server
-** TODO merge this (from Bart) into my notes
 https://github.com/NixOS/nixpkgs/issues/71283#issuecomment-574083024
 I think the kernels are actually only broken for unstable.
 The nixos version is what determines the version of everything you configure in configuration.nix, and the nixpkgs version is for everything you install ad-hoc, via nix-env.
