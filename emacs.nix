@@ -27,6 +27,8 @@ in
       undo-tree
       org
       auctex       # ; LaTeX mode
+
     ]) ++ [
       pkgs.notmuch # email, scriptable
-  ])
+    ]
+  )

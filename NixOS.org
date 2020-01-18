@@ -27,7 +27,38 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
 * TODO audio in NixOS
+** WORKING ! add a package
+*** after manually downloading the source for it
+In a clone of nixpkgs:
+  Put the package somewhere in pkgs/.
+    Model it after nix pill 8 section 2, at
+    /home/jeff/nix/pills/08/2-generic/
+    NOTE: This requires manually downloading the source code.
+  Add an appropriate line to pkgs/top-level/all-packages.nix
+    e.g. hello-test = callPackage ../development/libraries/hello-test { };
+  At the root of nixpkgs, test whether it builds with
+    nix-build -A <package-name>
+  To add it to my user profile, run
+    nix-env -f . -iA <package-name>
+*** with automatic downloading of the source
+rather than define src = the name of some file that I put there myself,
+define 
+  src = fetchurl {
+    url = ...;
+    sha256 = ...;
+  };
+To compute sha256, download from the desired URL (but only once)
+and run sha256sum on it.
+** TODO questions about changing the packages
+*** refs
+https://nixos.org/nixos/manual/index.html#sec-custom-packages
+https://nixos.org/nixpkgs/manual/#chap-quick-start
 ** TODO install serialosc
+*** TODO use this NixOS manual chapter
+6.1.2. Adding Custom Packages
+https://nixos.org/nixos/manual/index.html#sec-custom-packages
+nixos-rebuild switch -I nixpkgs=/home/jeff/nix/nixpkgs
+/home/jeff/nix/nixpkgs/pkgs/development/libraries/hello-test
 *** PITFALL ? I've got liblo, not liblo-dev, installed.
  But maybe it doesn't matter:
 

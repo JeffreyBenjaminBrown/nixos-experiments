@@ -74,8 +74,15 @@
     device = "/dev/sda"; };
 
   i18n = {
+
+    # In a later version of (nixpkgs?)
+    # I will need to change `consoleFont` and `consoleKeyMap`
+    # to the following, outside of (and next to) this `i18n` scope.
+    #   console.font = "Lat2-Terminus16";
+    #   console.keyMap = "us"; };
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
+
     defaultLocale = "en_US.UTF-8"; # I've tried this both as
       # English and Spanish. Presumably the next option,
       # extraLocaleSettings, is more important.
