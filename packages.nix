@@ -13,9 +13,11 @@
     borgbackup
     encfs
 
-    # networking
+    # networking, trafficking
     networkmanager
     plasma-nm
+    ktorrent
+    wget
 
     # exploring filetree
     tree
@@ -61,7 +63,6 @@
     xsel
     gnumeric
     tmux
-    ktorrent
 
     # big | sketchy | unfree
     libreoffice
