@@ -27,20 +27,11 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
 * TODO audio in NixOS
-** TODO fix SC memory error
-*** motivation: dropped voices
-Some montevideo patterns are dropping notes,
-where I don't remember them doing that before.
-*** I asked here:
-https://github.com/NixOS/nixpkgs/issues/71283
-*** an inapplicable anser
-https://askubuntu.com/questions/166126/unable-to-start-jack-cannot-allocate-memory
-They say to modify
-   /etc/security/limits.conf
--- which doesn't exist on my system.
-*** some maybe-helpful commands
-systemd-cgtop  # but I don't see audio or jackaudio among the groups listed
-ulimit -a      # or -l, which is just one supposedly-useful number
+** TODO get RT kernel working
+*** discussion here
+https://github.com/musnix/musnix/issues/100
+*** trying because @magnetophon suggests it now, here:
+https://github.com/NixOS/nixpkgs/issues/71283#issuecomment-575458797
 ** WORKING ! how to start, use JACK
 Stop audio in ordinary apps (e.g. Spotify, browser). No need to kill the app.
 Start Qjackctl. If it's not like this, make it so:
@@ -117,6 +108,8 @@ https://nixos.wiki/wiki/JACK
 https://nixos.wiki/wiki/Audio
   pretty weak -- ALSA section is out of date, doesn't link to JACK section
 *** TODO promising places I've spoken
+https://github.com/musnix/musnix/issues/100
+  musnix issue on the PREEMPT option error
 https://discourse.nixos.org/t/declarative-audio-config-using-jack/5458
   Discourse \ NixOS
 https://github.com/NixOS/nixpkgs/issues/71283
@@ -440,3 +433,5 @@ https://github.com/telent/config-nixpkgs
  chapter 15 in NixOS manual.
  There's also TaskServer, for todo lists,
    GitLab,
+* for getting help
+nixos-option (that's a shell command)
