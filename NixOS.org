@@ -26,6 +26,16 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 ** the Ubuntu-NixOS user ID problem
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
+* TODO install serialosc
+** PITFALL ? I've got liblo, not liblo-dev, installed.
+But maybe it doesn't matter:
+
+When I view the Debian package:
+  https://packages.debian.org/jessie/liblo-dev
+it looks like all it contains is liblo 7 or 0.28-3:
+  dep: liblo7 (= 0.28-3)
+Meanwhile the "liblo" line in my packages.nix should be installing liblo 0.29:
+  https://nixos.org/nixos/packages.html?channel=nixos-19.03&query=liblo
 * TODO audio in NixOS
 ** TODO get RT kernel working
 *** discussion here
@@ -114,6 +124,8 @@ https://discourse.nixos.org/t/declarative-audio-config-using-jack/5458
   Discourse \ NixOS
 https://github.com/NixOS/nixpkgs/issues/71283
   magnetophon, MDeltaX and others on Github
+https://github.com/magnetophon/nixosConfig/issues/4
+  re. the machines/ folder, in magnetophon's config repo
 https://github.com/magnetophon/nixosConfig/issues/2
   where I ask about JACK connections in magnetophon's config
 https://github.com/musnix/musnix/issues/103
@@ -151,7 +163,6 @@ Useful if a string includes the " symbol.
 **** `rec` is a special kind whose elements can refer to each other
 *** "with" brings a set's values into scope
 nix-repl> longName = { a = 3; b = 4; }
-
 nix-repl> longName.a + (with longName; a + b)
 10
 **** PITFALL: does not shadow
@@ -164,18 +175,17 @@ That's because it thinks the a in a + b is the set, not the value.
 ** Ch 5: functions and imports
 *** functions
 **** pattern matching over a set in a function argument
- These are equivalent:
+These are equivalent:
+  nix-repl> mul = s: s.a*s.b
+  nix-repl> mul = { a, b }: a*b
 
- nix-repl> mul = s: s.a*s.b
- nix-repl> mul { a = 3; b = 4; }
- 12
-
- nix-repl> mul = { a, b }: a*b
- nix-repl> mul { a = 3; b = 4; }
- 12
+Both yield this:
+  nix-repl> mul { a = 3; b = 4; }
+  12
 **** allow unmentioned fields with an ellipsis
- nix-repl> mul = { a, b, ... }: a*b
- nix-repl> mul { a = 3; b = 4; c = 2; }
+  nix-repl> mul = { a, b, ... }: a*b
+Without the ellipsis, you couldn't call this:
+  nix-repl> mul { a = 3; b = 4; c = 2; }
 **** define default fields with "?"
  nix-repl> mul = { a, b ? 2 }: a*b
  nix-repl> mul { a = 3; }
@@ -193,60 +203,68 @@ then you can do this:
   12
 ** Ch 6: "our first derivation":
 https://nixos.org/nixos/nix-pills/our-first-derivation.html
-*** nix repl
-is nice for testing stuff.
-It starts empty, but knowing things like builtins.currentTime
-:l <nixpkgs> loads all those packages.
+*** `nix repl`
+use it for testing
+**** importing packages
+ It starts empty, but knowing things like builtins.currentTime
+ :l <nixpkgs> loads all those packages.
 *** to build outside the nix repl
+**** to instantiate and realize in one step
+https://nixos.org/nixos/nix-pills/working-derivation.html#idm140737316174000
+bash$ nix-build simple.nix
+**** to instantiate only, or realize only
+nix-instantiate
+nix-store -r
+**** to build from an already-evaluated derivation
 run this from bash:
   nix-store -r /nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv
 That assumes the .drv file exists
 (and so far I only know how to create it from the nix repl).
 *** PITFALL: instatiate = evaluate /= realize = build
-At the nix repl, if we enter this:
+*** the instantiate|evaluate step
+**** to do it from the repl
+If we enter this:
   d = derivation { name = "biggles"; system = "mysystem"; builder = "mybuilder"; }
-
-it now knows what d is. But building it is a separate step:
-  :b d
-*** evaluating a derivation creates a .drv file in /nix/store
-In the Nix repl:
-
-  nix-repl> d = derivation { name = "x"; builder = "y"; system = builtins.currentSystem; }
-
-  nix-repl> d
-  «derivation /nix/store/7r40h4gj6rsaw6xnsq7vj128dpiawa94-x.drv»
-
-Then, outside of it:
-  [jeff@jbb-dell:~/nix/temp]$ nix show-derivation /nix/store/7r40h4gj6rs
-  aw6xnsq7vj128dpiawa94-x.drv
-  {
-    "/nix/store/7r40h4gj6rsaw6xnsq7vj128dpiawa94-x.drv": {
-      "outputs": {
-        "out": {
-          "path": "/nix/store/f4z943mkd9zkhcjk2mwy3p9g14qf6wvb-x"
-        }
-      },
-      "inputSrcs": [],
-      "inputDrvs": {},
-      "platform": "x86_64-linux",
-      "builder": "y",
-      "args": [],
-      "env": {
-        "builder": "y",
-        "name": "x",
-        "out": "/nix/store/f4z943mkd9zkhcjk2mwy3p9g14qf6wvb-x",
-        "system": "x86_64-linux"
-      }
-    }
-  }
-*** PITFALL: sometimes, sets can be converted to strings
-Namely, if they contain an "outPath" field.
-Note that evaluating a derivation at the repl shows its .drv path,
+it now knows what d is.
+**** PITFALL: evaluating a derivation at the repl shows its .drv path,
 not its outPath:
-  nix-repl> coreutils
-  «derivation /nix/store/1zcs1y4n27lqs0gw4v038i303pb89rw6-coreutils-8.21.drv»
-  nix-repl> builtins.toString coreutils
-  "/nix/store/8w4cbiy7wqvaqsnsnb3zvabq1cp2zhyz-coreutils-8.21"
+    nix-repl> coreutils
+    «derivation /nix/store/1zcs1y4n27lqs0gw4v038i303pb89rw6-coreutils-8.21.drv»
+    nix-repl> builtins.toString coreutils
+    "/nix/store/8w4cbiy7wqvaqsnsnb3zvabq1cp2zhyz-coreutils-8.21"
+**** it creates a .drv file in /nix/store
+***** In the Nix repl:
+   nix-repl> d = derivation { name = "x"; builder = "y"; system = builtins.currentSystem; }
+
+   nix-repl> d
+   «derivation /nix/store/7r40h4gj6rsaw6xnsq7vj128dpiawa94-x.drv»
+***** outside of the nix repl:
+   [jeff@jbb-dell:~/nix/temp]$ nix show-derivation /nix/store/7r40h4gj6rs
+   aw6xnsq7vj128dpiawa94-x.drv
+   {
+     "/nix/store/7r40h4gj6rsaw6xnsq7vj128dpiawa94-x.drv": {
+       "outputs": {
+         "out": {
+           "path": "/nix/store/f4z943mkd9zkhcjk2mwy3p9g14qf6wvb-x"
+         }
+       },
+       "inputSrcs": [],
+       "inputDrvs": {},
+       "platform": "x86_64-linux",
+       "builder": "y",
+       "args": [],
+       "env": {
+         "builder": "y",
+         "name": "x",
+         "out": "/nix/store/f4z943mkd9zkhcjk2mwy3p9g14qf6wvb-x",
+         "system": "x86_64-linux"
+       }
+     }
+   }
+*** the realize|build step
+:b d     # where d is some derivation
+*** PITFALL: sometimes, sets are converted to strings
+Namely, if they contain an "outPath" field.
 ** Ch 7: (our first) "working derivation"
 https://nixos.org/nixos/nix-pills/working-derivation.html
 *** PITFALL: Relative paths in strings are treated differently
@@ -255,11 +273,18 @@ Outside of a string, Nix parses it relative to the current directory.
 *** a minimal build
 Make a file called "builder.sh" containing
   declare -xp
+    # lists exported variables.
+    # declare is a bash function, not a Nix one.
   echo foo > $out
 Then enter nix repl, and evaluate
   :l <nixpkgs> # for access to bash
   d = derivation { name = "foo"; builder = "${bash}/bin/bash"; args = [ ./builder.sh ]; system = builtins.currentSystem; }
   :b d
+*** passing programs to a derivation
+**** sample code
+https://nixos.org/nixos/nix-pills/working-derivation.html#idm140737316198192
+**** "the trick"
+"every attribute in the set passed to derivation will be converted to a string and passed to the builder as an environment variable. This is how the builder gains access to coreutils and gcc: when converted to strings, the derivations evaluate to their output paths, and appending /bin to these leads us to their binaries.
 ** Ch 8: Generic Builders
 https://nixos.org/nixos/nix-pills/generic-builders.html
 * TODO ask: how does sc3-plugins know where the supercollider source is?
