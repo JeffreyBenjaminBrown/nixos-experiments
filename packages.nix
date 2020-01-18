@@ -11,6 +11,7 @@
     unzip
     gzip
     gitMinimal
+    nix-prefetch-git # to compute "the" sha256 of a git repo
     ark
     borgbackup
     encfs
