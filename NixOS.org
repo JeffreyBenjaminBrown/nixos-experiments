@@ -26,18 +26,19 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 ** the Ubuntu-NixOS user ID problem
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
-* TODO install serialosc
-** PITFALL ? I've got liblo, not liblo-dev, installed.
-But maybe it doesn't matter:
-
-When I view the Debian package:
-  https://packages.debian.org/jessie/liblo-dev
-it looks like all it contains is liblo 7 or 0.28-3:
-  dep: liblo7 (= 0.28-3)
-Meanwhile the "liblo" line in my packages.nix should be installing liblo 0.29:
-  https://nixos.org/nixos/packages.html?channel=nixos-19.03&query=liblo
 * TODO audio in NixOS
+** TODO install serialosc
+*** PITFALL ? I've got liblo, not liblo-dev, installed.
+ But maybe it doesn't matter:
+
+ When I view the Debian package:
+   https://packages.debian.org/jessie/liblo-dev
+ it looks like all it contains is liblo 7 or 0.28-3:
+   dep: liblo7 (= 0.28-3)
+ Meanwhile the "liblo" line in my packages.nix should be installing liblo 0.29:
+   https://nixos.org/nixos/packages.html?channel=nixos-19.03&query=liblo
 ** TODO get RT kernel working
+*** TODO use magnetphon's machine/thinknix files too
 *** discussion here
 https://github.com/musnix/musnix/issues/100
 *** trying because @magnetophon suggests it now, here:
@@ -459,4 +460,7 @@ https://github.com/telent/config-nixpkgs
  There's also TaskServer, for todo lists,
    GitLab,
 * for getting help
-nixos-option (that's a shell command)
+** from bash
+nixos-option
+** from the nix repl
+:?

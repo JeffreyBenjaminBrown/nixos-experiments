@@ -1,8 +1,10 @@
 { config, pkgs, nixpkgs, ... }:
 
 { environment.systemPackages =
-  [ (import ./emacs.nix { inherit pkgs; })
-  ] ++ ( with pkgs; [
+  with pkgs; [
+    (import ./emacs.nix { inherit pkgs; })
+      # Fun fact: Does not rely on the `with pkgs` statement.
+
     # storage, versioning
     archiver
     zip
@@ -101,5 +103,5 @@
     x42-plugins # level meters
     ladspa-sdk
     QmidiNet # "a midi network gateway"
-  ] ) ;
+  ];
 }
