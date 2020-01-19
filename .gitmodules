@@ -1,3 +1,0 @@
-[submodule "custom-packages/libmonome/libmonome"]
-	path = custom-packages/libmonome/libmonome
-	url = https://github.com/monome/libmonome.git
