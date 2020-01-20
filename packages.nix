@@ -16,6 +16,11 @@
     borgbackup
     encfs
 
+    # build tools
+    # waf # broken -- builds to a file, not a folder
+          # see my issues on StackOverflow
+    wafHook
+
     # networking, trafficking
     networkmanager
     plasma-nm
