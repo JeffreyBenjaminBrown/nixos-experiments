@@ -5,6 +5,12 @@
     (import ./emacs.nix { inherit pkgs; })
       # Fun fact: Does not rely on the `with pkgs` statement.
 
+    # for monome
+    systemd # for libudev
+    udev # for libudev
+    avahi # for libavahi-compat-libdnssd-dev
+    avahi-compat # for libavahi-compat-libdnssd-dev
+
     # storage, versioning
     archiver
     zip

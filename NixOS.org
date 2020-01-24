@@ -30,6 +30,31 @@ on NixOS it's 1001. This creates permissions problems.
 ** https://stackoverflow.com/questions/59806776/nix-write-a-package-that-uses-waf-instead-of-make?noredirect=1#comment105758423_59806776
 ** https://stackoverflow.com/questions/59805975/nix-building-waf-produces-a-file-but-i-seem-to-need-a-folder/59809635#59809635
 I got it [done via wafHook](https://github.com/JeffreyBenjaminBrown/nixos-experiments/blob/0abed44c904b5b20f24166c3aed08a351279156a/custom-packages/libmonome/default.nix); thanks!
+* TODO install monome
+** TODO ask
+*** the context
+I'm running
+  nix-build -A serialosc
+from nixpkgs, after installing as described in the header comment here:
+  https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/master/custom-packages/serialosc/default.nix
+*** the error:
+```
+_execute_child
+    raise child_exception
+OSError: [Errno 2] No such file or directory
+```
+*** prior art
+Others have run into it, outside of Nix:
+https://stackoverflow.com/questions/11566967/python-raise-child-exception-oserror-errno-2-no-such-file-or-directory
+
+And also in Nix:
+https://nixos.org/nix-dev/2014-August/013955.html
+** to compare libmonome/default.nix
+diff									\
+  /home/jeff/nix/jbb-config/custom-packages/libmonome/default.nix	\
+  /home/jeff/nix/nixpkgs/pkgs/development/libraries/libmonome/default.nix
+** for git submodule update
+~/nix/nixpkgs/pkgs/development/compilers/chez/default.nix
 * TODO audio in NixOS
 ** TODO figure out how to fetch before building
 see my uncommitted changes to the nixpkgs repo
