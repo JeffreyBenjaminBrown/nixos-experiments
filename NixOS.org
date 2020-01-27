@@ -26,18 +26,31 @@ users.groups.students.gid = 1000;  # TODO: Enable.
 ** the Ubuntu-NixOS user ID problem
 On my KUbuntu system, "jeff" has default uid 1000;
 on NixOS it's 1001. This creates permissions problems.
-* TODO my waf issues on StackOverflow
-** https://stackoverflow.com/questions/59806776/nix-write-a-package-that-uses-waf-instead-of-make?noredirect=1#comment105758423_59806776
-** https://stackoverflow.com/questions/59805975/nix-building-waf-produces-a-file-but-i-seem-to-need-a-folder/59809635#59809635
-I got it [done via wafHook](https://github.com/JeffreyBenjaminBrown/nixos-experiments/blob/0abed44c904b5b20f24166c3aed08a351279156a/custom-packages/libmonome/default.nix); thanks!
+* BLOCKED - awaiting response - my waf issues on StackOverflow
+** TODO With an answer, awaiting response
+https://stackoverflow.com/questions/59805975/nix-building-waf-produces-a-file-but-i-seem-to-need-a-folder/59809635#59809635
+** with only a comment
+https://stackoverflow.com/questions/59806776/nix-write-a-package-that-uses-waf-instead-of-make?noredirect=1#comment105758423_59806776
 * TODO install monome
-** TODO ask
+** TODO add libmonome to nixpkgs
+** TODO ask why serialosc fails to build
+*** TODO half-written question
+{{use the notes below to finish it}}
+
+Nix: build fails with "_execute_child raise child_exception OSError: [Errno 2] No such file or directory"
+
+##########################
+
+I'm trying to [build serialosc](https://monome.org/docs/serialosc/raspbian/) on NixOS. Here's my 
+
+https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/master/custom-packages/serialosc/default.nix
+
 *** the context
 I'm running
   nix-build -A serialosc
 from nixpkgs, after installing as described in the header comment here:
   https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/master/custom-packages/serialosc/default.nix
-*** the error:
+*** the error
 ```
 _execute_child
     raise child_exception
@@ -49,17 +62,17 @@ https://stackoverflow.com/questions/11566967/python-raise-child-exception-oserro
 
 And also in Nix:
 https://nixos.org/nix-dev/2014-August/013955.html
-** to compare libmonome/default.nix
-diff									\
-  /home/jeff/nix/jbb-config/custom-packages/libmonome/default.nix	\
-  /home/jeff/nix/nixpkgs/pkgs/development/libraries/libmonome/default.nix
-** for git submodule update
+** git submodule update: model code
 ~/nix/nixpkgs/pkgs/development/compilers/chez/default.nix
 * TODO audio in NixOS
-** TODO figure out how to fetch before building
-see my uncommitted changes to the nixpkgs repo
-** WORKING ! add a package
-*** write the package
+** how to add a package
+*** refs
+https://nixos.org/nixos/manual/index.html#sec-custom-packages
+https://nixos.org/nixpkgs/manual/#chap-quick-start
+*** TODO what are these for?
+nixos-rebuild switch -I nixpkgs=/home/jeff/nix/nixpkgs
+/home/jeff/nix/nixpkgs/pkgs/development/libraries/hello-test
+*** 1 - write the package
 **** after manually downloading the source for it
  In a clone of nixpkgs:
    Put the package somewhere in pkgs/.
@@ -75,23 +88,13 @@ see my uncommitted changes to the nixpkgs repo
    };
  To compute sha256, download from the desired URL (but only once)
  and run sha256sum on it.
-*** add an appropriate line to pkgs/top-level/all-packages.nix
+*** 2 - add an appropriate line to pkgs/top-level/all-packages.nix
 e.g. hello-test = callPackage ../development/libraries/hello-test { };
-*** commands to build it
+*** 3 - commands to build it
 At the root of nixpkgs, test whether it builds with
   nix-build -A <package-name>
 To add it to my user profile, run
   nix-env -f . -iA <package-name>
-** TODO questions about changing the packages
-*** refs
-https://nixos.org/nixos/manual/index.html#sec-custom-packages
-https://nixos.org/nixpkgs/manual/#chap-quick-start
-** TODO install serialosc
-*** TODO use this NixOS manual chapter
-6.1.2. Adding Custom Packages
-https://nixos.org/nixos/manual/index.html#sec-custom-packages
-nixos-rebuild switch -I nixpkgs=/home/jeff/nix/nixpkgs
-/home/jeff/nix/nixpkgs/pkgs/development/libraries/hello-test
 ** TODO get RT kernel working
 *** TODO use magnetphon's machine/thinknix files too
 *** discussion here

@@ -1,20 +1,3 @@
-# Apes this file from the nixpkgs repo:
-# pkgs/tools/networking/weighttp/default.nix
-
-# PITFALL: This won't build from here, but it will from nixpkgs.
-# I put it at /pkgs/development/libraries/libmonome,
-# and added the line
-#     libmonome = callPackage ../development/libraries/libmonome { };
-# to
-#     ~/nix/nixpkgs/pkgs/top-level/all-packages.nix
-# right after liblo (arbitrary but kind of natural).
-# Then from the top of nixpkgs, run any of these:
-#   `nix-build -A libmonome`
-#   `nix-env -f . -iA libmonome`.
-
-# PROBLEM: When the libmonome repo is updated, this will break.
-# Will need to change the `sha256` key.
-
 # PROBLEM: Does not seem to have permission to access the monome without sudo:
 # [jeff@jbb-dell:~/nix/nixpkgs]$ monomeserial
 # libmonome: could not open monome device: Permission denied
@@ -36,6 +19,10 @@
 #   dep: liblo7 (= 0.28-3)
 # The "liblo" line in my packages.nix should be installing liblo 0.29:
 #   https://nixos.org/nixos/packages.html?channel=nixos-19.03&query=liblo
+
+# I found no wafHook documentation,
+# so I aped this file from the nixpkgs repo:
+# pkgs/tools/networking/weighttp/default.nix
 
 
 { stdenv, libudev, liblo, fetchgit, python3, wafHook}:

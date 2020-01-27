@@ -84,6 +84,7 @@
     brave
     spotify
     google-chrome
+    skypeforlinux
 
     # audio, important
     a2jmidid
