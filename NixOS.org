@@ -32,7 +32,10 @@ https://stackoverflow.com/questions/59805975/nix-building-waf-produces-a-file-bu
 ** with only a comment
 https://stackoverflow.com/questions/59806776/nix-write-a-package-that-uses-waf-instead-of-make?noredirect=1#comment105758423_59806776
 * TODO install monome
-** TODO add libmonome to nixpkgs
+** TODO libmonome
+*** TODO RESPONSE waiting: should not require sudo
+https://stackoverflow.com/questions/59925105/nix-package-requires-sudo-to-access-usb-device?noredirect=1#comment105973084_59925105
+*** TODO add libmonome to nixpkgs
 ** TODO ask why serialosc fails to build
 *** TODO half-written question
 {{use the notes below to finish it}}
@@ -198,7 +201,6 @@ https://www.reddit.com/r/NixOS/comments/enkbus/getting_started_with_audio_progra
   Me asking Reddit why I can't use JACK.
 *** these procedures (not declarative) seem to have helped someone
 https://github.com/NixOS/nixpkgs/issues/74742#issuecomment-570745604
-* TODO resume review at pill 7.5
 * TODO learn to write Nix expressions
 ** stdenv.mkDerivation:
   https://nixos.org/nixos/nix-pills/fundamentals-of-stdenv.html
@@ -522,3 +524,7 @@ https://github.com/telent/config-nixpkgs
 nixos-option
 ** from the nix repl
 :?
+* TODO my config outside of .nix files
+~/.emacs
+~/.stack/config.yaml
+/etc/tmux.conf
