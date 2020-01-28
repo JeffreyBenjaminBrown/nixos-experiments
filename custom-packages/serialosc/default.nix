@@ -1,4 +1,6 @@
-# PITFALL: Depends on libmonome, also in this repo.
+# PITFALL: Depends on libmonome, which is available from this repo,
+# or [my fork of nixpkgs](https://github.com/JeffreyBenjaminBrown/nixpkgs),
+# but which is not yet part of the nixpkgs master branch.
 
 # HOW TO INSTALL (one way, anyway):
 # Add these two lines to nixpkgs/top-level/all-packages.nix:
