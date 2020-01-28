@@ -1,9 +1,8 @@
-The easiest way to build any of these packages is by running `nix-build` from its root.
-
-The `hello*` projects build. `hello-fetch` even fetches its source code before building.
-
-`libmonome` doesn't work:
-```
-Error: Cannot unpack waf lib into /nix/store/dk3pnwg7z9q14f4yj35y2kaqdmahnhhh-libmonome/.waf-2.0.17-6b308e91b5eb321c61bd5469cd6d43aa
-Move waf in a writable directory
-```
+Here is where I develop new packages.
+Once a package works, if it's not worth sharing,
+I'll just move it into _done/.
+If it's worth sharing, I'll integrate it into
+[my fork of nixpkgs](https://github.com/JeffreyBenjaminBrown/nixpkgs),
+but still keep a copy of it in _done/,
+because I might want to look at it later, and looking through _done/
+is easier than looking through my commits to nixpkgs.

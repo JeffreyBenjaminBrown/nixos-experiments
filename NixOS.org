@@ -1,12 +1,3 @@
-* TODO is this true? 
-test by running monomeserial
-** how to use a device without root privileges
-Suppose some command gives an error like "failed to open /dev/ttyUSB0"
-when run normally, but not when run as root.
-Then check what group that device (in this case, /dev/ttyUSB0) belongs to,
-and add that to `users.users.jeff.extraGroups`
-(where `jeff` is the user who should have the privilege),
-and log out and back in.
 * user ID problems
 ** changing user ID in NixOS is complicated
 *** because it won't let you change the ID of an existing user
@@ -41,10 +32,6 @@ https://stackoverflow.com/questions/59805975/nix-building-waf-produces-a-file-bu
 ** with only a comment
 https://stackoverflow.com/questions/59806776/nix-write-a-package-that-uses-waf-instead-of-make?noredirect=1#comment105758423_59806776
 * TODO install monome
-** TODO libmonome
-*** TODO RESPONSE waiting: should not require sudo
-https://stackoverflow.com/questions/59925105/nix-package-requires-sudo-to-access-usb-device?noredirect=1#comment105973084_59925105
-*** TODO add libmonome to nixpkgs
 ** TODO ask why serialosc fails to build
 *** TODO half-written question
 {{use the notes below to finish it}}
@@ -523,6 +510,13 @@ https://www.reddit.com/r/NixOS/comments/9swtg3/do_you_put_all_packages_you_insta
 ** some peoples' configs
 https://github.com/tazjin/nixos-config
 https://github.com/telent/config-nixpkgs
+* how to use a device without root privileges
+Suppose some command gives an error like "failed to open /dev/ttyUSB0"
+when run normally, but not when run as root.
+Then check what group that device (in this case, /dev/ttyUSB0) belongs to,
+and add that to `users.users.jeff.extraGroups`
+(where `jeff` is the user who should have the privilege),
+and log out and back in.
 * ambitious
 ** TODO put NextCloud on the Rapsberry
  chapter 15 in NixOS manual.

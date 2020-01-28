@@ -1,23 +1,24 @@
-# PROBLEM: Does not seem to have permission to access the monome without sudo:
-# [jeff@jbb-dell:~/nix/nixpkgs]$ monomeserial
-# libmonome: could not open monome device: Permission denied
-# failed to open /dev/ttyUSB0
-# [jeff@jbb-dell:~/nix/nixpkgs]$ sudo monomeserial
-# [sudo] password for jeff:
-# monomeserial version 1.4.2, yay!
-# initialized device m0000102 (monome 256) at /dev/ttyUSB0, which is 16x16 using proto
-#  mext
-# running with prefix /monome
-# ^C
-# [jeff@jbb-dell:~/nix/nixpkgs]$
+# PITFALL: If you'd prefer not to run this with `sudo` (which is sensible),
+# you'll need to make sure the user has access to the monome.
+# When the user does not, running `monomeserial`
+# will result in something like:
+#   [jeff@jbb-dell:~]$ monomeserial
+#   libmonome: could not open monome device: Permission denied
+#   failed to open /dev/ttyUSB0
+# In that case, run `ls -l <device path>`
+# (e.g., for the example above, `ls -l /dev/ttyUSB0`)
+# to find the name of the group that owns the device,
+# and add it to the user's `extraGroups` in the appropriate `.nix` file.
 
-# MAYBE A PROBLEM: I've got liblo, not liblo-dev, installed.
-# But maybe that distinction matters on Debian and not my system.
+# MAYBE A PROBLEM, but I'm guessing not:
+# The [installation instructions at monome.org](https://monome.org/docs/serialosc/raspbian/)
+# indicate that you should use `liblo-dev`, which is a Debian package.
+# This package instead depends on `liblo`.
 # When I view the Debian package:
 #   https://packages.debian.org/jessie/liblo-dev
-# it looks like all it contains is liblo 7 or 0.28-3:
+# it looks like all it contains is liblo 0.28-3:
 #   dep: liblo7 (= 0.28-3)
-# The "liblo" line in my packages.nix should be installing liblo 0.29:
+# "liblo" in nixpkgs (currently) installs liblo 0.29:
 #   https://nixos.org/nixos/packages.html?channel=nixos-19.03&query=liblo
 
 # I found no wafHook documentation,
