@@ -1,3 +1,12 @@
+* TODO is this true? 
+test by running monomeserial
+** how to use a device without root privileges
+Suppose some command gives an error like "failed to open /dev/ttyUSB0"
+when run normally, but not when run as root.
+Then check what group that device (in this case, /dev/ttyUSB0) belongs to,
+and add that to `users.users.jeff.extraGroups`
+(where `jeff` is the user who should have the privilege),
+and log out and back in.
 * user ID problems
 ** changing user ID in NixOS is complicated
 *** because it won't let you change the ID of an existing user

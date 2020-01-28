@@ -126,6 +126,7 @@
         # the privilege of changing settings (adding networks)
       "audio"
       "jackaudio"
+      "tty" # to use the monome without root privileges
       ];
   };
 
