@@ -63,6 +63,7 @@
     scala
     sbt   # scala build tool
 
+    # photo|video
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick7 # manipulate images
