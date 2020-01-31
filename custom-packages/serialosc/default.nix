@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  patches = ./fix-git-commit-in-wscript.patch;
+  patches = ./git-commit-in-wscript.patch;
 
   # The"LIBUV"  error message suggested this.
   # It causes more details to be reported upon failure.
