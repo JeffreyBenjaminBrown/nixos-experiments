@@ -1,0 +1,17 @@
+diff --git a/wscript b/wscript
+index 2148cc5..a1d3fbd 100644
+--- a/wscript
++++ b/wscript
+@@ -266,8 +266,10 @@ def configure(conf):
+ 		conf.env.GIT_COMMIT = subprocess.check_output(
+ 			["git", "rev-parse", "--verify", "--short", "HEAD"],
+ 			stderr=devnull).decode().strip()
+-	except subprocess.CalledProcessError:
+-		conf.env.GIT_COMMIT = ''
++
++	except (OSError, subprocess.CalledProcessError):
++		import os
++		conf.env.GIT_COMMIT = os.getenv("version")
+ 
+ 	conf.define("VERSION", VERSION)
+ 	conf.define("_GNU_SOURCE", 1)

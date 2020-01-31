@@ -1,16 +1,9 @@
-# PITFALL: Depends on libmonome, which is available from this repo,
-# or [my fork of nixpkgs](https://github.com/JeffreyBenjaminBrown/nixpkgs),
+# PITFALL: Depends on libmonome, which is available from this repo, or from
+# [my fork of nixpkgs](https://github.com/JeffreyBenjaminBrown/nixpkgs),
 # but which is not yet part of the nixpkgs master branch.
 
-# HOW TO INSTALL (one way, anyway):
-# Add these two lines to nixpkgs/top-level/all-packages.nix:
-#   libmonome = callPackage ../development/libraries/libmonome { };
-#   serialosc = callPackage ../development/libraries/serialosc { };
-# and copy the two packages to
-#   nixpkgs/pkgs/development/libraries/
-# and then from the root of nixpkgs, run
-#   nix-build -A libmonome
-#   nix-build -A serialosc
+# Built with sagacious help from Robert Kovacsics (@KoviRobi):
+# https://discourse.nixos.org/t/nix-build-fails-because-python-wants-something-thats-unavailable-without-saying-what-it-wants/5675/4
 
 { stdenv, libmonome, liblo, fetchgit, python3, wafHook, libudev, udev, systemd, avahi-compat, avahi }:
 
@@ -19,35 +12,18 @@ stdenv.mkDerivation rec {
   version = "v1.4.1";
 
   src = fetchgit {
-    # Once, it seemed to finish, and I don't know how! Then it crashed with:
-    # Switched to a new branch 'fetchgit'
-    # removing `.git'...
-    # hash mismatch in fixed-output derivation '/nix/store/5zj802wfjd0ima92lpzzsqdjqvrnrwf9-serialosc':
-    # wanted: sha256:1vqcxi32wc4pklbddllflkaigkfvd4ykwrjqccayvrk10dx1sna3
-    # got:    sha256:1zmzjasv21ix7i7s58a31k0025ji32hv2jm2ww6s0xhjmr5ax34j
-
-    # This way it [[gets pretty far]].
-    # The fetchSubmodules value I set again seems to have no effect.
-    url = https://github.com/monome/serialosc.git;
-    rev = "v1.4.1";
-    sha256 = "1zmzjasv21ix7i7s58a31k0025ji32hv2jm2ww6s0xhjmr5ax34j";
-
-    # For this I duplicated the serialosc repo including all submodules.
-    # It seems to behave just like the [[gets pretty far]] config.
-    # url = https://github.com/JeffreyBenjaminBrown/serialosc-nix-cheat;
-    # sha256 = "1pm49yqimpard9x2qbma1gyxlmv5bk0kwppn5djnfklgp636km1n";
-
-    # This is currently the hash of master.
-    # Gives me "Submodules aren't initialized!"
-    # url = https://github.com/monome/serialosc.git;
-    # sha256 = "0hc8jpn4vbv52g9rnqprfjybbhvj6dzra5rkdyq9g6h4fqpqlrwm";
-
-    # If I use what prefetch gives me, it always fails, with
-    # "Submodules aren't initialized!"
-    # url = https://github.com/monome/serialosc.git;
-    # sha256 = "1vqcxi32wc4pklbddllflkaigkfvd4ykwrjqccayvrk10dx1sna3";
-    # I've tried fetchSubmodules = false, true, or omitted.
+    url = https://github.com/monome/serialosc;
+    rev = "cec0ea76b2d5f69afa74d3ffc14a0950e32a7914";
+    # date: "2019-06-09T21:46:13+02:00"
+    sha256 = "03qkzslhih72idwafgfxmkwp5v3x048njh0c682phw2ks11plmbp";
+    fetchSubmodules = true;
   };
+
+  patches = ./fix-git-commit-in-wscript.patch;
+
+  # The"LIBUV"  error message suggested this.
+  # It causes more details to be reported upon failure.
+  wafFlags = ["-v"];
 
   nativeBuildInputs = [ wafHook ];
   buildInputs = [
