@@ -5,7 +5,10 @@
 # Built with sagacious help from Robert Kovacsics (@KoviRobi):
 # https://discourse.nixos.org/t/nix-build-fails-because-python-wants-something-thats-unavailable-without-saying-what-it-wants/5675/4
 
-{ stdenv, libmonome, liblo, fetchgit, python3, wafHook, libudev, udev, systemd, avahi-compat, avahi }:
+{ stdenv, libmonome, liblo, fetchgit, python3, wafHook, libudev, udev, systemd, avahi-compat, avahi
+  #, git, less
+, libuv
+}:
 
 stdenv.mkDerivation rec {
   name = "serialosc";
@@ -23,7 +26,8 @@ stdenv.mkDerivation rec {
 
   # The"LIBUV"  error message suggested this.
   # It causes more details to be reported upon failure.
-  wafFlags = ["-v"];
+  wafFlags = [ "-v"
+               "--enable-system-libuv" ];
 
   nativeBuildInputs = [ wafHook ];
   buildInputs = [
@@ -32,9 +36,10 @@ stdenv.mkDerivation rec {
     liblo
     libmonome
     libudev
-    libudev
     python3
     systemd
     udev
+    libuv
+#    git less # for debugging
   ];
 }
