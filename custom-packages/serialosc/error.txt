@@ -1,9 +1,8 @@
-[jeff@jbb-dell:~]$ cd nix/nixpkgs-fork/
-
-[jeff@jbb-dell:~/nix/nixpkgs-fork]$ nix-build -A serialosc
+[jeff@jbb-dell:~/nix/nixpkgs-fork]$ nix-env -f . -iA serialosc
+installing 'serialosc'
 these derivations will be built:
-  /nix/store/cgn6qsq1il7m89mwx6z5qmvl3g5a319j-serialosc.drv
-building '/nix/store/cgn6qsq1il7m89mwx6z5qmvl3g5a319j-serialosc.drv'...
+  /nix/store/11p9b7lbpfr83kqb5zpf6miivnqpv1cd-serialosc.drv
+building '/nix/store/11p9b7lbpfr83kqb5zpf6miivnqpv1cd-serialosc.drv'...
 unpacking sources
 unpacking source archive /nix/store/jglzxp2h56c9i442vjxdf52lhr91p8aw-serialosc-cec0ea7
 source root is serialosc-cec0ea7
@@ -11,25 +10,25 @@ patching sources
 applying patch /nix/store/d7qvxgw8j7jnh8p4hcvf7ysq0i1ad7x7-git-commit-in-wscript.patch
 patching file wscript
 configuring
-configure flags: --prefix=/nix/store/h3rm0j489cq3107q9z5pdygq8azjpywa-serialosc configure
-Setting top to                           : /build/serialosc-cec0ea7
-Setting out to                           : /build/serialosc-cec0ea7/build
+configure flags: --prefix=/nix/store/qpfjzlx0arzwsv51jx57rrx32xqbnp16-serialosc configure
+Setting top to                           : /build/serialosc-cec0ea7 
+Setting out to                           : /build/serialosc-cec0ea7/build 
 
-Checking for 'gcc' (C compiler)          : gcc
+Checking for 'gcc' (C compiler)          : gcc 
 
-Checking for working poll()              : yes
-Checking for libudev                     : yes
-Checking for libmonome                   : yes
-Checking for liblo                       : yes
-Checking for strdup                      : yes
-Checking for _strdup                     : no
-Checking for strndup                     : yes
-Checking for strcasecmp                  : yes
-Checking for header unistd.h             : yes
-Checking for header dns_sd.h             : yes
-Checking for library dl                  : yes
+Checking for working poll()              : yes 
+Checking for libudev                     : yes 
+Checking for libmonome                   : yes 
+Checking for liblo                       : yes 
+Checking for strdup                      : yes 
+Checking for _strdup                     : no 
+Checking for strndup                     : yes 
+Checking for strcasecmp                  : yes 
+Checking for header unistd.h             : yes 
+Checking for header dns_sd.h             : yes 
+Checking for library dl                  : yes 
 
-'configure' finished successfully (0.785s)
+'configure' finished successfully (0.770s)
 building
 build flags: --enable-system-libuv build
 Waf: Entering directory `/build/serialosc-cec0ea7/build'
@@ -41,11 +40,11 @@ Waf: Entering directory `/build/serialosc-cec0ea7/build'
 [ 6/50] Compiling third-party/libuv/src/threadpool.c
 [ 7/50] Compiling third-party/libuv/src/unix/core.c
 [ 8/50] Compiling third-party/libuv/src/unix/async.c
-[ 9/50] Compiling third-party/libuv/src/unix/linux-core.c
-[10/50] Linking build/src/libserialosc-common.a
+[ 9/50] Linking build/src/libserialosc-common.a
+[10/50] Compiling third-party/libuv/src/unix/linux-core.c
 [11/50] Compiling third-party/libuv/src/unix/proctitle.c
 [12/50] Compiling third-party/libuv/src/unix/timer.c
-[13/50] Compiling third-party/libuv/src/unix/getaddrinfo.c
+[13/50] Compiling third-party/libuv/src/unix/loop.c
 [14/50] Compiling third-party/libuv/src/unix/thread.c
 [15/50] Compiling third-party/libuv/src/unix/tcp.c
 [16/50] Compiling third-party/libuv/src/unix/fs.c
@@ -68,7 +67,7 @@ cc1: all warnings being treated as errors
 Waf: Leaving directory `/build/serialosc-cec0ea7/build'
 Build failed
  -> task in 'LIBUV' failed with exit status 1 (run with -v to display more information)
-builder for '/nix/store/cgn6qsq1il7m89mwx6z5qmvl3g5a319j-serialosc.drv' failed with exit code 1
-error: build of '/nix/store/cgn6qsq1il7m89mwx6z5qmvl3g5a319j-serialosc.drv' failed
+builder for '/nix/store/11p9b7lbpfr83kqb5zpf6miivnqpv1cd-serialosc.drv' failed with exit code 1
+error: build of '/nix/store/11p9b7lbpfr83kqb5zpf6miivnqpv1cd-serialosc.drv' failed
 
-[jeff@jbb-dell:~/nix/nixpkgs-fork]$
+[jeff@jbb-dell:~/nix/nixpkgs-fork]$ 

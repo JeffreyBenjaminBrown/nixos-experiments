@@ -37,6 +37,7 @@
     tree
     file # shows types of files
     kdeApplications.dolphin-plugins
+    agrep # fuzzy search!
 
     # explore system
     dmidecode # to learn about system RAM
@@ -72,6 +73,7 @@
     vlc
     capture     # screen capture (video, I think)
     qscreenshot # shows up as a KDE menu widget
+    simplescreenrecorder # includes mic input
 
     # misc
     killall
@@ -89,6 +91,7 @@
 
     # audio, important
     a2jmidid
+    audacity
     carla
     jack2Full
     jack_capture

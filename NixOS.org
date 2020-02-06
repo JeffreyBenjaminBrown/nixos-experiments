@@ -36,6 +36,8 @@ nix-prefetch-git --fetch-submodules https://github.com/monome/serialosc
 * strings and escape characters
 https://discourse.nixos.org/t/nix-build-fails-because-python-wants-something-thats-unavailable-without-saying-what-it-wants/5675/4
 "you don’t need to escape a single-quote inside a double-quoted string. But this leads to having two single-quotes, which terminates the nix string. You can escape those with another single-quote"
+* TODO are my nix-env installations permanent?
+I installed some things (libuv and libmonome) via `nix-env -f ~/nix/nixpkgs -iA <package name>`. Will they still be there when I restart? Will libuv not be reset to the older version?
 * TODO install monome
 ** BLOCKED asking why serialosc fails to build
 *** refs
@@ -128,8 +130,6 @@ In your response you list the phases, but you omit the bracketed expressions. Wh
 
 ** git submodule update: model code
 ~/nix/nixpkgs/pkgs/development/compilers/chez/default.nix
-** TODO is libmonome sufficiently up to date?
-I'm using the newest tag, but there are newer untagged commits.
 * TODO audio in NixOS
 ** how to add a package
 *** refs
