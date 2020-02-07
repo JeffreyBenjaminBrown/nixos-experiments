@@ -26,8 +26,14 @@ stdenv.mkDerivation rec {
 
   # The"LIBUV"  error message suggested this.
   # It causes more details to be reported upon failure.
-  wafFlags = [ "-v"
-               "--enable-system-libuv" ];
+  wafFlags = [ "-v" ];
+
+  # @simonvanderveldt suggested this, here:
+  # https://github.com/monome/serialosc/issues/49#issuecomment-583134920
+  # As of libuv 1.34.1 (which is on the nixpkgs master branch,
+  # but the default nixpkgs used by nix-rebuild is 1.34.0),
+  # the `packed-address` warning that was breaking the build is suppressed.
+  wafConfigureFlags = [ "--enable-system-libuv" ];
 
   nativeBuildInputs = [ wafHook ];
   buildInputs = [
