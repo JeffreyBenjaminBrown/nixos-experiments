@@ -36,9 +36,7 @@ nix-prefetch-git --fetch-submodules https://github.com/monome/serialosc
 * strings and escape characters
 https://discourse.nixos.org/t/nix-build-fails-because-python-wants-something-thats-unavailable-without-saying-what-it-wants/5675/4
 "you don’t need to escape a single-quote inside a double-quoted string. But this leads to having two single-quotes, which terminates the nix string. You can escape those with another single-quote"
-* TODO are my nix-env installations permanent?
-I installed some things (libuv and libmonome) via `nix-env -f ~/nix/nixpkgs -iA <package name>`. Will they still be there when I restart? Will libuv not be reset to the older version?
-* TODO install monome
+* TODO file: installing monome
 ** BLOCKED asking why serialosc fails to build
 *** refs
 I first posted on stackoverflow, then discourse.nixos. I got my first response on discourse.nixos, but then that same one and another on SO.
@@ -128,9 +126,58 @@ In your response you list the phases, but you omit the bracketed expressions. Wh
 ```
 **** How do I replace multiple lines?
 
+** nix-env installations are permanent
+ I installed some things (libuv and libmonome) via `nix-env -f ~/nix/nixpkgs -iA <package name>`. They still work after rebuilding.
 ** git submodule update: model code
 ~/nix/nixpkgs/pkgs/development/compilers/chez/default.nix
 * TODO audio in NixOS
+** TODO sometimes Qjackctl does not take over
+I can start Qjackctl, and still I can play youtube videos.
+*** when I first launch Qjackctl, I get these messages
+01:06:49.053 Statistics reset.
+01:06:49.064 ALSA connection change.
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+01:06:49.099 ALSA connection graph change.
+*** when I press start in it, I get this
+01:08:22.192 JACK is starting...
+01:08:22.192 /run/current-system/sw/bin/jackd -dalsa -dhw:0 -r48000 -p1024 -n2
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+01:08:22.199 JACK was started with PID=2163.
+no message buffer overruns
+no message buffer overruns
+no message buffer overruns
+jackdmp 1.9.12
+Copyright 2001-2005 Paul Davis and others.
+Copyright 2004-2016 Grame.
+Copyright 2016-2017 Filipe Coelho.
+jackdmp comes with ABSOLUTELY NO WARRANTY
+This is free software, and you are welcome to redistribute it
+under certain conditions; see the file COPYING for details
+JACK server starting in realtime mode with priority 10
+self-connect-mode is "Don't restrict self connect requests"
+audio_reservation_init
+Acquire audio card Audio0
+creating alsa driver ... hw:0|hw:0|1024|2|48000|0|0|nomon|swmeter|-|32bit
+configuring for 48000Hz, period = 1024 frames (21.3 ms), buffer = 2 periods
+ALSA: final selected sample format for capture: 32bit integer little-endian
+ALSA: use 2 periods for capture
+ALSA: final selected sample format for playback: 32bit integer little-endian
+ALSA: use 2 periods for playback
+01:08:24.323 JACK connection change.
+01:08:24.323 Server configuration saved to "/home/jeff/.jackdrc".
+01:08:24.323 Statistics reset.
+01:08:24.337 Client activated.
+01:08:24.337 Patchbay deactivated.
+01:08:24.367 JACK connection graph change.
+*** with auto-mute disabled, I futz with the earphone jack, and then I can hear
 ** how to add a package
 *** refs
 https://nixos.org/nixos/manual/index.html#sec-custom-packages
@@ -168,12 +215,32 @@ https://github.com/musnix/musnix/issues/100
 *** trying because @magnetophon suggests it now, here:
 https://github.com/NixOS/nixpkgs/issues/71283#issuecomment-575458797
 ** WORKING ! how to start, use JACK
-Stop audio in ordinary apps (e.g. Spotify, browser). No need to kill the app.
-Start Qjackctl. If it's not like this, make it so:
-  * 2 periods / buffer
-  * 256 frames / period
-  * hw:0 (or default)
-  * 48 kHz
+*** PITFALL: Test with high frequencies
+A sine wave from SuperCollider at 200 Hz
+is inaudible from my computer's speaker
+(over the sound of central heating).
+
+230 Hz is barely audible.
+*** PITFALL: magic wand effects
+For some reason, when it wasn't working,
+it helped to plug in some headphones halfway.
+That makes me suspect messing with alsamixer could also help.
+*** steps
+Stop audio in ordinary apps (e.g. Spotify, browser).
+  No need to kill the app.
+Start Qjackctl.
+  Use the following settings:
+    * ALSA
+    * hw:0 (or default)
+    * 48 kHz
+    * 256 frames / period
+    * 2 periods / buffer
+  Press start.
+  Once it's available, press play (the right-facing triangle).
+Start SuperCollider.
+  Boot the sound engine.
+  Evaluate this expression:
+    { SinOsc.ar(440, 0, 0.5) }.play;
 ** Qjackctl can be used for routing
 Thus spake @magnetophon:
   https://github.com/NixOS/nixpkgs/issues/71283#issuecomment-574976258
