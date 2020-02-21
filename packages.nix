@@ -76,6 +76,7 @@
     simplescreenrecorder # includes mic input
 
     # misc
+    aspell aspellDicts.en aspellDicts.es
     killall
     xsel
     gnumeric
