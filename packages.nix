@@ -11,7 +11,7 @@
     avahi # for libavahi-compat-libdnssd-dev
     avahi-compat # for libavahi-compat-libdnssd-dev
 
-    # storage, versioning
+    # storage, versioning, formatting
     archiver
     zip
     unzip
@@ -21,6 +21,12 @@
     ark
     borgbackup
     encfs
+    pandoc
+    (texlive.combine { inherit (texlive)
+      scheme-small
+      latexmk
+      bibtex; }) #for pdflatex
+    lmodern # pandoc needs this to convert .md to .pdf
 
     # build tools
     # waf # broken -- builds to a file, not a folder
