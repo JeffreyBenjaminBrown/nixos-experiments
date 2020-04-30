@@ -10,6 +10,7 @@
 
   nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
   virtualisation.docker.enable = true;
+  environment.homeBinInPath = true; # that is, ~/bin
 
   # Networking
 
@@ -73,16 +74,18 @@
     version = 2;
     device = "/dev/sda"; };
 
-  i18n = {
+  console = {
 
     # In a later version of (nixpkgs?)
     # I will need to change `consoleFont` and `consoleKeyMap`
     # to the following, outside of (and next to) this `i18n` scope.
     #   console.font = "Lat2-Terminus16";
     #   console.keyMap = "us"; };
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
 
+  i18n = {
     defaultLocale = "en_US.UTF-8"; # I've tried this both as
       # English and Spanish. Presumably the next option,
       # extraLocaleSettings, is more important.
@@ -131,7 +134,7 @@
   };
 
   # PITFALL: To avoid breaking some software,
-  # change this only when NixOS release notes say.
+  # change this only when NixOS release notes indicate.
   # PITFALL: Surprisingly, it does not have to match the version of
   # NixOS you are running -- for instance, the release notes for 19.09
   # (https://nixos.org/nixos/manual/release-notes.html#sec-release-19.09)
