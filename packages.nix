@@ -38,6 +38,7 @@
     plasma-nm
     ktorrent
     wget
+    zoom-us
 
     # exploring filetree
     tree
@@ -53,6 +54,10 @@
     # programming languages, or close neighbors
     awscli
     docker
+    gradle_4_10 # Builds Java code. Used by SmSn.
+                # The latest one, 5.6.1, is just called "gradle".
+                # I'm using 4 because SmSn won't build with gradle 5.
+    maven # a build tool
     python
     python3
     stack
@@ -64,6 +69,10 @@
     libffi
     haskellPackages.hasktags
     haskellPackages.tidal
+    haskellPackages.jack
+    jack2
+    haskellPackages.SDL  # a sound library
+    haskellPackages.sdl2 # another version of that
     #haskellPackages.vivid  # marked as broken; Nix refuses to evaluate
     #haskellPackages.vivid-supercollider
     #haskellPackages.vivid-osc
@@ -98,6 +107,8 @@
 
     # audio, important
     a2jmidid
+    SDL
+    SDL2
     # audacity # Seemed to bork my audio setup -- e.g.
     #            now headsets are detected automatically when connected;
     #            I have to screw with `alsamixer` to use them.
