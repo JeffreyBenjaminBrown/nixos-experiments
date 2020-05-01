@@ -75,12 +75,6 @@
     device = "/dev/sda"; };
 
   console = {
-
-    # In a later version of (nixpkgs?)
-    # I will need to change `consoleFont` and `consoleKeyMap`
-    # to the following, outside of (and next to) this `i18n` scope.
-    #   console.font = "Lat2-Terminus16";
-    #   console.keyMap = "us"; };
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
