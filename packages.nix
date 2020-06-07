@@ -83,6 +83,8 @@
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick7 # manipulate images
+    kdenlive     # video editor
+      ffmpeg-full  # video tools, not required by kdenlive but recommended
     pdftk        # manipulate pdfs
     kdeApplications.okular
     vlc
