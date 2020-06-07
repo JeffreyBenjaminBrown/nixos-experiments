@@ -2,7 +2,13 @@
 # 21.1.2. Adding Packages to Emacs
 # https://nixos.org/nixos/manual/index.html#module-services-emacs-adding-packages
 
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {
+  overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
+} }:
 
 let
   myEmacs = pkgs.emacs;
@@ -14,12 +20,6 @@ in
       magit        # ; Integrate git <C-x g>
       nix-mode
 
-      # `org-roam` is in Melpa: https://melpa.org/#/org-roam
-      # right next to nix-mode: https://melpa.org/#/nix-mode
-      # but for some reason this line makes NixOS throw an error:
-        # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
-      org-roam
-
     ]) ++ (with epkgs.melpaPackages; [
       # elpy         # will it conflict with python-mode?
       markdown-mode
@@ -27,6 +27,15 @@ in
       haskell-mode
       scala-mode
       intero       # for haskell
+
+      company
+      # company-org-roam
+
+      # `org-roam` is in Melpa: https://melpa.org/#/org-roam
+      # right next to nix-mode: https://melpa.org/#/nix-mode
+      # but for some reason this line makes NixOS throw an error:
+        # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
+      # org-roam
 
     ]) ++ (with epkgs.elpaPackages; [
       csv-mode
