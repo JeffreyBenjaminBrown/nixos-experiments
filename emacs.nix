@@ -2,13 +2,7 @@
 # 21.1.2. Adding Packages to Emacs
 # https://nixos.org/nixos/manual/index.html#module-services-emacs-adding-packages
 
-{ pkgs ? import <nixpkgs> {
-  overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
-} }:
+{ pkgs ? import <nixpkgs> {} }:
 
 let
   myEmacs = pkgs.emacs;
