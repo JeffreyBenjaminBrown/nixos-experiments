@@ -116,9 +116,6 @@
     ardour
     SDL
     SDL2
-    # audacity # Seemed to bork my audio setup -- e.g.
-    #            now headsets are detected automatically when connected;
-    #            I have to screw with `alsamixer` to use them.
     carla
     jack2Full
     jack_capture
