@@ -8,6 +8,9 @@
     ./packages.nix
   ];
 
+  environment.variables = # customize Bash (and other stuff?)
+    { EDITOR = "mg"; };
+
   nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
   virtualisation.docker.enable = true;
   environment.homeBinInPath = true; # that is, ~/bin

@@ -1,9 +1,12 @@
 { config, pkgs, nixpkgs, ... }:
 
-{ environment.systemPackages =
+{
+  environment.systemPackages =
   with pkgs; [
+    # editors
     (import ./emacs.nix { inherit pkgs; })
       # Fun fact: Does not rely on the `with pkgs` statement.
+    mg
 
     # for monome
     systemd # for libudev
@@ -78,6 +81,7 @@
     #haskellPackages.vivid-osc
     scala
     sbt   # scala build tool
+    sqlite
 
     # photo|video
     gimp         # manipulate images
@@ -109,6 +113,7 @@
 
     # audio, important
     a2jmidid
+    ardour
     SDL
     SDL2
     # audacity # Seemed to bork my audio setup -- e.g.
