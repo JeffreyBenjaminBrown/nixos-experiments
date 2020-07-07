@@ -92,9 +92,12 @@
     pdftk        # manipulate pdfs
     kdeApplications.okular
     vlc
-    capture     # screen capture (video, I think)
-    qscreenshot # shows up as a KDE menu widget
+    capture              # screen capture (video, I think)
+    qscreenshot          # shows up as a KDE menu widget
+    screenkey            # show what I'm typing on the screen
+    lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
     simplescreenrecorder # includes mic input
+    gnome3.cheese        # record from webcam
 
     # misc
     aspell aspellDicts.en aspellDicts.es
