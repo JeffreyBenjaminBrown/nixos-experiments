@@ -99,6 +99,14 @@
     simplescreenrecorder # includes mic input
     gnome3.cheese        # record from webcam
 
+    # # For feeding the mic into Cheese (for webcam videos)
+    # PITFALL: This borks at least some of my audio setup,
+    # in particular preventing me from using external speakers.
+    # # There's an alsa emulator for pulse wchich might work better.
+    pavucontrol # Pulse Audio Volume Control, needed for audio in Cheese
+        # according to this kid: https://www.youtube.com/watch?v=M0B0-SilJw4
+    pulseaudio # I'm just guessing I need this; nobody said so
+
     # misc
     aspell aspellDicts.en aspellDicts.es
     killall

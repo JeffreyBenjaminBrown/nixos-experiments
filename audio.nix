@@ -10,6 +10,13 @@
 
 with pkgs; {
 
+  # For feeding the mic into Cheese (for webcam videos)
+  # Was suggested here: https://nixos.wiki/wiki/PulseAudio
+  # PITFALL: This borks at least some of my audio setup,
+  # in particular preventing me from using external speakers.
+  # # There's an alsa emulator for pulse wchich might work better.
+  hardware.pulseaudio.enable = true;
+
   # services.tlp.enable = false; # a power management daemon
   # services.jack.jackd.enable = true; # note: also mentioned in the
     # big commented-out section below about JACK, from the NixOS WIKI.
