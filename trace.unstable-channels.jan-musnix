@@ -1,5 +1,16 @@
 building Nix...
 building the system configuration...
+trace: warning: In file /home/jeff/nix/musnix/modules/rtirq.nix
+a list is being assigned to the option config.environment.etc.
+This will soon be an error as type loaOf is deprecated.
+See https://github.com/NixOS/nixpkgs/pull/63103 for more information.
+Do
+  environment.etc =
+    { rtirq.conf = {...}; }
+instead of
+  environment.etc =
+    [ { target = "rtirq.conf"; ...} ]
+
 these derivations will be built:
   /nix/store/w8pq2gpbnh6v2k64ifdkcf23znj9c0c7-hplip-3.20.5.drv
   /nix/store/z20qvbx9pmw4zzvw73hjfk4lj3jhclbw-cups-progs.drv
@@ -57,13 +68,9 @@ building '/nix/store/bbifkp0n4ckk1m3qjy50p00ki1rffr9k-google-chrome-84.0.4147.89
 building '/nix/store/5dxmnpq2d0jx0iswpwjdglsyiw9w7c53-vmpk-0.5.1.drv'...
 building '/nix/store/w8pq2gpbnh6v2k64ifdkcf23znj9c0c7-hplip-3.20.5.drv'...
 building '/nix/store/9nn4j95ihja6ahk7scjwm0cpgvcxqwfp-zoom_x86_64.tar.xz.drv'...
-
-trying https://zoom.us/client/5.1.422789.0705/zoom_x86_64.tar.xz
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
+unpacking sources
 unpacking sources
 unpacking source archive /nix/store/flwmv893naxzifqsvqaclqz7vjg5pyks-vmpk-0.5.1.tar.bz2
-unpacking sources
 Sourcing python-recompile-bytecode-hook.sh
 Sourcing python-remove-tests-dir-hook
 Sourcing python-catch-conflicts-hook.sh
@@ -78,8 +85,11 @@ configuring
 fixing cmake files...
 grep: Invalid range end
 cmake flags: -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_BUILD_RPATH=ON -DBUILD_TESTING=OFF -DCMAKE_INSTALL_LOCALEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/locale -DCMAKE_INSTALL_LIBEXECDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/libexec -DCMAKE_INSTALL_LIBDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_INSTALL_DOCDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/doc/VMPK -DCMAKE_INSTALL_INFODIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/info -DCMAKE_INSTALL_MANDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/man -DCMAKE_INSTALL_OLDINCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_INCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_SBINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/sbin -DCMAKE_INSTALL_BINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/bin -DCMAKE_INSTALL_NAME_DIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_POLICY_DEFAULT_CMP0025=NEW -DCMAKE_OSX_SYSROOT= -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_FIND_FRAMEWORK=last -DCMAKE_STRIP=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/strip -DCMAKE_RANLIB=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ranlib -DCMAKE_AR=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ar -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1  
+
+trying https://zoom.us/client/5.1.422789.0705/zoom_x86_64.tar.xz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
 -- The C compiler identification is GNU 9.3.0
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 -- The CXX compiler identification is GNU 9.3.0
 -- Check for working C compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/gcc
 unpacking sources
@@ -90,6 +100,7 @@ unpacking source archive /nix/store/xfav9dlvhwvklgja3lm2ralfa3dh8pnx-hplip-3.20.
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Check for working CXX compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/g++
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 source root is hplip-3.20.5
 setting SOURCE_DATE_EPOCH to timestamp 1589204206 of file hplip-3.20.5/locatedriver
 patching sources
@@ -114,6 +125,8 @@ patching sources
 -- Looking for Q_WS_WIN
 -- Looking for Q_WS_WIN - not found
 -- Looking for Q_WS_QWS
+-- Looking for Q_WS_QWS - not found
+-- Looking for Q_WS_MAC
 applying patch /nix/store/khrs1k7v48b907sw2x00njxij77xkana-image-processor.patch
 patching file Makefile.am
 patching file Makefile.in
@@ -122,9 +135,6 @@ patching file prnt/hpcups/HPCupsFilter.cpp
 configuring
 fixing libtool script ./ltmain.sh
 configure flags: --disable-static --disable-dependency-tracking --prefix=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5 --with-hpppddir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/share/cups/model/HP --with-cupsfilterdir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/lib/cups/filter --with-cupsbackenddir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/lib/cups/backend --with-icondir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/share/applications --with-systraydir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/xdg/autostart --with-mimedir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/etc/cups --enable-policykit --disable-qt4 --enable-qt5
--- Looking for Q_WS_QWS - not found
--- Looking for Q_WS_MAC
-checking for a BSD-compatible install... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d065f7-coreutils-8.31/bin/install -c
 -- Looking for Q_WS_MAC - not found
 -- Found Qt4: /nix/store/sixphan9m33ipw7ab7s7hz0av7mancwj-qt-4.8.7/bin/qmake (found suitable version "4.8.7", minimum required is "4.8.0") 
 -- Found Qt4.EDITION = OpenSource version = 4.8.7
@@ -132,6 +142,7 @@ checking for a BSD-compatible install... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d0
 -- Program pkg-config found (pkg-config)
 -- Found X11: /nix/store/6psr8xhjdyj4gs21s6m31fbmmqkr3fjn-xorgproto-2019.1/include   
 -- Looking for XOpenDisplay in /nix/store/9l9xf027b896chvnbimm26g31pgkpvxx-libX11-1.6.8/lib/libX11.so;/nix/store/m6sz8wvmjsihmi159pd4j7zblaliarbg-libXext-1.3.4/lib/libXext.so
+checking for a BSD-compatible install... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d065f7-coreutils-8.31/bin/install -c
 -- Looking for XOpenDisplay in /nix/store/9l9xf027b896chvnbimm26g31pgkpvxx-libX11-1.6.8/lib/libX11.so;/nix/store/m6sz8wvmjsihmi159pd4j7zblaliarbg-libXext-1.3.4/lib/libXext.so - found
 -- Looking for gethostbyname
 -- Looking for gethostbyname - found
@@ -145,27 +156,22 @@ checking for a BSD-compatible install... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d0
 -- Looking for IceConnectionNumber in ICE - found
 -- Checking for module 'jack'
 --   Found jack, version 1.9.14
-checking whether build environment is sane... yes
 -- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+checking whether build environment is sane... yes
 checking for a thread-safe mkdir -p... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d065f7-coreutils-8.31/bin/mkdir -p
 checking for gawk... gawk
 checking whether make sets $(MAKE)... yes
--- Looking for pthread.h - found
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
-checking whether the C++ compiler works... yes
-checking for C++ compiler default output file name... a.out
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
 -- Looking for pthread_create in pthreads
-checking for suffix of executables... 
 -- Looking for pthread_create in pthreads - not found
 -- Looking for pthread_create in pthread
-checking whether we are cross compiling... no
-checking for suffix of object files... o
-checking whether we are using the GNU C++ compiler... yes
+checking whether the C++ compiler works... yes
+checking for C++ compiler default output file name... a.out
 -- Looking for pthread_create in pthread - found
 -- Found Threads: TRUE  
 -- Checking for module 'alsa>=1.0'
-checking whether g++ accepts -g... yes
 --   No package 'alsa' found
 CMake Error at /nix/store/ajs06x1m5ci5ij41wc2jm7ibvy0ssrv2-cmake-3.17.3/share/cmake-3.17/Modules/FindPkgConfig.cmake:497 (message):
   A required package was not found
@@ -177,9 +183,7 @@ Call Stack (most recent call first):
 -- Configuring incomplete, errors occurred!
 See also "/build/vmpk-0.5.1/build/CMakeFiles/CMakeOutput.log".
 See also "/build/vmpk-0.5.1/build/CMakeFiles/CMakeError.log".
-checking for style of include used by make... GNU
-checking dependency style of g++... none
-checking for gcc... gcc
+checking for suffix of executables... 
 builder for '/nix/store/5dxmnpq2d0jx0iswpwjdglsyiw9w7c53-vmpk-0.5.1.drv' failed with exit code 1
 cannot build derivation '/nix/store/gx3zc910sdv1jxxha1zj1nczdqgzwb7b-system-path.drv': 1 dependencies couldn't be built
 cannot build derivation '/nix/store/y10gv2p485n71wr25xk0dp71hxjxhgcw-nixos-system-jbb-dell-20.09pre236005.2b7c0dcdaab.drv': 1 dependencies couldn't be built

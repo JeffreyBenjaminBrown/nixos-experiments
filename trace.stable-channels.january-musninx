@@ -1,5 +1,16 @@
 building Nix...
 building the system configuration...
+trace: warning: In file /home/jeff/nix/musnix/modules/rtirq.nix
+a list is being assigned to the option config.environment.etc.
+This will soon be an error as type loaOf is deprecated.
+See https://github.com/NixOS/nixpkgs/pull/63103 for more information.
+Do
+  environment.etc =
+    { rtirq.conf = {...}; }
+instead of
+  environment.etc =
+    [ { target = "rtirq.conf"; ...} ]
+
 these derivations will be built:
   /nix/store/w8pq2gpbnh6v2k64ifdkcf23znj9c0c7-hplip-3.20.5.drv
   /nix/store/z20qvbx9pmw4zzvw73hjfk4lj3jhclbw-cups-progs.drv
@@ -58,6 +69,13 @@ building '/nix/store/5dxmnpq2d0jx0iswpwjdglsyiw9w7c53-vmpk-0.5.1.drv'...
 building '/nix/store/w8pq2gpbnh6v2k64ifdkcf23znj9c0c7-hplip-3.20.5.drv'...
 building '/nix/store/9nn4j95ihja6ahk7scjwm0cpgvcxqwfp-zoom_x86_64.tar.xz.drv'...
 unpacking sources
+unpacking source archive /nix/store/flwmv893naxzifqsvqaclqz7vjg5pyks-vmpk-0.5.1.tar.bz2
+unpacking sources
+source root is vmpk-0.5.1
+setting SOURCE_DATE_EPOCH to timestamp 1360420179 of file vmpk-0.5.1/vmpk.spec.in
+patching sources
+configuring
+fixing cmake files...
 Sourcing python-recompile-bytecode-hook.sh
 Sourcing python-remove-tests-dir-hook
 Sourcing python-catch-conflicts-hook.sh
@@ -65,34 +83,27 @@ Sourcing python-remove-bin-bytecode-hook.sh
 Sourcing python-imports-check-hook.sh
 Using pythonImportsCheckPhase
 Sourcing python-namespaces-hook
-unpacking sources
-unpacking source archive /nix/store/flwmv893naxzifqsvqaclqz7vjg5pyks-vmpk-0.5.1.tar.bz2
+grep: Invalid range end
+cmake flags: -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_BUILD_RPATH=ON -DBUILD_TESTING=OFF -DCMAKE_INSTALL_LOCALEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/locale -DCMAKE_INSTALL_LIBEXECDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/libexec -DCMAKE_INSTALL_LIBDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_INSTALL_DOCDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/doc/VMPK -DCMAKE_INSTALL_INFODIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/info -DCMAKE_INSTALL_MANDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/man -DCMAKE_INSTALL_OLDINCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_INCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_SBINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/sbin -DCMAKE_INSTALL_BINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/bin -DCMAKE_INSTALL_NAME_DIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_POLICY_DEFAULT_CMP0025=NEW -DCMAKE_OSX_SYSROOT= -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_FIND_FRAMEWORK=last -DCMAKE_STRIP=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/strip -DCMAKE_RANLIB=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ranlib -DCMAKE_AR=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ar -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1  
 
 trying https://zoom.us/client/5.1.422789.0705/zoom_x86_64.tar.xz
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-source root is vmpk-0.5.1
-setting SOURCE_DATE_EPOCH to timestamp 1360420179 of file vmpk-0.5.1/vmpk.spec.in
-patching sources
-configuring
-fixing cmake files...
-grep: Invalid range end
-cmake flags: -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_BUILD_RPATH=ON -DBUILD_TESTING=OFF -DCMAKE_INSTALL_LOCALEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/locale -DCMAKE_INSTALL_LIBEXECDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/libexec -DCMAKE_INSTALL_LIBDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_INSTALL_DOCDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/doc/VMPK -DCMAKE_INSTALL_INFODIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/info -DCMAKE_INSTALL_MANDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/man -DCMAKE_INSTALL_OLDINCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_INCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_SBINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/sbin -DCMAKE_INSTALL_BINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/bin -DCMAKE_INSTALL_NAME_DIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_POLICY_DEFAULT_CMP0025=NEW -DCMAKE_OSX_SYSROOT= -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_FIND_FRAMEWORK=last -DCMAKE_STRIP=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/strip -DCMAKE_RANLIB=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ranlib -DCMAKE_AR=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ar -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1  
 -- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Check for working C compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/gcc
 unpacking sources
 unpacking source archive /nix/store/xfav9dlvhwvklgja3lm2ralfa3dh8pnx-hplip-3.20.5.tar.gz
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
--- The CXX compiler identification is GNU 9.3.0
--- Check for working C compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/gcc
 -- Check for working C compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/gcc - works
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
-source root is hplip-3.20.5
-setting SOURCE_DATE_EPOCH to timestamp 1589204206 of file hplip-3.20.5/locatedriver
-patching sources
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Check for working CXX compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/g++
+source root is hplip-3.20.5
+setting SOURCE_DATE_EPOCH to timestamp 1589204206 of file hplip-3.20.5/locatedriver
+patching sources
 -- Check for working CXX compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/g++ - works
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
@@ -150,10 +161,10 @@ checking for a thread-safe mkdir -p... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d065
 checking for gawk... gawk
 checking whether make sets $(MAKE)... yes
 -- Looking for pthread.h
--- Looking for pthread.h - found
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
 checking whether the C++ compiler works... yes
 checking for C++ compiler default output file name... a.out
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
 checking for suffix of executables... 
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
 -- Looking for pthread_create in pthreads

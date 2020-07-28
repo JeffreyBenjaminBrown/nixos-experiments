@@ -115,6 +115,9 @@
     skypeforlinux
 
     # audio, important
+    alsaLib
+    alsa-tools-1.1.7
+    alsa-utils-1.2.1
     a2jmidid
     ardour
     SDL
