@@ -1,0 +1,186 @@
+building Nix...
+building the system configuration...
+these derivations will be built:
+  /nix/store/w8pq2gpbnh6v2k64ifdkcf23znj9c0c7-hplip-3.20.5.drv
+  /nix/store/z20qvbx9pmw4zzvw73hjfk4lj3jhclbw-cups-progs.drv
+  /nix/store/1c308r7fciicqws1aidl1s3fxc9hzz0b-set-environment.drv
+  /nix/store/8f0h5ya0i7b2bx668kjgs3ivkddrxjwf-pam-environment.drv
+  /nix/store/2sdhxg7r8b8hd465l9pijvf7rpad7vy0-login.pam.drv
+  /nix/store/72q4y6w1rymxiw1p72w5fdyyj3pnsvn5-cups-files.conf.drv
+  /nix/store/x52wyc2i652ny9214mvg4s42ngxc4hmm-cups-progs.drv
+  /nix/store/2snpv5ipnisi0j0nk5zh6p43m4q4zm9l-unit-script-cups-pre-start.drv
+  /nix/store/35yywr9a7davn3y5dabjm2pyaa0a6zs0-groupadd.pam.drv
+  /nix/store/3i1m0zn9ypgb85cpgrwskq8hj9jc1kwz-unit-cups.service.drv
+  /nix/store/5dxmnpq2d0jx0iswpwjdglsyiw9w7c53-vmpk-0.5.1.drv
+  /nix/store/bbifkp0n4ckk1m3qjy50p00ki1rffr9k-google-chrome-84.0.4147.89.drv
+  /nix/store/9nn4j95ihja6ahk7scjwm0cpgvcxqwfp-zoom_x86_64.tar.xz.drv
+  /nix/store/y2izwx6906a33jxqa99lsbhzknpxiybr-zoom-us-5.1.422789.0705.drv
+  /nix/store/gx3zc910sdv1jxxha1zj1nczdqgzwb7b-system-path.drv
+  /nix/store/3v50p504ykwpm8xxams2zld8w6san4sy-dbus-1.drv
+  /nix/store/59cw80s4p6m89b1nhbz5vxx686nzshzg-gdm.pam.drv
+  /nix/store/97i5mg2x747099zlf4rqlr93mycqziav-unit-polkit.service.drv
+  /nix/store/b04dz8b6vbz6s477bjxavxykwhj10ana-unit-dbus.service.drv
+  /nix/store/qv98d49b1z1n7xd2mj9zkax3zrbg1ndh-unit-systemd-fsck-.service.drv
+  /nix/store/6s3nr9fhwnzpinm6kpf9lzhfkbwyw0qc-system-units.drv
+  /nix/store/8qwvcvjpyxbid5gahw4h6k0ci8cf18aa-vlock.pam.drv
+  /nix/store/xjj4incpxn15zjgyjsb3pff8867glvi8-unit-dbus.service.drv
+  /nix/store/9bdyp9nbzjs2a6qcb3vz4wzpmb2kwddl-user-units.drv
+  /nix/store/a934kvm2016xkfm9sdbwhpfy8w0iq9ci-i3lock.pam.drv
+  /nix/store/alqkfm1pp3cxhl9kxrd1i6cjgpwf3afw-etc-profile.drv
+  /nix/store/c0ngnn2pbyb62yb0ndbspnrr9xrh3f9d-lightdm.pam.drv
+  /nix/store/c7p0nac8lzbqk4zpznn6yffs4rxhgijf-sddm-greeter.pam.drv
+  /nix/store/dp7zqh0gbvrq7h8b844n7y5akmplzbig-passwd.pam.drv
+  /nix/store/gvnblbr92sqfj8nfvbdx79kb073ppwws-userdel.pam.drv
+  /nix/store/hp546v21w105q4nqbczd8fa6bs6c1laa-usermod.pam.drv
+  /nix/store/if56wy3y8yiin5kwnqy6x77mg4ikaadm-kdm.pam.drv
+  /nix/store/iwv0vfqgsyr0ws2sw4pvrlvqkmb503f2-groupmod.pam.drv
+  /nix/store/lxhidaf8jfvqqxkcbn087z1w44kgypn9-xlock.pam.drv
+  /nix/store/mb72lwgkg5vjmm2h8w5ii65i0ldhjr71-systemd-user.pam.drv
+  /nix/store/mw05kk54ww67rrd1ahmi4icgmhlad6a7-kde.pam.drv
+  /nix/store/nzi7i2qvx678l7fxxrhpq1hlmm3gczfj-chpasswd.pam.drv
+  /nix/store/p762dwqpkxa8zlkzbkh5i976bgff70j9-cups.pam.drv
+  /nix/store/pdcmynhkrvf868fcih5nrk20npzrf8rk-polkit-1.pam.drv
+  /nix/store/pkpylk6amx7z8nfn4z4rm3sgnk4ymkkm-useradd.pam.drv
+  /nix/store/qcykx522hhy5b5yywbp4dwz9pb9sx3m0-sddm.pam.drv
+  /nix/store/qd324rh4fnlv868sqbf0ldnl4s7hbsma-groupmems.pam.drv
+  /nix/store/qvfc2675l9di37lwf6zzpp6yqlsqbqbf-sudo.pam.drv
+  /nix/store/rfq1pm2jrgqa7x2ilc8q130m1pbb9061-xscreensaver.pam.drv
+  /nix/store/vcb47fnnbiccsmw3y4shavclgdz3v92k-i3lock-color.pam.drv
+  /nix/store/vz3la75clzjy7qjyfa9zadj0s50m9q1s-chsh.pam.drv
+  /nix/store/wmn682bp00f5dxspxsxvvxb0461fj5z7-chfn.pam.drv
+  /nix/store/wqi7cjf32qh2yvgdi8rlsykfw1swp90q-runuser-l.pam.drv
+  /nix/store/xi1xbzp4w9n4ncv2y1cp8451p62adhmb-su.pam.drv
+  /nix/store/zl4v4qkzl1gpkkypkslmaly3fsxpsg1b-groupdel.pam.drv
+  /nix/store/w59j69n5rks4286zwszs94w9kfgcla8f-etc.drv
+  /nix/store/y10gv2p485n71wr25xk0dp71hxjxhgcw-nixos-system-jbb-dell-20.09pre236005.2b7c0dcdaab.drv
+building '/nix/store/bbifkp0n4ckk1m3qjy50p00ki1rffr9k-google-chrome-84.0.4147.89.drv'...
+building '/nix/store/5dxmnpq2d0jx0iswpwjdglsyiw9w7c53-vmpk-0.5.1.drv'...
+building '/nix/store/w8pq2gpbnh6v2k64ifdkcf23znj9c0c7-hplip-3.20.5.drv'...
+building '/nix/store/9nn4j95ihja6ahk7scjwm0cpgvcxqwfp-zoom_x86_64.tar.xz.drv'...
+
+trying https://zoom.us/client/5.1.422789.0705/zoom_x86_64.tar.xz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+unpacking sources
+unpacking source archive /nix/store/flwmv893naxzifqsvqaclqz7vjg5pyks-vmpk-0.5.1.tar.bz2
+unpacking sources
+Sourcing python-recompile-bytecode-hook.sh
+Sourcing python-remove-tests-dir-hook
+Sourcing python-catch-conflicts-hook.sh
+Sourcing python-remove-bin-bytecode-hook.sh
+Sourcing python-imports-check-hook.sh
+Using pythonImportsCheckPhase
+Sourcing python-namespaces-hook
+source root is vmpk-0.5.1
+setting SOURCE_DATE_EPOCH to timestamp 1360420179 of file vmpk-0.5.1/vmpk.spec.in
+patching sources
+configuring
+fixing cmake files...
+grep: Invalid range end
+cmake flags: -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_SKIP_BUILD_RPATH=ON -DBUILD_TESTING=OFF -DCMAKE_INSTALL_LOCALEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/locale -DCMAKE_INSTALL_LIBEXECDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/libexec -DCMAKE_INSTALL_LIBDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_INSTALL_DOCDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/doc/VMPK -DCMAKE_INSTALL_INFODIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/info -DCMAKE_INSTALL_MANDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/share/man -DCMAKE_INSTALL_OLDINCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_INCLUDEDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/include -DCMAKE_INSTALL_SBINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/sbin -DCMAKE_INSTALL_BINDIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/bin -DCMAKE_INSTALL_NAME_DIR=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1/lib -DCMAKE_POLICY_DEFAULT_CMP0025=NEW -DCMAKE_OSX_SYSROOT= -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_FIND_FRAMEWORK=last -DCMAKE_STRIP=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/strip -DCMAKE_RANLIB=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ranlib -DCMAKE_AR=/nix/store/k6rnzlmcvm37d0nw4fkz6ivmykmrdn39-binutils-2.31.1/bin/ar -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1  
+-- The C compiler identification is GNU 9.3.0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+-- The CXX compiler identification is GNU 9.3.0
+-- Check for working C compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/gcc
+unpacking sources
+unpacking source archive /nix/store/xfav9dlvhwvklgja3lm2ralfa3dh8pnx-hplip-3.20.5.tar.gz
+-- Check for working C compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/gcc - works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/g++
+source root is hplip-3.20.5
+setting SOURCE_DATE_EPOCH to timestamp 1589204206 of file hplip-3.20.5/locatedriver
+patching sources
+-- Check for working CXX compiler: /nix/store/q4xzgxvcbdy30cyd609y2cs5a50fwdrk-gcc-wrapper-9.3.0/bin/g++ - works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- VMPK 0.5.1
+    install prefix: /nix/store/p84pfzf99gg1ynp8gkf36ki2n5gxyk5b-vmpk-0.5.1
+     D-Bus support: ON
+    RtMIDI drivers
+              ALSA: ON
+              JACK: ON
+              Irix: OFF
+          CoreMIDI: OFF
+           Windows: OFF
+           UDP Net: ON
+-- Build configuration: Release
+-- Looking for Q_WS_X11
+-- Looking for Q_WS_X11 - found
+-- Looking for Q_WS_WIN
+-- Looking for Q_WS_WIN - not found
+-- Looking for Q_WS_QWS
+applying patch /nix/store/khrs1k7v48b907sw2x00njxij77xkana-image-processor.patch
+patching file Makefile.am
+patching file Makefile.in
+Hunk #1 succeeded at 4848 (offset 34 lines).
+patching file prnt/hpcups/HPCupsFilter.cpp
+configuring
+fixing libtool script ./ltmain.sh
+configure flags: --disable-static --disable-dependency-tracking --prefix=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5 --with-hpppddir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/share/cups/model/HP --with-cupsfilterdir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/lib/cups/filter --with-cupsbackenddir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/lib/cups/backend --with-icondir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/share/applications --with-systraydir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/xdg/autostart --with-mimedir=/nix/store/y85mwll57w3ca5p8c835v6xwp6nhwg1d-hplip-3.20.5/etc/cups --enable-policykit --disable-qt4 --enable-qt5
+-- Looking for Q_WS_QWS - not found
+-- Looking for Q_WS_MAC
+checking for a BSD-compatible install... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d065f7-coreutils-8.31/bin/install -c
+-- Looking for Q_WS_MAC - not found
+-- Found Qt4: /nix/store/sixphan9m33ipw7ab7s7hz0av7mancwj-qt-4.8.7/bin/qmake (found suitable version "4.8.7", minimum required is "4.8.0") 
+-- Found Qt4.EDITION = OpenSource version = 4.8.7
+-- Found PkgConfig: pkg-config (found version "0.29.2") 
+-- Program pkg-config found (pkg-config)
+-- Found X11: /nix/store/6psr8xhjdyj4gs21s6m31fbmmqkr3fjn-xorgproto-2019.1/include   
+-- Looking for XOpenDisplay in /nix/store/9l9xf027b896chvnbimm26g31pgkpvxx-libX11-1.6.8/lib/libX11.so;/nix/store/m6sz8wvmjsihmi159pd4j7zblaliarbg-libXext-1.3.4/lib/libXext.so
+-- Looking for XOpenDisplay in /nix/store/9l9xf027b896chvnbimm26g31pgkpvxx-libX11-1.6.8/lib/libX11.so;/nix/store/m6sz8wvmjsihmi159pd4j7zblaliarbg-libXext-1.3.4/lib/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Checking for module 'jack'
+--   Found jack, version 1.9.14
+checking whether build environment is sane... yes
+-- Looking for pthread.h
+checking for a thread-safe mkdir -p... /nix/store/vssdbs9s059qm5rqpw5q25z3c2d065f7-coreutils-8.31/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+checking whether the C++ compiler works... yes
+checking for C++ compiler default output file name... a.out
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+checking for suffix of executables... 
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C++ compiler... yes
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Checking for module 'alsa>=1.0'
+checking whether g++ accepts -g... yes
+--   No package 'alsa' found
+CMake Error at /nix/store/ajs06x1m5ci5ij41wc2jm7ibvy0ssrv2-cmake-3.17.3/share/cmake-3.17/Modules/FindPkgConfig.cmake:497 (message):
+  A required package was not found
+Call Stack (most recent call first):
+  /nix/store/ajs06x1m5ci5ij41wc2jm7ibvy0ssrv2-cmake-3.17.3/share/cmake-3.17/Modules/FindPkgConfig.cmake:681 (_pkg_check_modules_internal)
+  CMakeLists.txt:148 (PKG_CHECK_MODULES)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/build/vmpk-0.5.1/build/CMakeFiles/CMakeOutput.log".
+See also "/build/vmpk-0.5.1/build/CMakeFiles/CMakeError.log".
+checking for style of include used by make... GNU
+checking dependency style of g++... none
+checking for gcc... gcc
+builder for '/nix/store/5dxmnpq2d0jx0iswpwjdglsyiw9w7c53-vmpk-0.5.1.drv' failed with exit code 1
+cannot build derivation '/nix/store/gx3zc910sdv1jxxha1zj1nczdqgzwb7b-system-path.drv': 1 dependencies couldn't be built
+cannot build derivation '/nix/store/y10gv2p485n71wr25xk0dp71hxjxhgcw-nixos-system-jbb-dell-20.09pre236005.2b7c0dcdaab.drv': 1 dependencies couldn't be built
+error: build of '/nix/store/y10gv2p485n71wr25xk0dp71hxjxhgcw-nixos-system-jbb-dell-20.09pre236005.2b7c0dcdaab.drv' failed
