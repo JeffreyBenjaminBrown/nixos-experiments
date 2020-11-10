@@ -1,0 +1,54 @@
+# PITFALL: tabs instead of spaces will screw up
+  # mkfs.ext4 and maybe other commands.
+
+# ## Partition for UEFI
+# # PITFALL: At some point while I was trying to install with EFI,
+# # NixOS reported "this doesn't look like an EFI system" and failed.
+#
+# # create GPT partition table
+# sudo parted /dev/sda -- mklabel gpt
+#
+# # add root partition
+# sudo parted /dev/sda -- mkpart primary 512MiB -3.25%
+#
+# # add swap partition
+# # was: sudo parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+#   # but that gives bad alignment
+# sudo parted /dev/sda -- mkpart primary linux-swap -3.25% 100%
+#
+# # add boot partition
+# # NOTE: "3" appears below because this is the 3rd partition made.
+# sudo parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
+# sudo parted /dev/sda -- set 3 esp on
+
+
+## Partition for legacy boot
+
+# create MBR partition table
+sudo parted /dev/sda -- mklabel msdos
+# add root partition
+sudo parted /dev/sda -- mkpart primary 1MiB -3.25%
+# add swap partition
+sudo parted /dev/sda -- mkpart primary linux-swap -3.25% 100%
+
+
+## Format
+
+# initialize (part of formatting)
+sudo mkfs.ext4  -L nixos        /dev/sda1
+sudo mkswap     -L swap         /dev/sda2
+# sudo mkfs.fat -F 32 -n boot   /dev/sda3       # only for UEFI
+
+## Install
+
+sudo mount /dev/disk/by-label/nixos /mnt
+# sudo mkdir -p /mnt/boot                       # only for UEFI
+# sudo mount /dev/disk/by-label/boot /mnt/boot  # only for UEFI
+
+sudo nixos-generate-config --root /mnt
+
+# Then change the config. Something like this:
+# sudo cp configuration.5.networkmanager /mnt/etc/nixos/configuration.nix
+# sudo cp packages.4.nix /mnt/etc/nixos/packages.nix
+
+sudo nixos-install

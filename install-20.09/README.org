@@ -1,0 +1,53 @@
+* What this is
+It's what I used (plus some of my org-roam data) to install NixOS 20.09.
+* the first configuration that worked
+was configuration.5 + packages.5
+* history
+** failures
+*** trying GRUB with "nodev"
+ with this in my confi:
+   boot.loader.grub.efiSupport = true;
+   boot.loader.grub.devices = ["nodev"]; # Where to put GRUB. "nodev" means EFI only.
+ I got this error:
+   installing the boot loader...
+   setting up /etc...
+   updating GRUB 2 menu...
+   installing the GRUB 2 EFI boot loader into /boot...
+   Installing for x86_64-efi platform.
+   /nix/store/04dy9ccrcmfwm9h5nlcfxsy54l6nvzjb-grub-2.04/sbin/grub-install: error: /boot doesn't look like an EFI partition.
+   /nix/store/awmamb515bkmqyqpq2gads6lzxfcm5i0-install-grub.pl: installation of GRUB EFI into /boot failed: No such file or directory
+*** trying GRUB with device=/dev/sda
+**** with this in my config
+   boot.loader = {
+     # TODO ? "You may want to look at the options starting with boot.loader.efi and boot.loader.systemd as well."
+ #    systemd-boot.enable = true;
+ #    efi.canTouchEfiVariables = true;
+     grub = {
+       enable = true;
+       version = 2;
+ #      efiSupport = true;
+       devices = ["/dev/sda"]; # Where to put GRUB. "nodev" means EFI only.
+     };
+   };
+**** it installed without complaint
+**** but then I couldn't log in!
+***** even when I tried the simplest password imaginable
+***** someone indicates "initialPassword" might be it
+ https://discourse.nixos.org/t/default-login-and-password-for-nixos/4683/6
+***** the linux "passwd" function might work
+ I changed it to 'a' for users root and nixos.
+ I was not permitted to change it for 'jeff',
+ as the user did not exist.
+*** attempt 4: more packages, still no network
+ I added a lot of packages, while trying to keep it small.
+ I used
+   networking.wireless.enable = true;
+** successes
+*** attempt 5: a different networking option
+ (Only one of the networking options from attempt 5 (this) and attempt 4 can be used.)
+   networking.networkmanager.enable = true;
+*** attempt 6: worked (AFAICT)
+*** attempt 7, 8: worked (AFAICT)
+ 8 worked without org-roam. Will know soon whether it works with it.
+* where I asked some questions
+  https://discourse.nixos.org/t/nixos-20-09-fresh-vanilla-install-this-gpt-partition-label-contains-no-bios-boot-partition/9903/6

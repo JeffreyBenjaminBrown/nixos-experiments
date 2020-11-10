@@ -1,0 +1,51 @@
+{ config, pkgs, nixpkgs, ... }:
+
+{
+  environment.systemPackages =
+  with pkgs; [
+    emacs
+    mg
+
+    # storage, versioning, formatting
+    archiver
+    zip
+    unzip
+    gzip
+    gitMinimal
+    nix-prefetch-git # to compute "the" sha256 of a git repo
+    ark
+    borgbackup
+    encfs
+
+    # build tools
+    # waf # broken -- builds to a file, not a folder
+          # see my issues on StackOverflow
+    wafHook
+
+    # networking, trafficking
+    networkmanager
+    plasma-nm
+    wget
+
+    # exploring filetree
+    tree
+    file # shows types of files
+    kdeApplications.dolphin-plugins
+    agrep # fuzzy search!
+
+    # explore system
+    dmidecode # to learn about system RAM
+    i2c-tools # includes decode-dimms
+    pciutils # for lspci, to learn about sound card, per musnix readme
+
+    # misc
+    aspell aspellDicts.en aspellDicts.es
+    killall
+    xsel
+    gnumeric
+    tmux
+
+    # big | sketchy | unfree
+    firefox
+  ];
+}

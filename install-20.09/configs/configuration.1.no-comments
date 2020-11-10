@@ -1,0 +1,46 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi";
+    grub = {
+      enable = true;
+      version = 2;
+      efiSupport = true;
+      devices = ["/dev/sda"];
+    };
+  };
+
+  networking.hostName = "jbb-dell";
+  networking.wireless.enable = true;
+
+  networking.useDHCP = false;
+  networking.interfaces.enp2s0.useDHCP = true;
+  networking.interfaces.wlp1s0.useDHCP = true;
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  users.users.jeff = {
+    uid = 1000;
+    isNormalUser = true;
+    extraGroups = [
+      "docker"
+      "wheel"
+      "networkmanager"
+      "audio"
+      "jackaudio"
+      "dialout"
+      ];
+  };
+
+  system.stateVersion = "20.09";
+}
