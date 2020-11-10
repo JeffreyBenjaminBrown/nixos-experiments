@@ -1,0 +1,3 @@
+* TODO | PTIFALL : The latest config is in install-20.09
+The one at the root of this repo is old, from 20.03.
+I've still got to transfer the latest configurations in install-20.09 to here, and incorporate the data from audio.nix.
