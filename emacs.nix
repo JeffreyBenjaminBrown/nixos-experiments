@@ -2,7 +2,8 @@
 # 21.1.2. Adding Packages to Emacs
 # https://nixos.org/nixos/manual/index.html#module-services-emacs-adding-packages
 
-{ pkgs ? import <nixpkgs> {} }:
+# { pkgs ? import <nixpkgs> {} }:
+# { config, pkgs ? import <nixpkgs> {}, lib, options, modulesPath }:
 
 let
   myEmacs = pkgs.emacs;
@@ -25,10 +26,8 @@ in
 
       company
 
-      # `org-roam` is in Melpa: https://melpa.org/#/org-roam
-      # right next to nix-mode: https://melpa.org/#/nix-mode
-      # but for some reason this line makes NixOS throw an error:
-        # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
+      # org-roam seems to develop too fast for this to work.
+      # Instead just install procedurally, with package-list-packages.
       # org-roam
       # company-org-roam
 

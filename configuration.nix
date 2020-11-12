@@ -1,10 +1,17 @@
 { config, pkgs, ... }:
 
 {
+#  nixpkgs.overlays = [
+#    (import (builtins.fetchTarball {
+#      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+#    }))
+#  ];
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./audio.nix
+      ./emacs.nix
       ./packages.nix
     ];
 
