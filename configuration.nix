@@ -6,7 +6,7 @@
       url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     }))
   ];
-p
+
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
 

@@ -30,6 +30,10 @@
       latexmk
       bibtex; }) #for pdflatex
     lmodern # pandoc needs this to convert .md to .pdf
+    # samsung-UnifiedLinuxDriver
+      # to connect phone to computer, hopefully,
+      # but I suspect it's just for pinters, not phone.
+      # After installing it I still couldn't connect my M-31.
 
     # build tools
     # waf # broken -- builds to a file, not a folder
