@@ -8,7 +8,7 @@
   ];
 
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  # system.autoUpgrade.allowReboot = true;
 
   imports =
     [ # Include the results of the hardware scan.

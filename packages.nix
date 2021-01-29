@@ -45,7 +45,7 @@
     plasma-nm
     ktorrent
     wget
-    zoom-us
+    signal-desktop
 
     # exploring filetree
     tree
@@ -117,6 +117,7 @@
     spotify
     google-chrome
     skypeforlinux
+    zoom-us
 
     # audio, important
     a2jmidid
