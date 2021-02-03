@@ -30,6 +30,7 @@ in
       # but for some reason this line makes NixOS throw an error:
         # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
       org-roam
+      consult # for consult-ripgrep. (Requires ripgrep.)
       # emacsql-sqlite3
       # company-org-roam
 

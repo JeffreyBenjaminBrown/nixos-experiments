@@ -52,6 +52,7 @@
     file # shows types of files
     kdeApplications.dolphin-plugins
     agrep # fuzzy search!
+    ripgrep
 
     # explore system
     dmidecode # to learn about system RAM
@@ -88,6 +89,7 @@
     sqlite
 
     # photo|video
+    gnumake
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick7 # manipulate images
