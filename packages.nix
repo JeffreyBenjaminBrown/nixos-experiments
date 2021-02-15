@@ -46,6 +46,7 @@
     ktorrent
     wget
     signal-desktop
+    # tdesktop # telegram
 
     # exploring filetree
     tree
