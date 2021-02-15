@@ -1,5 +1,13 @@
-* The story
-
+* In brief
+** Things were broken for a while.
+   Since maybe Feb 3 2021 my config has not been rebuilding nightly.
+** I got it working again, but I'm missing intero for emacs now.
+** I fixed musnix (by updating the musnix repo).
+** Intero for emacs is still broken. Until I learn how to use it again I've just commented it out.
+   See the document "ask-intero.md", and the link to the NixOS forum it contains.
+** My boot menu's list of "all configs" is missing the latest ones, but they appear outside of that menu, in the main menu.
+   See `ask-which-boot-config.md`, and the link to Reddit it contains.
+* The long story
 I'm trying to rebuild a configuration that used to work -- in fact it's the one I've already got installed. When I try to rebuild commit
 `393958bbf65dff05763319e056802e8effaafaf9`
 it I get an error regarding Intero.
@@ -50,16 +58,18 @@ So I updated Musnix.
 That built. (I didn't test audio.)
 
 Rebuilding with the rtirq section restored didn't work.
-** I am about to test this named, experimental boot config:
+** I tested this named, experimental boot config:
    sudo nixos-rebuild switch -p no_rtirq_or_intero_and_musnix_89cf5880
    musnix 89cf5880a2e32ddc15bf518a79959e873de844be
    jbb config 13ecf2e1175a02c55b47133922e6caaba00ec69d
 *** Neither that config name nor today's date shows in the list of available configs.
     The latest config in the boot menu is Feb 3, which might be about when things broke (I don't remember).
     But when I load the latest config, intero is no longer available!
-** now I'm trying a new experimental boot config, with the *truly* up-to-date musnix
+    So it seems to work; it's just not in the list of "all configs".
+** I updated musnix to 2021 02 07 and tried another boot config
    sudo nixos-rebuild switch -p no_intero_and_musnix_06eaf399
    musnix 06eaf399789af403133dc8e5ab370c8f2c51d4f5
-   still jbb config 13ecf2e1175a02c55b47133922e6caaba00ec69d
-     EXCEPT with rtirq enabled again
-     (TODO : replace this with the commit for the new config)
+   jbb config 560b33387ab9f1b9f962ce65e88d7272d98ee7d9
+
+   The new Musnix lets me use the rtirq options again,
+   so I have reinstated them in the latest jbb-nix-config.
