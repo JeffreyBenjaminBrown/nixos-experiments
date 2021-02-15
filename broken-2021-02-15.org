@@ -4,6 +4,7 @@ I'm trying to rebuild a configuration that used to work -- in fact it's the one 
 `393958bbf65dff05763319e056802e8effaafaf9`
 it I get an error regarding Intero.
 ** The Intero error
+
 ```
 [jeff@jbb-dell:~/nix/jbb-config]$ sudo nixos-rebuild switch
 unpacking 'https://github.com/nix-community/emacs-overlay/archive/master.tar.g
@@ -50,6 +51,15 @@ That built. (I didn't test audio.)
 
 Rebuilding with the rtirq section restored didn't work.
 ** I am about to test this named, experimental boot config:
-   sudo nixos-rebuild switch -p no-rtirq-or-intero-and-musnix-89cf5880
+   sudo nixos-rebuild switch -p no_rtirq_or_intero_and_musnix_89cf5880
    musnix 89cf5880a2e32ddc15bf518a79959e873de844be
    jbb config 13ecf2e1175a02c55b47133922e6caaba00ec69d
+*** Neither that config name nor today's date shows in the list of available configs.
+    The latest config in the boot menu is Feb 3, which might be about when things broke (I don't remember).
+    But when I load the latest config, intero is no longer available!
+** now I'm trying a new experimental boot config, with the *truly* up-to-date musnix
+   sudo nixos-rebuild switch -p no_intero_and_musnix_06eaf399
+   musnix 06eaf399789af403133dc8e5ab370c8f2c51d4f5
+   still jbb config 13ecf2e1175a02c55b47133922e6caaba00ec69d
+     EXCEPT with rtirq enabled again
+     (TODO : replace this with the commit for the new config)

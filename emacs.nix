@@ -22,8 +22,9 @@ in
       haskell-mode
       scala-mode
 
-      # emacs-intero
-      # For haskell. As of 2021-02-15 `intero` doesn't show up.
+      # intero # For haskell.
+      #
+      # As of 2021-02-15 `intero` doesn't show up.
       # Searching https://search.nixos.org/packages for intero,
       # I find emacs26Packages.intero, which has the name `emacs-intero`.
       # But that doesn't show up either. Nor does emacs26Packages.intero.

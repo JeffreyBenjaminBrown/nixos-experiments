@@ -38,12 +38,12 @@ with pkgs; {
       # I don't think this does anything without the realtime kernel.
 
     # magic to me
-#    rtirq = {
-#      # highList = "snd_hrtimer";
-#      resetAll = 1;
-#      prioLow = 0;
-#      enable = true;
-#      nameList = "rtc0 snd";
-#    };
+    rtirq = {
+      # highList = "snd_hrtimer";
+      resetAll = 1;
+      prioLow = 0;
+      enable = true;
+      nameList = "rtc0 snd";
+    };
   };
 }
