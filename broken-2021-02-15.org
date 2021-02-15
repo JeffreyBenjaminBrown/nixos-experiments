@@ -1,0 +1,55 @@
+* The story
+
+I'm trying to rebuild a configuration that used to work -- in fact it's the one I've already got installed. When I try to rebuild commit
+`393958bbf65dff05763319e056802e8effaafaf9`
+it I get an error regarding Intero.
+** The Intero error
+```
+[jeff@jbb-dell:~/nix/jbb-config]$ sudo nixos-rebuild switch
+unpacking 'https://github.com/nix-community/emacs-overlay/archive/master.tar.g
+z'...
+building Nix...
+building the system configuration...
+error: undefined variable 'intero' at /etc/nixos/emacs.nix:24:7
+(use '--show-trace' to show detailed location information)
+```
+
+Searching https://search.nixos.org/packages for intero,
+I find `emacs26Packages.intero`, which has the name `emacs-intero`.
+I tried replacing `intero` with `emacs-intero`,
+and then with `emacs26Packages.intero`, and neither of those worked.
+So I just deleted it from my config.
+** Then I got a new error, re. rtirq
+
+```
+error: cannot download rtirq-20191121.tar.gz from any mirror
+```
+
+So I commented out the only place `rtirq` appears in my config:
+
+```
+with pkgs; {
+  ...
+  musnix = {
+
+
+#    rtirq = {
+#      # highList = "snd_hrtimer";
+#      resetAll = 1;
+#      prioLow = 0;
+#      enable = true;
+#      nameList = "rtc0 snd";
+#    };
+```
+
+Then I remembered that I was on an old commit of Musnix, specifically
+  `40213cfb5934601a6d35bc245d033ab0ffbf4d4b`.
+So I updated Musnix.
+
+That built. (I didn't test audio.)
+
+Rebuilding with the rtirq section restored didn't work.
+** I am about to test this named, experimental boot config:
+   sudo nixos-rebuild switch -p no-rtirq-or-intero-and-musnix-89cf5880
+   musnix 89cf5880a2e32ddc15bf518a79959e873de844be
+   jbb config 13ecf2e1175a02c55b47133922e6caaba00ec69d
