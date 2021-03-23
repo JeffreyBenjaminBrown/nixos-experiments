@@ -73,3 +73,10 @@ Rebuilding with the rtirq section restored didn't work.
 
    The new Musnix lets me use the rtirq options again,
    so I have reinstated them in the latest jbb-nix-config.
+** Then I learned that dante can replace intero
+   sudo nixos-rebuild switch -p dante_and_musnix_06eaf399
+   musnix 06eaf399789af403133dc8e5ab370c8f2c51d4f5
+   jbb config 560b33387ab9f1b9f962ce65e88d7272d98ee7d9
+
+   The new Musnix lets me use the rtirq options again,
+   so I have reinstated them in the latest jbb-nix-config.
