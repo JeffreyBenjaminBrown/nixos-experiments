@@ -2,6 +2,10 @@
 # 21.1.2. Adding Packages to Emacs
 # https://nixos.org/nixos/manual/index.html#module-services-emacs-adding-packages
 
+# PITFALL: If any of these stop working, moving them from the
+# epkgs.melpaPackages to the epkgs.melpaStablePackages sections might help
+# (that is, of course, if they're available in Melpa Stable).
+
 { pkgs ? import <nixpkgs> {} }:
 
 let
@@ -22,7 +26,24 @@ in
       haskell-mode
       scala-mode
 
-      # intero # For haskell.
+      # New (2021-03-23), and (to me) experimental.
+      mwim
+      block-nav
+      neotree
+      linum-relative
+      free-keys
+      iflipb
+      rainbow-delimiters
+      goto-last-change
+      ctrlf
+      ace-window
+      beacon
+      volatile-highlights
+      smart-hungry-delete
+      restart-emacs
+      multiple-cursors
+
+      dante # for haskell
       #
       # As of 2021-02-15 `intero` doesn't show up.
       # Searching https://search.nixos.org/packages for intero,

@@ -25,6 +25,7 @@
     borgbackup
     encfs
     pandoc
+    tabula # extract tables from PDFs
     (texlive.combine { inherit (texlive)
       scheme-small
       latexmk
@@ -43,7 +44,7 @@
     # networking, trafficking
     networkmanager
     plasma-nm
-    ktorrent
+    rtorrent
     wget
     signal-desktop
     # tdesktop # telegram
