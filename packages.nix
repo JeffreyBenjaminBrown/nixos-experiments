@@ -3,18 +3,21 @@
 {
   environment.systemPackages =
   with pkgs; [
-    # editors
+    ### editors ###
+    ###############
     (import ./emacs.nix { inherit pkgs; })
       # Fun fact: Does not rely on the `with pkgs` statement.
     mg
 
-    # for monome
-    systemd # for libudev
-    udev # for libudev
-    avahi # for libavahi-compat-libdnssd-dev
+    ### for monome ##
+    #################
+    systemd      # for libudev
+    udev         # for libudev
+    avahi        # for libavahi-compat-libdnssd-dev
     avahi-compat # for libavahi-compat-libdnssd-dev
 
-    # storage, versioning, formatting
+    ### storage, versioning, formatting ###
+    #######################################
     archiver
     zip
     unzip
@@ -25,7 +28,6 @@
     borgbackup
     encfs
     pandoc
-    tabula # extract tables from PDFs
     (texlive.combine { inherit (texlive)
       scheme-small
       latexmk
@@ -36,38 +38,44 @@
       # but I suspect it's just for pinters, not phone.
       # After installing it I still couldn't connect my M-31.
 
-    # build tools
+    ### build tools ###
+    ###################
     # waf # broken -- builds to a file, not a folder
           # see my issues on StackOverflow
     wafHook
 
-    # networking, trafficking
+    ### networking, trafficking ###
+    ###############################
     networkmanager
     plasma-nm
     rtorrent
     wget
     signal-desktop
-    # tdesktop # telegram
+    tdesktop # telegram
 
-    # exploring filetree
+    ### exploring filetree ###
+    ##########################
     tree
     file # shows types of files
     kdeApplications.dolphin-plugins
     agrep # fuzzy search!
     ripgrep
 
-    # explore system
+    ### explore system ##
+    #####################
     dmidecode # to learn about system RAM
     i2c-tools # includes decode-dimms
     pciutils # for lspci, to learn about sound card, per musnix readme
 
-    # programming languages, or close neighbors
+    ### programming languages, or close neighbors ###
+    #################################################
     awscli
     docker
-    gradle_4_10 # Builds Java code. Used by SmSn.
-                # The latest one, 5.6.1, is just called "gradle".
-                # I'm using 4 because SmSn won't build with gradle 5.
-    maven # a build tool
+    # Java
+      # gradle_4_10 # Builds Java code. Used by SmSn.
+      #             # The latest one, 5.6.1, is just called "gradle".
+      #             # I'm using 4 because SmSn won't build with gradle 5.
+      # maven # a build tool
     python
     python3
     stack
@@ -78,7 +86,7 @@
     haskellPackages.libffi
     libffi
     haskellPackages.hasktags
-    haskellPackages.tidal
+    # haskellPackages.tidal # Broken.
     haskellPackages.jack
     jack2
     haskellPackages.SDL  # a sound library
@@ -86,11 +94,17 @@
     #haskellPackages.vivid  # marked as broken; Nix refuses to evaluate
     #haskellPackages.vivid-supercollider
     #haskellPackages.vivid-osc
-    scala
-    sbt   # scala build tool
+    # scala
+      # scala
+      # sbt   # scala build tool
     sqlite
 
-    # photo|video
+    ### photo|video ###
+    ###################
+    # Image to text.
+      # tesseract4 # Google OCR. Too huge to keep.
+      # ocrad # Gnu OCR. Too huge to keep.
+      # tabula # extract tables from PDFs
     gnumake
     gimp         # manipulate images
     ghostscript  # manipulate images
@@ -107,23 +121,26 @@
     simplescreenrecorder # includes mic input
     gnome3.cheese        # record from webcam
 
-    # misc
+    ### misc ###
+    ############
     aspell aspellDicts.en aspellDicts.es
     killall
     xsel
     gnumeric
     tmux
 
-    # big | sketchy | unfree
+    ### big | sketchy | unfree ###
+    ##############################
     libreoffice
     firefox
     brave
     spotify
     google-chrome
-    skypeforlinux
-    zoom-us
+    # skypeforlinux
+    # zoom-us
 
-    # audio, important
+    #### audio, important ###
+    #########################
     a2jmidid
     ardour
     SDL
@@ -140,8 +157,9 @@
     supercollider_scel
     vmpk # virtual MIDI keyboard
 
-    # audio, maybe gratuitous, selected from magnetophon's config:
-    # https://github.com/magnetophon/nixosConfig
+    #### audio, maybe gratuitous, selected from magnetophon's config: ###
+    #### https://github.com/magnetophon/nixosConfig ######################
+    #####################################################################
     jack_oscrolloscope
     jackmeter
     jalv
