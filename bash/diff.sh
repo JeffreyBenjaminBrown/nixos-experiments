@@ -1,7 +1,7 @@
 for i in `cat list-of-nix-files-to-copy.txt`; do
     echo ""
     echo "----"$i":"
-    diff -u $i /etc/nixos/$i | diff-so-fancy
+    diff -u /etc/nixos/$i $i | diff-so-fancy
 done
 
 echo ""
