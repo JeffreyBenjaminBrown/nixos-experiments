@@ -20,6 +20,10 @@ with pkgs; {
     '';
 
   imports = [ /home/jeff/nix/musnix ];
+  # PITFALL: This can stop working if my musnix repo is out of date.
+  # That happened on 2021 04 02, causing a "cannot download rtirq-<number>"
+  # error, making no mention of musnix.
+
   musnix = {
     enable = true;
     alsaSeq.enable = false;

@@ -20,12 +20,14 @@ in
       use-package
 
     ]) ++ (with epkgs.melpaPackages; [
-      # elpy         # will it conflict with python-mode?
+      elpy
       markdown-mode
-      python-mode
+      # python-mode # Broke in nixpkgs, so I replaced it with `elpy`.
+        # I also asked about that here:
+        # https://discourse.nixos.org/t/emacs-python-mode-marked-as-broken-cant-rebuild-nixos-config/12674/2
       haskell-mode
       scala-mode
-
+      json-mode
       # New (2021-03-23), and (to me) experimental.
       mwim
       block-nav
@@ -57,15 +59,15 @@ in
       # but for some reason this line makes NixOS throw an error:
         # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
       org-roam
+      ac-helm # autocomplete with Helm
+      helm
+      helm-company
       consult # for consult-ripgrep. (Requires ripgrep.)
-      # emacsql-sqlite3
       # company-org-roam
 
     ]) ++ (with epkgs.elpaPackages; [
       csv-mode
       undo-tree
-      org
-      auctex       # ; LaTeX mode
 
     ]) ++ [
       pkgs.notmuch # email, scriptable
