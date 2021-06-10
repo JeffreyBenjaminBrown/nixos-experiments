@@ -57,7 +57,7 @@
     ##########################
     tree
     file # shows types of files
-    kdeGear.dolphin-plugins
+    libsForQt5.dolphin
     agrep # fuzzy search!
     ripgrep
 
@@ -112,16 +112,14 @@
     kdenlive     # video editor
       ffmpeg-full  # video tools, not required by kdenlive but recommended
     pdftk        # manipulate pdfs
-    kdeGear.okular
+    libsForQt5.okular
     vlc
     capture              # screen capture (video, I think)
     qscreenshot          # shows up as a KDE menu widget
     screenkey            # show what I'm typing on the screen
     lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
     simplescreenrecorder # includes mic input
-    # gnome3.cheese # Record from webcam.
-                    # NixOS 21.05 upgrades from Gnome 3,
-                    # so I'm disabling this b/c it might not work.
+    gnome.cheese
 
     ### misc ###
     ############

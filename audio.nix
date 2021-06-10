@@ -6,7 +6,7 @@
 #
 # Some parts of this file is magic to me. Those are marked "magic".
 
-{config, lib, pkgs, options, modulesPath}:
+{config, lib, pkgs, options, modulesPath, ...}:
 
 with pkgs; {
 
