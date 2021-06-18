@@ -14,20 +14,20 @@ let
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
-      hide-lines
+      json-mode
       magit        # ; Integrate git <C-x g>
       nix-mode
       use-package
 
     ]) ++ (with epkgs.melpaPackages; [
       elpy
+      hide-lines
       markdown-mode
       # python-mode # Broke in nixpkgs, so I replaced it with `elpy`.
         # I also asked about that here:
         # https://discourse.nixos.org/t/emacs-python-mode-marked-as-broken-cant-rebuild-nixos-config/12674/2
       haskell-mode
       scala-mode
-      json-mode
       # New (2021-03-23), and (to me) experimental.
       mwim
       block-nav

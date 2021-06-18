@@ -72,6 +72,7 @@
     #################################################
     awscli
     docker
+    docker-compose
     # Java
       # gradle_4_10 # Builds Java code. Used by SmSn.
       #             # The latest one, 5.6.1, is just called "gradle".
@@ -135,7 +136,6 @@
     libreoffice
     firefox
     brave
-    spotify
     google-chrome
     teams
     # skypeforlinux
