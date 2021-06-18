@@ -135,6 +135,10 @@
     };
   };
 
+  # Delete all but the newest 15 generations automatically.
+  # Suggested here: https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
+  boot.loader.grub.configurationLimit = 15;
+
   # PITFALL: To avoid catastrophe,
   # change this only when NixOS release notes indicate.
   # PITFALL: Surprisingly, it does not have to match the version of

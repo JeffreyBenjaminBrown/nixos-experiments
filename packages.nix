@@ -80,6 +80,9 @@
       # maven # a build tool
     python
     python3
+    gcc
+    memcached    # Requirement for Agora.
+    libmemcached # C/C++ library. Requirement for Agora.
     stack
     ghc
     # I hoped these next two would let me build a new Stack project
