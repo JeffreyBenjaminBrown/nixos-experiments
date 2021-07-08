@@ -29,10 +29,11 @@
     borgbackup
     encfs
     pandoc
-    (texlive.combine { inherit (texlive)
-      scheme-small
-      latexmk
-      bibtex; }) #for pdflatex
+    corefonts # to build Mikhal's code, which hasn't worked yet
+    # (texlive.combine { inherit (texlive)
+    #   scheme-small
+    #   latexmk
+    #   bibtex; }) #for pdflatex
     lmodern # pandoc needs this to convert .md to .pdf
     # samsung-UnifiedLinuxDriver
       # to connect phone to computer, hopefully,
