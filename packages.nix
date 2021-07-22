@@ -26,6 +26,8 @@
     gzip
     gitMinimal
     nix-prefetch-git # to compute "the" sha256 of a git repo
+    cachix # CL client for Nix binary cache hosting. https://cachix.org
+           # Used by Karya.
     ark
     borgbackup
     encfs
@@ -160,6 +162,7 @@
     flac
     sox
     ladspaH
+    faust # for Karya
     supercollider
     supercollider_scel
     vmpk # virtual MIDI keyboard
