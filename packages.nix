@@ -18,6 +18,7 @@
 
     ### storage, versioning, formatting ###
     #######################################
+    parted
     ntfs3g # NTFS driver (e.g. for Windows hard drives)
     archiver
     zip
