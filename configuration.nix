@@ -15,6 +15,7 @@
       ./hardware-configuration.nix
       ./audio.nix
       ./packages.nix
+      ./cachix.nix
     ];
 
   environment.variables = # customize Bash (and other stuff?)

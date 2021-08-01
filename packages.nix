@@ -107,6 +107,7 @@
       # scala
       # sbt   # scala build tool
     sqlite
+    zsh
 
     ### photo|video ###
     ###################
@@ -124,7 +125,8 @@
     libsForQt5.okular
     vlc
     capture              # screen capture (video, I think)
-    qscreenshot          # shows up as a KDE menu widget
+    # qscreenshot        # shows up as a KDE menu widget
+      # Not needed -- I've already got Spectacle installed (presss Print).
     screenkey            # show what I'm typing on the screen
     lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
     simplescreenrecorder # includes mic input
