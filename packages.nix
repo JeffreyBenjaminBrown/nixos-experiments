@@ -82,11 +82,15 @@
       #             # The latest one, 5.6.1, is just called "gradle".
       #             # I'm using 4 because SmSn won't build with gradle 5.
       # maven # a build tool
+    erlang
     python
     python3
     gcc
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
+    # haskellPackages.stackage-to-hackage # marked as broken
+    haskellPackages.Cabal_3_4_0_0
+    cabal-install
     stack
     ghc
     # I hoped these next two would let me build a new Stack project
