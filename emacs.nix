@@ -14,6 +14,11 @@ let
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
+      # erlang # Won't't build; doesn't find Perl 5.
+               # I even put a symlink called perl5 in ~/bin/,
+               # which is part of my PATH.
+               # For now it's installed the normal Emacs way,
+               # via `M-x pack-list-pack`
       json-mode
       magit        # ; Integrate git <C-x g>
       nix-mode

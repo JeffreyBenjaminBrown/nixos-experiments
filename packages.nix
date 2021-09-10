@@ -82,7 +82,10 @@
       #             # The latest one, 5.6.1, is just called "gradle".
       #             # I'm using 4 because SmSn won't build with gradle 5.
       # maven # a build tool
-    erlang
+    erlangR24
+    perl  # Perl 5, required by the Emacs `erlang` package
+    gleam # like Erlang but with more robust typing
+    ponyc # like Erlang but stricter typing, maybe?
     python
     python3
     gcc
