@@ -84,7 +84,14 @@
       # maven # a build tool
     erlangR24
     perl  # Perl 5, required by the Emacs `erlang` package
-    gleam # like Erlang but with more robust typing
+
+    # To get the latest one I'm installing gleam and rebar3
+    # "semi-procedurally"
+    # from my nixpkgs fork; see org node
+    # [[id:c15685f2-54d8-40dd-a49c-d87ec0bd5034][3 - commands to build it]]
+      # gleam # like Erlang but with more robust typing
+      # rebar3 # A REPL for Gleam
+
     ponyc # like Erlang but stricter typing, maybe?
     python
     python3
