@@ -200,5 +200,20 @@
     x42-plugins # level meters
     ladspa-sdk
     QmidiNet # "a midi network gateway"
+
+    # some LV2 plugins (e.g. guitar effects)
+    gxplugins-lv2
+    swh_lv2
+    mda_lv2
+    x42-plugins
+    zam-plugins
+    infamousPlugins
+    lsp-plugins
+    kapitonov-plugins-pack
+    magnetophonDSP.pluginUtils
+    distrho
+    eq10q
+    fomp
+    tap-plugins
   ];
 }
