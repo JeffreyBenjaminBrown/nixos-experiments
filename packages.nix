@@ -24,7 +24,8 @@
     zip
     unzip
     gzip
-    gnupg
+    gnupg # to encrypt, decrypt
+    pinentry # needed by gnupg
     gitMinimal
     nix-prefetch-git # to compute "the" sha256 of a git repo
     cachix # CL client for Nix binary cache hosting. https://cachix.org
@@ -100,6 +101,8 @@
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
     # haskellPackages.stackage-to-hackage # marked as broken
+    purescript
+    spago # a PureScript build tool
     haskellPackages.Cabal_3_4_0_0
     cabal-install
     stack
@@ -131,6 +134,7 @@
       # ocrad # Gnu OCR. Too huge to keep.
       # tabula # extract tables from PDFs
     gnumake
+    cmake
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick7 # manipulate images
@@ -183,6 +187,14 @@
     supercollider
     supercollider_scel
     vmpk # virtual MIDI keyboard
+
+    #### Audio
+    fftw           #            Needed for sc3-plugins.
+    fftwFloat      # Maybe also needed for sc3-plugins?
+    fftwLongDouble # Maybe also needed for sc3-plugins?
+    nodejs # Needed for npm, for wagsi
+    vscode # This or vscodium needed for wagsi
+    vscodium # This or vscode needed (so far) for wagsi
 
     #### audio, maybe gratuitous, selected from magnetophon's config: ###
     #### https://github.com/magnetophon/nixosConfig ######################

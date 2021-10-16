@@ -33,6 +33,10 @@ in
         # https://discourse.nixos.org/t/emacs-python-mode-marked-as-broken-cant-rebuild-nixos-config/12674/2
       haskell-mode
       scala-mode
+      psc-ide         # PureScript
+      psci            # PureScript repl
+      purescript-mode # PureScript
+
       # New (2021-03-23), and (to me) experimental.
       mwim
       block-nav
@@ -73,6 +77,7 @@ in
     ]) ++ (with epkgs.elpaPackages; [
       csv-mode
       undo-tree
+      xclip # for copy-paste from `emacs -nw` (within Bash) to other apps
 
     ]) ++ [
       pkgs.notmuch # email, scriptable
