@@ -1,7 +1,7 @@
 # Based on
 # https://gist.github.com/gosub/a42e265ec38d9df203d6
 
-with import <nixpkgs> {};
+{ stdenv, fetchgit, cmake, supercollider, fftw, libsndfile }:
 
 stdenv.mkDerivation {
 
