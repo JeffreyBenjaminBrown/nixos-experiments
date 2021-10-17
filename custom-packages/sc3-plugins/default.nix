@@ -14,7 +14,7 @@ stdenv.mkDerivation {
       # To determine this sha256 value, I first supplied a garbage one
       # and ran `nix-build -L` in the folder containing this file.
       # The resulting error suggested this one.
-  	fetchSubmodules = true;
+    fetchSubmodules = true;
   };
 
   buildInputs = [ cmake
@@ -24,6 +24,6 @@ stdenv.mkDerivation {
 
   cmakeFlags = [
     "-DSUPERNOVA=OFF"
-	  "-DSC_PATH=${supercollider}/include/SuperCollider"
-	  "-DFFTW3F_LIBRARY=${fftw}/lib/"];
+    "-DSC_PATH=${supercollider}/include/SuperCollider"
+    "-DFFTW3F_LIBRARY=${fftw}/lib/" ];
 }
