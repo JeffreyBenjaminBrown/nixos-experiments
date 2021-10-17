@@ -7,6 +7,15 @@ stdenv.mkDerivation {
 
   name = "sc3-plugins-3.11.1";
 
+  meta = {
+    description = "Synths and other tools for SuperCollider.";
+    homepage = "https://supercollider.github.io/";
+    license = "GPL version 2.0";
+    branch = "Version-3.11.1";
+    platforms =- lib.platforms.linux;
+    maintainers = with maintainers; [ jeffBrown ];
+  };
+
   src = fetchgit {
     url = "https://github.com/supercollider/sc3-plugins";
     rev = "209cf4ffdcc9181b37aedbf4902e4b4d4090d505"; # This is an ordinary git commit hash, the one corresponding to tag "Version-3.11.1".
