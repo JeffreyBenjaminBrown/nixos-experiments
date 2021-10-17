@@ -1,19 +1,21 @@
 # Based on
 # https://gist.github.com/gosub/a42e265ec38d9df203d6
 
-{ stdenv, fetchgit, cmake, supercollider, fftw, libsndfile }:
+{ stdenv, lib, fetchgit,
+  cmake,
+  supercollider, fftw, libsndfile }:
 
 stdenv.mkDerivation {
 
   name = "sc3-plugins-3.11.1";
 
-  meta = {
+  meta = with lib; {
     description = "Synths and other tools for SuperCollider.";
     homepage = "https://supercollider.github.io/";
     license = "GPL version 2.0";
     branch = "Version-3.11.1";
-    platforms =- lib.platforms.linux;
-    maintainers = with maintainers; [ jeffBrown ];
+    platforms = lib.platforms.linux;
+    maintainers = [ jeffBrown ];
   };
 
   src = fetchgit {
