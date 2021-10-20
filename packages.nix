@@ -192,7 +192,7 @@
     fftw           #            Needed for sc3-plugins.
     fftwFloat      # Maybe also needed for sc3-plugins?
     fftwLongDouble # Maybe also needed for sc3-plugins?
-    nodejs # Needed for npm, for wagsi
+    nodejs-16_x
     vscode # This or vscodium needed for wagsi
     vscodium # This or vscode needed (so far) for wagsi
 
