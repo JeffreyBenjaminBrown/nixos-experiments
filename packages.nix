@@ -8,6 +8,7 @@
     (import ./emacs.nix { inherit pkgs; })
       # Fun fact: Does not rely on the `with pkgs` statement.
     mg
+    atom # For TidalCycles
 
     ### for monome ##
     #################
