@@ -85,7 +85,7 @@
       #             # The latest one, 5.6.1, is just called "gradle".
       #             # I'm using 4 because SmSn won't build with gradle 5.
       # maven # a build tool
-    erlangR24
+    erlang
     perl  # Perl 5, required by the Emacs `erlang` package
 
     # To get the latest one I'm installing gleam and rebar3
@@ -104,7 +104,7 @@
     # haskellPackages.stackage-to-hackage # marked as broken
     purescript
     spago # a PureScript build tool
-    haskellPackages.Cabal_3_4_0_0
+    haskellPackages.Cabal_3_6_2_0
     cabal-install
     stack
     ghc
@@ -138,7 +138,7 @@
     cmake
     gimp         # manipulate images
     ghostscript  # manipulate images
-    imagemagick7 # manipulate images
+    imagemagick  # manipulate images
     kdenlive     # video editor
       ffmpeg-full  # video tools, not required by kdenlive but recommended
     pdftk        # manipulate pdfs
@@ -193,7 +193,7 @@
     fftw           #            Needed for sc3-plugins.
     fftwFloat      # Maybe also needed for sc3-plugins?
     fftwLongDouble # Maybe also needed for sc3-plugins?
-    nodejs-16_x
+    nodejs-17_x
     vscode # This or vscodium needed for wagsi
     vscodium # This or vscode needed (so far) for wagsi
 
