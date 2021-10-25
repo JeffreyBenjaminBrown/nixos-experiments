@@ -99,6 +99,7 @@
     python
     python3
     gcc
+    go_1_17 # aka golang
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
     # haskellPackages.stackage-to-hackage # marked as broken
