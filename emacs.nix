@@ -26,6 +26,7 @@ in
       use-package
 
     ]) ++ (with epkgs.melpaPackages; [
+      neotree # wonderful visually branching file navigator
       elpy
       hide-lines
       markdown-mode
@@ -41,7 +42,6 @@ in
       # New (2021-03-23), and (to me) experimental.
       mwim
       block-nav
-      neotree
       linum-relative
       free-keys
       iflipb
