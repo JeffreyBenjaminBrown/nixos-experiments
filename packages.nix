@@ -87,6 +87,7 @@
       # maven # a build tool
     erlang
     perl  # Perl 5, required by the Emacs `erlang` package
+    jq
 
     # To get the latest one I'm installing gleam and rebar3
     # "semi-procedurally"
@@ -121,9 +122,12 @@
     jack2
     haskellPackages.SDL  # a sound library
     haskellPackages.sdl2 # another version of that
-    #haskellPackages.vivid  # marked as broken; Nix refuses to evaluate
-    #haskellPackages.vivid-supercollider
-    #haskellPackages.vivid-osc
+
+    # Didn't work. Installed instead by ./imperative.sh
+      # haskellPackages.vivid
+      # haskellPackages.vivid-supercollider
+      # haskellPackages.vivid-osc
+
     # scala
       # scala
       # sbt   # scala build tool
