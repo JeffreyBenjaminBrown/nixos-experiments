@@ -15,7 +15,7 @@
       ./hardware-configuration.nix
       ./audio.nix
       ./packages.nix
-      ./cachix.nix
+      # ./cachix.nix
     ];
 
   environment.variables = # customize Bash (and other stuff?)
@@ -133,19 +133,20 @@
       enable = true;
       version = 2;
       devices = ["/dev/sda"]; # Where to put GRUB. "nodev" means EFI only.
+
+      # configurationLimit = 15;
+        # Deletes all but the newest 15 generations automatically.
+        # Suggested here: https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
     };
   };
 
-  # Delete all but the newest 15 generations automatically.
-  # Suggested here: https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
-  boot.loader.grub.configurationLimit = 15;
-
-  # PITFALL: To avoid catastrophe,
-  # change this only when NixOS release notes indicate.
-  # PITFALL: Surprisingly, it does not have to match the version of
-  # NixOS you are running -- for instance, the release notes for 19.09
-  # (https://nixos.org/nixos/manual/release-notes.html#sec-release-19.09)
-  # state, "When upgrading from NixOS 19.03, please make sure that system.stateVersion is set to "19.03", or lower if the installation dates back to an earlier version of NixOS."
-  system.stateVersion = "20.09";
+  # PITFALL: Probably not to modify.
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "21.05";
   # PITFALL: read preceding comment.
 }

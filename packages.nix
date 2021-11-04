@@ -29,8 +29,8 @@
     pinentry # needed by gnupg
     gitMinimal
     nix-prefetch-git # to compute "the" sha256 of a git repo
-    cachix # CL client for Nix binary cache hosting. https://cachix.org
-           # Used by Karya.
+    # cachix # CL client for Nix binary cache hosting. https://cachix.org
+    #        # Used by Karya.
     ark
     borgbackup
     encfs
@@ -98,6 +98,7 @@
     ponyc # like Erlang but stricter typing, maybe?
     python
     python3
+    coconut
     gcc
     go_1_17 # aka golang
     memcached    # Requirement for Agora.
@@ -105,7 +106,7 @@
     # haskellPackages.stackage-to-hackage # marked as broken
     purescript
     spago # a PureScript build tool
-    haskellPackages.Cabal_3_6_2_0
+    haskellPackages.Cabal_3_4_0_0
     cabal-install
     stack
     ghc
@@ -160,6 +161,10 @@
     xsel
     gnumeric
     tmux
+    # eternal-terminal # Better than Mosh, but
+                       # the server doesn't work on Amazon Linux.
+    # mosh # An ssh connection robust to interruptions, but
+           # the server doesn't work on Amazon Linux.
 
     ### big | sketchy | unfree ###
     ##############################
@@ -194,7 +199,7 @@
     fftw           #            Needed for sc3-plugins.
     fftwFloat      # Maybe also needed for sc3-plugins?
     fftwLongDouble # Maybe also needed for sc3-plugins?
-    nodejs-17_x
+    nodejs
     vscode # This or vscodium needed for wagsi
     vscodium # This or vscode needed (so far) for wagsi
 
