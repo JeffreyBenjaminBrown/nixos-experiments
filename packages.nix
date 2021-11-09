@@ -165,6 +165,7 @@
     xsel
     gnumeric
     tmux
+    acpi # show battery status
     # eternal-terminal # Better than Mosh, but
                        # the server doesn't work on Amazon Linux.
     # mosh # An ssh connection robust to interruptions, but
