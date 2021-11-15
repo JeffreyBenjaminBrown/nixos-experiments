@@ -35,6 +35,7 @@
     borgbackup
     encfs
     pandoc
+    dos2unix
     corefonts # to build Mikhal's code, which hasn't worked yet
     # (texlive.combine { inherit (texlive)
     #   scheme-small
@@ -65,7 +66,8 @@
     ##########################
     tree
     file # shows types of files
-    libsForQt5.dolphin
+    libsForQt5.dolphin # A             file manager.
+    lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
     agrep # fuzzy search!
     ripgrep
 

@@ -45,3 +45,10 @@ cabal repl
 # 	echo ""			> $config
 #     fi
 # fi
+
+# Manual KDE config.
+In_kde settings: search for "search", disable content indexing.
+In_kde settings: set a keyboard shortcut to invert a window's colors.
+In_kde settings: add Spanish as a second language, configure shortcuts.
+In_kde settings: use 16 Desktops, 2 Activities, set shortcuts to move between them and move windows between them.
+In_kde settings: set shortcuts to zoom, to view all desktops.
