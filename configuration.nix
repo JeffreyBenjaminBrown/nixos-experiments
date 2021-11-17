@@ -134,6 +134,7 @@
       version = 2;
       devices = ["/dev/sda"]; # Where to put GRUB. "nodev" means EFI only.
 
+      # TODO ? Re-enable
       # configurationLimit = 15;
         # Deletes all but the newest 15 generations automatically.
         # Suggested here: https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
