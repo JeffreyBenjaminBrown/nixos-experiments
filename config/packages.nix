@@ -8,7 +8,6 @@
     (import ./emacs.nix { inherit pkgs; })
       # Fun fact: Does not rely on the `with pkgs` statement.
     mg
-    atom # For TidalCycles
 
     ### for monome ##
     #################
@@ -29,6 +28,7 @@
     pinentry # needed by gnupg
     gitMinimal
     nix-prefetch-git # to compute "the" sha256 of a git repo
+    nixos-option
     # cachix # CL client for Nix binary cache hosting. https://cachix.org
     #        # Used by Karya.
     ark
@@ -109,7 +109,7 @@
     # haskellPackages.stackage-to-hackage # marked as broken
     purescript
     spago # a PureScript build tool
-    haskellPackages.Cabal_3_4_0_0
+    haskellPackages.Cabal_3_6_2_0
     cabal-install
     stack
     ghc

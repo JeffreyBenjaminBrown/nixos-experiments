@@ -1,4 +1,3 @@
-cp            \
-  default.nix \
-  *.patch     \
-  /home/jeff/nix/nixpkgs-fork/pkgs/development/libraries/serialosc/
+target=/home/jeff/nix/nixpkgs/pkgs/development/libraries/serialosc/
+mkdir $target
+cp default.nix *.patch $target

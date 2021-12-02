@@ -30,13 +30,12 @@
 
 stdenv.mkDerivation rec {
   name = "libmonome";
-  version = "v1.4.2";
+  version = "v1.4.4";
 
   src = fetchgit {
     url = https://github.com/monome/libmonome.git;
     rev = version;
-    # date = 2018-04-30T17:26:39-04:00;
-    sha256 = "17g4m17ibpcwyxzh4pqpd7h7xk146ay130jlk3zjjn23fypwahhi";
+    sha256 = "whLePcC35BqSdDC4Z4vHGjr2xA1Murbd5CXNEkqf6C4=";
   };
 
   nativeBuildInputs = [ wafHook ];

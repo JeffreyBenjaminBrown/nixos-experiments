@@ -5,4 +5,3 @@ for i in `cat config/files-to-copy.txt`; do
 done
 
 echo ""
-echo "These file are at left, /etc/nixos/* files at right."
