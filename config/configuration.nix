@@ -15,6 +15,7 @@
       ./hardware-configuration.nix
       ./audio.nix
       ./packages.nix
+      # ./emacs.nix # This is imported from packages.nix, not here.
       # ./cachix.nix
     ];
 

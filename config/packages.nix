@@ -9,8 +9,14 @@
       # Fun fact: Does not rely on the `with pkgs` statement.
     mg
 
-    ### for monome ##
-    #################
+    ### printer ###
+    ###############
+    # hplip # Drivers for HP printers, scanners, fax machines
+            # Worthless (tried it for my worthless HP Deskjet 1112,
+            # which was not recognized).
+
+    ### for monome ###
+    ##################
     systemd      # for libudev
     udev         # for libudev
     avahi        # for libavahi-compat-libdnssd-dev
@@ -33,6 +39,7 @@
     #        # Used by Karya.
     ark
     borgbackup
+    rclone # sync a clone to a (big commercial) cloud
     encfs
     pandoc
     dos2unix
@@ -46,6 +53,8 @@
       # to connect phone to computer, hopefully,
       # but I suspect it's just for pinters, not phone.
       # After installing it I still couldn't connect my M-31.
+    mtools # For `mlabel`, for relabeling a drive
+    diff-so-fancy
 
     ### build tools ###
     ###################

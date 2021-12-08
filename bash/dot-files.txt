@@ -1,0 +1,8 @@
+.emacs
+.emacs.d
+.gitconfig
+.inputrc
+.aws
+.ssh
+.tmux
+.tmux.conf
