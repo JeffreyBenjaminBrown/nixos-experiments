@@ -42,15 +42,9 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
 
-  # # XFCE and XMonad
-  services.xserver = {
-    desktopManager.xfce.enable = true;
-    displayManager.defaultSession = "xfce+xmonad";
-    windowManager.xmonad = {
-      enable = true;
-      config = pkgs.lib.readFile /home/jeff/.xmonad/xmonad.hs;
-    };
-  };
+  # Enable the KDE Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Select internationalisation properties.
   i18n = {
