@@ -45,8 +45,11 @@
   # # XFCE and XMonad
   services.xserver = {
     desktopManager.xfce.enable = true;
-    windowManager.xmonad.enable = true;
     displayManager.defaultSession = "xfce+xmonad";
+    windowManager.xmonad = {
+      enable = true;
+      config = pkgs.lib.readFile /home/jeff/.xmonad/xmonad.hs;
+    };
   };
 
   # Select internationalisation properties.

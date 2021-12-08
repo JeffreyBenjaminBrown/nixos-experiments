@@ -128,6 +128,12 @@
     # (stack new, cd, stack build) but I still get the error
     # "libffi.so.6: cannot open shared object file: No such file or directory"
     haskellPackages.libffi
+    xmonad-with-packages
+    haskellPackages.xmonad
+    haskellPackages.xmonad-utils
+    haskellPackages.xmonad-screenshot
+    haskellPackages.xmonad-extras
+    haskellPackages.xmonad-contrib
     libffi
     haskellPackages.hasktags
     # haskellPackages.tidal # Broken.
