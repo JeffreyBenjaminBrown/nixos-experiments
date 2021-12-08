@@ -42,10 +42,12 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
 
-  # # Enable XFCE and XMonad
-  services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.displayManager.defaultSession = "xfce";
-  services.xserver.windowManager.xmonad.enable = true;
+  # # XFCE and XMonad
+  services.xserver = {
+    desktopManager.xfce.enable = true;
+    windowManager.xmonad.enable = true;
+    displayManager.defaultSession = "xfce+xmonad";
+  };
 
   # Select internationalisation properties.
   i18n = {
