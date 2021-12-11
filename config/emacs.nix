@@ -27,6 +27,8 @@ in
       use-package
 
     ]) ++ (with epkgs.melpaPackages; [
+      native-complete # Tab-completion in *shell* buffers.
+
       neotree # wonderful visually branching file navigator
       elpy
       hide-lines
