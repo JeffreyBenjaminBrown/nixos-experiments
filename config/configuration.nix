@@ -13,7 +13,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./audio.nix
       ./packages.nix
       # ./emacs.nix # This is imported from packages.nix, not here.
       # ./cachix.nix
@@ -26,15 +25,17 @@
   virtualisation.docker.enable = true;
   environment.homeBinInPath = true; # that is, ~/bin
 
+  networking.useDHCP = false;
+  networking.interfaces.eno1.useDHCP = true; # NEW from the 21.11 auto-generated config.
+  # PITFALL ? None of the rest of these networking options were in the auto-gen config.
   networking.hostName = "jbb-dell";
   networking.networkmanager.enable = true;
-  networking.useDHCP = false;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlp1s0.useDHCP = true;
+  # networking.interfaces.enp2s0.useDHCP = true;
+  # networking.interfaces.wlp1s0.useDHCP = true;
 
   services.printing.enable = true; # Enable CUPS
 
-  # Enable sound
+  # Sound
   sound.enable = true;
 
   # Enable the X11 windowing system.
@@ -42,9 +43,14 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # # Enable XFCE and XMonad
+  services.xserver.desktopManager.xfce.enable = true;
+  services.xserver.displayManager.defaultSession = "xfce";
+  services.xserver.windowManager.xmonad.enable = true;
+
+  # # Enable the KDE Desktop Environment.
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
 
   # Select internationalisation properties.
   i18n = {
@@ -81,7 +87,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  # services.xserver.libinput.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Bogota";
@@ -142,6 +148,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11"; # PITFALL: read preceding comment.
   # PITFALL: read preceding comment.
 }

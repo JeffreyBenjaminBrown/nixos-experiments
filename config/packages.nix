@@ -9,19 +9,6 @@
       # Fun fact: Does not rely on the `with pkgs` statement.
     mg
 
-    ### printer ###
-    ###############
-    # hplip # Drivers for HP printers, scanners, fax machines
-            # Worthless (tried it for my worthless HP Deskjet 1112,
-            # which was not recognized).
-
-    ### for monome ###
-    ##################
-    systemd      # for libudev
-    udev         # for libudev
-    avahi        # for libavahi-compat-libdnssd-dev
-    avahi-compat # for libavahi-compat-libdnssd-dev
-
     ### storage, versioning, formatting ###
     #######################################
     parted
@@ -147,13 +134,14 @@
     sqlite
     zsh
 
-    ### graphics|photo|video ###
+    ### photo|video ###
     ###################
     # Image to text.
       # tesseract4 # Google OCR. Too huge to keep.
       # ocrad # Gnu OCR. Too huge to keep.
       # tabula # extract tables from PDFs
-    xdotool      # "fakes keyboard and mouse input, among other things"
+    gnumake
+    cmake
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick  # manipulate images
@@ -193,65 +181,5 @@
     teams
     # skypeforlinux
     # zoom-us
-
-    #### audio, important ###
-    #########################
-    a2jmidid
-    ardour
-    SDL
-    SDL2
-    carla
-    jack2Full
-    jack_capture
-    qjackctl
-    cadence
-    flac
-    sox
-    ladspaH
-    faust # for Karya
-    supercollider
-    supercollider_scel
-    vmpk # virtual MIDI keyboard
-
-    #### Audio
-    fftw           #            Needed for sc3-plugins.
-    fftwFloat      # Maybe also needed for sc3-plugins?
-    fftwLongDouble # Maybe also needed for sc3-plugins?
-    nodejs
-    vscode # This or vscodium needed for wagsi
-    vscodium # This or vscode needed (so far) for wagsi
-
-    #### audio, maybe gratuitous, selected from magnetophon's config: ###
-    #### https://github.com/magnetophon/nixosConfig ######################
-    #####################################################################
-    jack_oscrolloscope
-    jackmeter
-    jalv
-    lilv
-    liblo
-    graphviz # why is this here?
-    jaaa # signal analyzer
-    japa # psychoacoustic signal analyzer
-    sooperlooper
-    squishyball # for A/B testing. Not clearly audio software.
-    shntool # view and modify WAVE files
-    x42-plugins # level meters
-    ladspa-sdk
-    QmidiNet # "a midi network gateway"
-
-    # some LV2 plugins (e.g. guitar effects)
-    gxplugins-lv2
-    swh_lv2
-    mda_lv2
-    x42-plugins
-    zam-plugins
-    infamousPlugins
-    lsp-plugins
-    kapitonov-plugins-pack
-    magnetophonDSP.pluginUtils
-    distrho
-    eq10q
-    fomp
-    tap-plugins
   ];
 }
