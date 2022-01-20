@@ -120,6 +120,7 @@
     # haskellPackages.stackage-to-hackage # marked as broken
     purescript
     spago # a PureScript build tool
+    nodejs-17_x
     haskellPackages.Cabal_3_6_2_0
     cabal-install
     stack
@@ -191,6 +192,7 @@
     brave
     google-chrome
     teams
+    spotify
     # skypeforlinux
     # zoom-us
 
@@ -217,7 +219,6 @@
     fftw           #            Needed for sc3-plugins.
     fftwFloat      # Maybe also needed for sc3-plugins?
     fftwLongDouble # Maybe also needed for sc3-plugins?
-    nodejs
     # vscode   # This or vscodium might be needed for wagsi
     # vscodium # This or vscode   might be needed for wagsi
 
