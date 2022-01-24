@@ -25,6 +25,7 @@ in
       magit        # ; Integrate git <C-x g>
       nix-mode
       use-package
+      perspective
 
     ]) ++ (with epkgs.melpaPackages; [
       native-complete # Tab-completion in *shell* buffers.
