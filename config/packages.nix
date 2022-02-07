@@ -180,6 +180,7 @@
     gnumeric
     tmux
     acpi # show battery status
+    gnome.gnome-disk-utility
     # eternal-terminal # Better than Mosh, but
                        # the server doesn't work on Amazon Linux.
     # mosh # An ssh connection robust to interruptions, but
