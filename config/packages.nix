@@ -80,7 +80,7 @@
     libsForQt5.dolphin # A             file manager.
     lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
     agrep # fuzzy search!
-    ripgrep
+    ripgrep # "rg"
 
     ### explore system ##
     #####################

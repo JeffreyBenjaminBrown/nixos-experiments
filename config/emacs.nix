@@ -77,6 +77,7 @@ in
       helm
       helm-company
       consult # for consult-ripgrep. (Requires ripgrep.)
+      deadgrep
       # company-org-roam
 
     ]) ++ (with epkgs.elpaPackages; [
