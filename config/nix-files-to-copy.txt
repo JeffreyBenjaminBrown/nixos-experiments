@@ -1,4 +1,4 @@
 configuration.nix
 emacs.nix
 packages.nix
-audio.nix
+audio-configuration.nix

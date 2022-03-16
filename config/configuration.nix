@@ -13,7 +13,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./audio.nix
+      ./audio-configuration.nix
       ./packages.nix
       # ./emacs.nix # This is imported from packages.nix, not here.
       # ./cachix.nix
