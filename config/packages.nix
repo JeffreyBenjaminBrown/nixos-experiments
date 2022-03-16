@@ -123,15 +123,19 @@
     nodejs-17_x
     haskellPackages.Cabal_3_6_2_0
     cabal-install
-    stack
-    ghc
+
+    # Used to be simply `ghc`. The rest is voodoo monkey-pasted from
+    # https://github.com/haskell/cabal/issues/6228#issuecomment-529566609
+    ghc.withPackages (hp: with hp; [ zlib ])
+    haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
+    zlib
+    zlib.dev
     # I hoped these next two would let me build a new Stack project
     # (stack new, cd, stack build) but I still get the error
     # "libffi.so.6: cannot open shared object file: No such file or directory"
     haskellPackages.libffi
     libffi
     haskellPackages.hasktags
-    # haskellPackages.tidal # Broken.
     haskellPackages.jack
     jack2
     haskellPackages.SDL  # a sound library
@@ -161,6 +165,8 @@
     kdenlive     # video editor
       ffmpeg-full  # video tools, not required by kdenlive but recommended
     pdftk        # manipulate pdfs
+    qpdf         # manipulate pdfs
+    poppler_utils # for pdfunite, among others
     libsForQt5.okular
     vlc
     capture              # screen capture (video, I think)

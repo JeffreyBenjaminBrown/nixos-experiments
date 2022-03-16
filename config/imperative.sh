@@ -4,6 +4,7 @@ git config --global interactive.diffFilter "diff-so-fancy --patch"
 git config --global user.email "jeffbrown.the@gmail.com"
 git config --global user.name "Jeffrey Benjamin Brown"
 git config --global core.editor "emacs -nw --no-init-file"
+git config --global status.showUntrackedFiles all
 
 # Haskell
 cabal update
