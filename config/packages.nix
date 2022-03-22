@@ -198,15 +198,16 @@
     firefox
     brave
     google-chrome
-    teams
     spotify
     # skypeforlinux
+    # teams
     # zoom-us
 
     #### audio, important ###
     #########################
     a2jmidid
     ardour
+    reaper
     SDL
     SDL2
     carla
