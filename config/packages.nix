@@ -66,6 +66,7 @@
 
     ### networking, trafficking ###
     ###############################
+    uwsgi # For Agora, hopefully
     networkmanager
     plasma-nm
     rtorrent
@@ -112,6 +113,7 @@
     ponyc # like Erlang but stricter typing, maybe?
     python
     python3
+    python39Packages.pip
     coconut
     gcc
     go_1_17 # aka golang
@@ -121,6 +123,8 @@
     purescript
     spago # a PureScript build tool
     nodejs-17_x
+    # stack # Useful for Hode if I want to load all three modules
+            # into a single GHCI.
     haskellPackages.Cabal_3_6_2_0
     ghc
     cabal-install

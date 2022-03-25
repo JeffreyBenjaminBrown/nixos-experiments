@@ -1,0 +1,476 @@
+Collecting bleach==3.2.1
+  Using cached bleach-3.2.1-py2.py3-none-any.whl (145 kB)
+Collecting cachetools==4.2.0
+  Using cached cachetools-4.2.0-py3-none-any.whl (12 kB)
+Collecting cachetools-ext==0.0.8
+  Using cached cachetools_ext-0.0.8.tar.gz (5.4 kB)
+Requirement already satisfied: certifi==2021.10.8 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 4)) (2021.10.8)
+Requirement already satisfied: charset-normalizer==2.0.7 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 5)) (2.0.7)
+Requirement already satisfied: click==7.1.2 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 6)) (7.1.2)
+Collecting dateparser==1.0.0
+  Using cached dateparser-1.0.0-py2.py3-none-any.whl (279 kB)
+Collecting feedgen==0.9.0
+  Using cached feedgen-0.9.0.tar.gz (217 kB)
+Collecting feedparser==6.0.2
+  Using cached feedparser-6.0.2-py3-none-any.whl (80 kB)
+Collecting filetype==1.0.7
+  Using cached filetype-1.0.7-py2.py3-none-any.whl (15 kB)
+Requirement already satisfied: Flask==1.1.2 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 11)) (1.1.2)
+Collecting Flask-Caching==1.10.0
+  Using cached Flask_Caching-1.10.0-py3-none-any.whl (31 kB)
+Collecting Flask-Cors==3.0.10
+  Using cached Flask_Cors-3.0.10-py2.py3-none-any.whl (14 kB)
+Collecting Flask-Markdown==0.3
+  Using cached Flask-Markdown-0.3.tar.gz (165 kB)
+Collecting Flask-WTF==0.14.3
+  Using cached Flask_WTF-0.14.3-py2.py3-none-any.whl (13 kB)
+Collecting fuzzywuzzy==0.18.0
+  Using cached fuzzywuzzy-0.18.0-py2.py3-none-any.whl (18 kB)
+Requirement already satisfied: idna==3.3 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 17)) (3.3)
+Collecting importlib-metadata==2.0.0
+  Using cached importlib_metadata-2.0.0-py2.py3-none-any.whl (31 kB)
+Requirement already satisfied: isodate==0.6.0 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 19)) (0.6.0)
+Requirement already satisfied: itsdangerous==1.1.0 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 20)) (1.1.0)
+Collecting jedi==0.17.2
+  Using cached jedi-0.17.2-py2.py3-none-any.whl (1.4 MB)
+Requirement already satisfied: Jinja2==2.11.2 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 22)) (2.11.2)
+Collecting jsons==1.4.0
+  Using cached jsons-1.4.0-py3-none-any.whl (58 kB)
+Requirement already satisfied: lxml==4.6.2 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 24)) (4.6.2)
+Requirement already satisfied: Markdown==3.3.3 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 25)) (3.3.3)
+Collecting marko==0.9.1
+  Using cached marko-0.9.1-py2.py3-none-any.whl (35 kB)
+Requirement already satisfied: MarkupSafe==1.1.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 27)) (1.1.1)
+Collecting mdx-truly-sane-lists==1.2
+  Using cached mdx_truly_sane_lists-1.2-py3-none-any.whl (5.0 kB)
+Collecting org-python==0.3.2
+  Using cached org-python-0.3.2.tar.gz (9.7 kB)
+Requirement already satisfied: packaging==20.4 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 30)) (20.4)
+Requirement already satisfied: parso==0.7.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 31)) (0.7.1)
+Collecting pylibmc==1.6.1
+  Using cached pylibmc-1.6.1.tar.gz (64 kB)
+Requirement already satisfied: pyparsing==2.4.7 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 33)) (2.4.7)
+Requirement already satisfied: python-dateutil==2.8.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 34)) (2.8.1)
+Collecting python-Levenshtein==0.12.0
+  Using cached python-Levenshtein-0.12.0.tar.gz (48 kB)
+Requirement already satisfied: pytz==2020.4 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 36)) (2020.4)
+Collecting PyYAML==5.4.1
+  Using cached PyYAML-5.4.1-cp39-cp39-manylinux1_x86_64.whl (630 kB)
+Collecting rdflib==5.0.0
+  Using cached rdflib-5.0.0-py3-none-any.whl (231 kB)
+Collecting redis==3.5.3
+  Using cached redis-3.5.3-py2.py3-none-any.whl (72 kB)
+Requirement already satisfied: regex==2020.11.13 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 40)) (2020.11.13)
+Collecting requests==2.26.0
+  Using cached requests-2.26.0-py2.py3-none-any.whl (62 kB)
+Requirement already satisfied: sgmllib3k==1.0.0 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 42)) (1.0.0)
+Requirement already satisfied: six==1.15.0 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 43)) (1.15.0)
+Collecting text-unidecode==1.3
+  Using cached text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
+Requirement already satisfied: typish==1.9.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 45)) (1.9.1)
+Requirement already satisfied: tzlocal==2.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 46)) (2.1)
+Collecting unicode-slugify==0.1.3
+  Using cached unicode-slugify-0.1.3.tar.gz (4.4 kB)
+Requirement already satisfied: Unidecode==1.1.2 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 48)) (1.1.2)
+Requirement already satisfied: urllib3==1.26.7 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 49)) (1.26.7)
+Collecting uWSGI==2.0.19.1
+  Using cached uWSGI-2.0.19.1.tar.gz (803 kB)
+Requirement already satisfied: webencodings==0.5.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 51)) (0.5.1)
+Requirement already satisfied: Werkzeug==1.0.1 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 52)) (1.0.1)
+Requirement already satisfied: WTForms==2.3.3 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 53)) (2.3.3)
+Requirement already satisfied: zipp==3.4.0 in ./venv/lib/python3.9/site-packages (from -r requirements.txt (line 54)) (3.4.0)
+Requirement already satisfied: setuptools in ./venv/lib/python3.9/site-packages (from python-Levenshtein==0.12.0->-r requirements.txt (line 35)) (56.0.0)
+WARNING: The candidate selected for download or install is a yanked version: 'python-levenshtein' candidate (version 0.12.0 at https://files.pythonhosted.org/packages/42/a9/d1785c85ebf9b7dfacd08938dd028209c34a0ea3b1bcdb895208bd40a67d/python-Levenshtein-0.12.0.tar.gz#sha256=033a11de5e3d19ea25c9302d11224e1a1898fe5abd23c61c7c360c25195e3eb1 (from https://pypi.org/simple/python-levenshtein/))
+Reason for being yanked: Insecure, upgrade to 0.12.1
+Using legacy 'setup.py install' for cachetools-ext, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for feedgen, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for Flask-Markdown, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for org-python, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for pylibmc, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for python-Levenshtein, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for unicode-slugify, since package 'wheel' is not installed.
+Using legacy 'setup.py install' for uWSGI, since package 'wheel' is not installed.
+Installing collected packages: uWSGI, unicode-slugify, text-unidecode, requests, redis, rdflib, PyYAML, python-Levenshtein, pylibmc, org-python, mdx-truly-sane-lists, marko, jsons, jedi, importlib-metadata, fuzzywuzzy, Flask-WTF, Flask-Markdown, Flask-Cors, Flask-Caching, filetype, feedparser, feedgen, dateparser, cachetools-ext, cachetools, bleach
+    Running setup.py install for uWSGI: started
+    Running setup.py install for uWSGI: finished with status 'error'
+    ERROR: Command errored out with exit status 1:
+     command: /home/jeff/code/graphs/agora/agora-server/venv/bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/run/user/1000/pip-install-fs4s91yn/uwsgi_f77145f0b1134cd3963f23b154af7363/setup.py'"'"'; __file__='"'"'/run/user/1000/pip-install-fs4s91yn/uwsgi_f77145f0b1134cd3963f23b154af7363/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record /run/user/1000/pip-record-s5ubehgv/install-record.txt --single-version-externally-managed --compile --install-headers /home/jeff/code/graphs/agora/agora-server/venv/include/site/python3.9/uWSGI
+         cwd: /run/user/1000/pip-install-fs4s91yn/uwsgi_f77145f0b1134cd3963f23b154af7363/
+    Complete output (373 lines):
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/distutils/dist.py:274: UserWarning: Unknown distribution option: 'descriptions'
+      warnings.warn(msg)
+    running install
+    using profile: buildconf/default.ini
+    detected include path: ['/nix/store/04m8psaiac9b24qcb6fpwd33lxjgi4py-gcc-10.3.0/lib/gcc/x86_64-unknown-linux-gnu/10.3.0/include', '/nix/store/04m8psaiac9b24qcb6fpwd33lxjgi4py-gcc-10.3.0/include', '/nix/store/04m8psaiac9b24qcb6fpwd33lxjgi4py-gcc-10.3.0/lib/gcc/x86_64-unknown-linux-gnu/10.3.0/include-fixed', '/nix/store/f8z3wraxrbziyf93lwh6adslm89zi6fw-glibc-2.33-123-dev/include']
+    Patching "bin_name" to properly install_scripts dir
+    detected CPU cores: 4
+    configured CFLAGS: -O2 -I. -Wall -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DUWSGI_HAS_IFADDRS -DUWSGI_LOCK_USE_MUTEX -DUWSGI_EVENT_USE_EPOLL -DUWSGI_EVENT_TIMER_USE_TIMERFD -DUWSGI_EVENT_FILEMONITOR_USE_INOTIFY -DUWSGI_VERSION="\"2.0.19.1\"" -DUWSGI_VERSION_BASE="2" -DUWSGI_VERSION_MAJOR="0" -DUWSGI_VERSION_MINOR="19" -DUWSGI_VERSION_REVISION="1" -DUWSGI_VERSION_CUSTOM="\"\"" -DUWSGI_YAML -DUWSGI_PLUGIN_DIR="\".\"" -DUWSGI_DECLARE_EMBEDDED_PLUGINS="UDEP(python);UDEP(gevent);UDEP(ping);UDEP(cache);UDEP(nagios);UDEP(rrdtool);UDEP(carbon);UDEP(rpc);UDEP(corerouter);UDEP(fastrouter);UDEP(http);UDEP(ugreen);UDEP(signal);UDEP(syslog);UDEP(rsyslog);UDEP(logsocket);UDEP(router_uwsgi);UDEP(router_redirect);UDEP(router_basicauth);UDEP(zergpool);UDEP(redislog);UDEP(mongodblog);UDEP(router_rewrite);UDEP(router_http);UDEP(logfile);UDEP(router_cache);UDEP(rawrouter);UDEP(router_static);UDEP(sslrouter);UDEP(spooler);UDEP(cheaper_busyness);UDEP(symcall);UDEP(transformation_tofile);UDEP(transformation_gzip);UDEP(transformation_chunked);UDEP(transformation_offload);UDEP(router_memcached);UDEP(router_redis);UDEP(router_hash);UDEP(router_expires);UDEP(router_metrics);UDEP(transformation_template);UDEP(stats_pusher_socket);" -DUWSGI_LOAD_EMBEDDED_PLUGINS="ULEP(python);ULEP(gevent);ULEP(ping);ULEP(cache);ULEP(nagios);ULEP(rrdtool);ULEP(carbon);ULEP(rpc);ULEP(corerouter);ULEP(fastrouter);ULEP(http);ULEP(ugreen);ULEP(signal);ULEP(syslog);ULEP(rsyslog);ULEP(logsocket);ULEP(router_uwsgi);ULEP(router_redirect);ULEP(router_basicauth);ULEP(zergpool);ULEP(redislog);ULEP(mongodblog);ULEP(router_rewrite);ULEP(router_http);ULEP(logfile);ULEP(router_cache);ULEP(rawrouter);ULEP(router_static);ULEP(sslrouter);ULEP(spooler);ULEP(cheaper_busyness);ULEP(symcall);ULEP(transformation_tofile);ULEP(transformation_gzip);ULEP(transformation_chunked);ULEP(transformation_offload);ULEP(router_memcached);ULEP(router_redis);ULEP(router_hash);ULEP(router_expires);ULEP(router_metrics);ULEP(transformation_template);ULEP(stats_pusher_socket);"
+    *** uWSGI compiling server core ***
+    [thread 2][gcc] core/utils.o
+    [thread 1][gcc] core/protocol.o
+    [thread 0][gcc] core/socket.o
+    [thread 3][gcc] core/logging.o
+    [thread 1][gcc] core/master.o
+    [thread 0][gcc] core/master_utils.o
+    [thread 3][gcc] core/emperor.o
+    [thread 1][gcc] core/notify.o
+    [thread 1][gcc] core/mule.o
+    [thread 0][gcc] core/subscription.o
+    [thread 1][gcc] core/stats.o
+    [thread 2][gcc] core/sendfile.o
+    [thread 3][gcc] core/async.o
+    [thread 2][gcc] core/master_checks.o
+    [thread 0][gcc] core/fifo.o
+    [thread 1][gcc] core/offload.o
+    [thread 3][gcc] core/io.o
+    [thread 2][gcc] core/static.o
+    [thread 0][gcc] core/websockets.o
+    [thread 1][gcc] core/spooler.o
+    [thread 2][gcc] core/snmp.o
+    [thread 0][gcc] core/exceptions.o
+    [thread 3][gcc] core/config.o
+    [thread 1][gcc] core/setup_utils.o
+    [thread 2][gcc] core/clock.o
+    [thread 0][gcc] core/init.o
+    [thread 2][gcc] core/buffer.o
+    [thread 1][gcc] core/reader.o
+    [thread 3][gcc] core/writer.o
+    [thread 0][gcc] core/alarm.o
+    [thread 2][gcc] core/cron.o
+    [thread 1][gcc] core/hooks.o
+    [thread 0][gcc] core/plugins.o
+    [thread 2][gcc] core/lock.o
+    [thread 3][gcc] core/cache.o
+    [thread 0][gcc] core/daemons.o
+    [thread 1][gcc] core/errors.o
+    [thread 2][gcc] core/hash.o
+    [thread 1][gcc] core/master_events.o
+    [thread 0][gcc] core/chunked.o
+    [thread 2][gcc] core/queue.o
+    [thread 0][gcc] core/event.o
+    [thread 1][gcc] core/signal.o
+    [thread 2][gcc] core/strings.o
+    [thread 3][gcc] core/progress.o
+    [thread 0][gcc] core/timebomb.o
+    [thread 1][gcc] core/ini.o
+    [thread 3][gcc] core/fsmon.o
+    [thread 2][gcc] core/mount.o
+    [thread 0][gcc] core/metrics.o
+    [thread 1][gcc] core/plugins_builder.o
+    [thread 3][gcc] core/sharedarea.o
+    [thread 2][gcc] core/rpc.o
+    [thread 1][gcc] core/gateway.o
+    [thread 2][gcc] core/loop.o
+    [thread 3][gcc] core/cookie.o
+    [thread 1][gcc] core/querystring.o
+    [thread 0][gcc] core/rb_timers.o
+    [thread 2][gcc] core/transformations.o
+    [thread 3][gcc] core/uwsgi.o
+    [thread 1][gcc] proto/base.o
+    [thread 2][gcc] proto/uwsgi.o
+    [thread 0][gcc] proto/http.o
+    [thread 2][gcc] proto/fastcgi.o
+    [thread 1][gcc] proto/scgi.o
+    [thread 2][gcc] proto/puwsgi.o
+    [thread 1][gcc] lib/linux_ns.o
+    [thread 0][gcc] core/yaml.o
+    [thread 2][gcc] core/dot_h.o
+    [thread 1][gcc] core/config_py.o
+    *** uWSGI compiling embedded plugins ***
+    [thread 2][gcc] plugins/python/python_plugin.o
+    [thread 0][gcc] plugins/python/pyutils.o
+    [thread 1][gcc] plugins/python/pyloader.o
+    plugins/python/python_plugin.c: In function ‘uwsgi_python_reset_random_seed’:
+    plugins/python/python_plugin.c:319:33: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      319 |                                 PyEval_CallObject(random_seed, random_args);
+          |                                 ^~~~~~~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c: In function ‘uwsgi_pyimport_by_filename’:
+    plugins/python/python_plugin.c:470:3: warning: ‘PyParser_SimpleParseFileFlags’ is deprecated [-Wdeprecated-declarations]
+      470 |   py_file_node = PyParser_SimpleParseFile(pyfile, real_filename, Py_file_input);
+          |   ^~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:152,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/pythonrun.h:91:28: note: declared here
+       91 | PyAPI_FUNC(struct _node *) PyParser_SimpleParseFileFlags(FILE *, const char *, int, int);
+          |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c:487:4: warning: ‘PyParser_SimpleParseStringFlags’ is deprecated [-Wdeprecated-declarations]
+      487 |    py_file_node = PyParser_SimpleParseString(pycontent, Py_file_input);
+          |    ^~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:152,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/pythonrun.h:79:28: note: declared here
+       79 | PyAPI_FUNC(struct _node *) PyParser_SimpleParseStringFlags(const char *, int, int);
+          |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c:496:2: warning: ‘PyNode_Compile’ is deprecated [-Wdeprecated-declarations]
+      496 |  py_compiled_node = (PyObject *) PyNode_Compile(py_file_node, real_filename);
+          |  ^~~~~~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:151,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/compile.h:15:28: note: declared here
+       15 | PyAPI_FUNC(PyCodeObject *) PyNode_Compile(struct _node *, const char *);
+          |                            ^~~~~~~~~~~~~~
+    plugins/python/python_plugin.c: In function ‘uwsgi_python_enable_threads’:
+    plugins/python/python_plugin.c:1292:2: warning: ‘PyEval_InitThreads’ is deprecated [-Wdeprecated-declarations]
+     1292 |  PyEval_InitThreads();
+          |  ^~~~~~~~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:130:37: note: declared here
+      130 | Py_DEPRECATED(3.9) PyAPI_FUNC(void) PyEval_InitThreads(void);
+          |                                     ^~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c: In function ‘uwsgi_python_set_thread_name’:
+    plugins/python/python_plugin.c:1336:33: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+     1336 |                                 PyObject *current_thread = PyEval_CallObject(threading_current, (PyObject *)NULL);
+          |                                 ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c: In function ‘uwsgi_python_setup_thread’:
+    plugins/python/python_plugin.c:1424:33: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+     1424 |                                 PyObject *current_thread = PyEval_CallObject(threading_current, (PyObject *)NULL);
+          |                                 ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c: In function ‘uwsgi_python_mule’:
+    plugins/python/python_plugin.c:1854:4: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+     1854 |    result = PyEval_CallObject(callable, arglist);
+          |    ^~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/python_plugin.c: In function ‘uwsgi_python_logger’:
+    plugins/python/python_plugin.c:1944:17: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+     1944 |                 ul->data = (void *) PyEval_CallObject(py_getLogger, py_getLogger_args);
+          |                 ^~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/python_plugin.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/pyloader.c: In function ‘uwsgi_pecan_loader’:
+    plugins/python/pyloader.c:663:2: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      663 |  pecan_app = PyEval_CallObject(pecan_deploy, pecan_arg);
+          |  ^~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/pyloader.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/pyutils.c: In function ‘uwsgi_python_backtrace’:
+    plugins/python/pyutils.c:78:2: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+       78 |  PyObject *result = PyEval_CallObject(extract_tb, args);
+          |  ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/pyutils.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/pyloader.c: In function ‘uwsgi_paste_loader’:
+    plugins/python/pyloader.c:727:2: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      727 |  paste_app = PyEval_CallObject(paste_loadapp, paste_arg);
+          |  ^~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/pyloader.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/pyloader.c: In function ‘uwsgi_eval_loader’:
+    plugins/python/pyloader.c:745:2: warning: ‘PyParser_SimpleParseStringFlags’ is deprecated [-Wdeprecated-declarations]
+      745 |  wsgi_eval_node = PyParser_SimpleParseString(code, Py_file_input);
+          |  ^~~~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:152,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/pyloader.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/pythonrun.h:79:28: note: declared here
+       79 | PyAPI_FUNC(struct _node *) PyParser_SimpleParseStringFlags(const char *, int, int);
+          |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/pyloader.c:752:2: warning: ‘PyNode_Compile’ is deprecated [-Wdeprecated-declarations]
+      752 |  wsgi_compiled_node = (PyObject *) PyNode_Compile(wsgi_eval_node, "uwsgi_eval_config");
+          |  ^~~~~~~~~~~~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:151,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/pyloader.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/compile.h:15:28: note: declared here
+       15 | PyAPI_FUNC(PyCodeObject *) PyNode_Compile(struct _node *, const char *);
+          |                            ^~~~~~~~~~~~~~
+    plugins/python/pyutils.c: In function ‘python_call’:
+    plugins/python/pyutils.c:279:2: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      279 |  PyObject *pyret = PyEval_CallObject(callable, args);
+          |  ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/pyutils.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    [thread 0][gcc] plugins/python/wsgi_handlers.o
+    [thread 1][gcc] plugins/python/wsgi_headers.o
+    [thread 1][gcc] plugins/python/wsgi_subhandler.o
+    [thread 0][gcc] plugins/python/web3_subhandler.o
+    [thread 2][gcc] plugins/python/pump_subhandler.o
+    [thread 3][gcc] plugins/python/gil.o
+    plugins/python/wsgi_subhandler.c: In function ‘uwsgi_python_consume_file_wrapper_read’:
+    plugins/python/wsgi_subhandler.c:106:10: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      106 |          PyObject *read_method_output = PyEval_CallObject(read_method, read_method_args);
+          |          ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/wsgi_subhandler.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/wsgi_subhandler.c: In function ‘uwsgi_response_subhandler_wsgi’:
+    plugins/python/wsgi_subhandler.c:366:25: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      366 |                         PyObject *close_method_output = PyEval_CallObject(close_method, close_method_args);
+          |                         ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/wsgi_subhandler.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    [thread 0][gcc] plugins/python/uwsgi_pymodule.o
+    [thread 1][gcc] plugins/python/profiler.o
+    [thread 3][gcc] plugins/python/symimporter.o
+    [thread 2][gcc] plugins/python/tracebacker.o
+    [thread 1][gcc] plugins/python/raw.o
+    plugins/python/tracebacker.c: In function ‘uwsgi_python_get_thread_name’:
+    plugins/python/tracebacker.c:17:2: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+       17 |  PyObject *threads_list = PyEval_CallObject(threading_enumerate, (PyObject *)NULL);
+          |  ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/tracebacker.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/tracebacker.c: In function ‘uwsgi_python_tracebacker_thread’:
+    plugins/python/tracebacker.c:109:3: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      109 |   PyObject *current_frames = PyEval_CallObject(_current_frames, (PyObject *)NULL);
+          |   ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/tracebacker.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/tracebacker.c:115:3: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      115 |   PyObject *frames_ret = PyEval_CallObject(current_frames_items, (PyObject *)NULL);
+          |   ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/tracebacker.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    plugins/python/tracebacker.c:137:4: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+      137 |    PyObject *stacktrace = PyEval_CallObject( extract_stack, arg_tuple);
+          |    ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/tracebacker.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    [thread 3][gcc] plugins/gevent/gevent.o
+    [thread 2][gcc] plugins/gevent/hooks.o
+    plugins/python/raw.c: In function ‘uwsgi_request_python_raw’:
+    plugins/python/raw.c:67:2: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+       67 |  wsgi_req->async_result = PyEval_CallObject(up.raw_callable, args);
+          |  ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/python/uwsgi_python.h:2,
+                     from plugins/python/raw.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    [thread 1][gcc] plugins/ping/ping_plugin.o
+    plugins/gevent/gevent.c: In function ‘py_uwsgi_gevent_ctrl_gl’:
+    plugins/gevent/gevent.c:36:17: warning: ‘PyEval_CallObjectWithKeywords’ is deprecated [-Wdeprecated-declarations]
+       36 |                 PyObject *gswitch = PyEval_CallObject(ugevent.greenlet_switch, gevent_sleep_args);
+          |                 ^~~~~~~~
+    In file included from /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/Python.h:154,
+                     from plugins/gevent/../python/uwsgi_python.h:2,
+                     from plugins/gevent/gevent.h:1,
+                     from plugins/gevent/gevent.c:1:
+    /nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/include/python3.9/ceval.h:17:43: note: declared here
+       17 | Py_DEPRECATED(3.9) PyAPI_FUNC(PyObject *) PyEval_CallObjectWithKeywords(
+          |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    [thread 1][gcc] plugins/cache/cache.o
+    [thread 2][gcc] plugins/nagios/nagios.o
+    [thread 3][gcc] plugins/rrdtool/rrdtool.o
+    [thread 2][gcc] plugins/carbon/carbon.o
+    [thread 1][gcc] plugins/rpc/rpc_plugin.o
+    [thread 3][gcc] plugins/corerouter/cr_common.o
+    [thread 1][gcc] plugins/corerouter/cr_map.o
+    [thread 2][gcc] plugins/corerouter/corerouter.o
+    [thread 3][gcc] plugins/fastrouter/fastrouter.o
+    [thread 1][gcc] plugins/http/http.o
+    [thread 0][gcc] plugins/http/keepalive.o
+    [thread 0][gcc] plugins/http/https.o
+    [thread 3][gcc] plugins/http/spdy3.o
+    [thread 2][gcc] plugins/ugreen/ugreen.o
+    [thread 3][gcc] plugins/signal/signal_plugin.o
+    [thread 0][gcc] plugins/syslog/syslog_plugin.o
+    [thread 2][gcc] plugins/rsyslog/rsyslog_plugin.o
+    [thread 1][gcc] plugins/logsocket/logsocket_plugin.o
+    [thread 3][gcc] plugins/router_uwsgi/router_uwsgi.o
+    [thread 0][gcc] plugins/router_redirect/router_redirect.o
+    [thread 2][gcc] plugins/router_basicauth/router_basicauth.o
+    [thread 1][gcc] plugins/zergpool/zergpool.o
+    [thread 3][gcc] plugins/redislog/redislog_plugin.o
+    [thread 0][gcc] plugins/mongodblog/mongodblog_plugin.o
+    [thread 2][gcc] plugins/router_rewrite/router_rewrite.o
+    [thread 1][gcc] plugins/router_http/router_http.o
+    [thread 3][gcc] plugins/logfile/logfile.o
+    [thread 0][gcc] plugins/router_cache/router_cache.o
+    [thread 2][gcc] plugins/rawrouter/rawrouter.o
+    [thread 1][gcc] plugins/router_static/router_static.o
+    [thread 0][gcc] plugins/sslrouter/sslrouter.o
+    [thread 3][gcc] plugins/spooler/spooler_plugin.o
+    [thread 1][gcc] plugins/cheaper_busyness/cheaper_busyness.o
+    [thread 0][gcc] plugins/symcall/symcall_plugin.o
+    [thread 3][gcc] plugins/transformation_tofile/tofile.o
+    [thread 2][gcc] plugins/transformation_gzip/gzip.o
+    [thread 3][gcc] plugins/transformation_chunked/chunked.o
+    [thread 2][gcc] plugins/transformation_offload/offload.o
+    [thread 1][gcc] plugins/router_memcached/router_memcached.o
+    [thread 0][gcc] plugins/router_redis/router_redis.o
+    [thread 3][gcc] plugins/router_hash/router_hash.o
+    [thread 2][gcc] plugins/router_expires/expires.o
+    [thread 0][gcc] plugins/router_metrics/plugin.o
+    [thread 1][gcc] plugins/transformation_template/tt.o
+    [thread 3][gcc] plugins/stats_pusher_socket/plugin.o
+    *** uWSGI linking ***
+    gcc -o /home/jeff/code/graphs/agora/agora-server/venv/bin/uwsgi -L/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib -Wl,-rpath,/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib core/utils.o core/protocol.o core/socket.o core/logging.o core/master.o core/master_utils.o core/emperor.o core/notify.o core/mule.o core/subscription.o core/stats.o core/sendfile.o core/async.o core/master_checks.o core/fifo.o core/offload.o core/io.o core/static.o core/websockets.o core/spooler.o core/snmp.o core/exceptions.o core/config.o core/setup_utils.o core/clock.o core/init.o core/buffer.o core/reader.o core/writer.o core/alarm.o core/cron.o core/hooks.o core/plugins.o core/lock.o core/cache.o core/daemons.o core/errors.o core/hash.o core/master_events.o core/chunked.o core/queue.o core/event.o core/signal.o core/strings.o core/progress.o core/timebomb.o core/ini.o core/fsmon.o core/mount.o core/metrics.o core/plugins_builder.o core/sharedarea.o core/rpc.o core/gateway.o core/loop.o core/cookie.o core/querystring.o core/rb_timers.o core/transformations.o core/uwsgi.o proto/base.o proto/uwsgi.o proto/http.o proto/fastcgi.o proto/scgi.o proto/puwsgi.o lib/linux_ns.o core/yaml.o core/dot_h.o core/config_py.o plugins/python/python_plugin.o plugins/python/pyutils.o plugins/python/pyloader.o plugins/python/wsgi_handlers.o plugins/python/wsgi_headers.o plugins/python/wsgi_subhandler.o plugins/python/web3_subhandler.o plugins/python/pump_subhandler.o plugins/python/gil.o plugins/python/uwsgi_pymodule.o plugins/python/profiler.o plugins/python/symimporter.o plugins/python/tracebacker.o plugins/python/raw.o plugins/gevent/gevent.o plugins/gevent/hooks.o plugins/ping/ping_plugin.o plugins/cache/cache.o plugins/nagios/nagios.o plugins/rrdtool/rrdtool.o plugins/carbon/carbon.o plugins/rpc/rpc_plugin.o plugins/corerouter/cr_common.o plugins/corerouter/cr_map.o plugins/corerouter/corerouter.o plugins/fastrouter/fastrouter.o plugins/http/http.o plugins/http/keepalive.o plugins/http/https.o plugins/http/spdy3.o plugins/ugreen/ugreen.o plugins/signal/signal_plugin.o plugins/syslog/syslog_plugin.o plugins/rsyslog/rsyslog_plugin.o plugins/logsocket/logsocket_plugin.o plugins/router_uwsgi/router_uwsgi.o plugins/router_redirect/router_redirect.o plugins/router_basicauth/router_basicauth.o plugins/zergpool/zergpool.o plugins/redislog/redislog_plugin.o plugins/mongodblog/mongodblog_plugin.o plugins/router_rewrite/router_rewrite.o plugins/router_http/router_http.o plugins/logfile/logfile.o plugins/router_cache/router_cache.o plugins/rawrouter/rawrouter.o plugins/router_static/router_static.o plugins/sslrouter/sslrouter.o plugins/spooler/spooler_plugin.o plugins/cheaper_busyness/cheaper_busyness.o plugins/symcall/symcall_plugin.o plugins/transformation_tofile/tofile.o plugins/transformation_gzip/gzip.o plugins/transformation_chunked/chunked.o plugins/transformation_offload/offload.o plugins/router_memcached/router_memcached.o plugins/router_redis/router_redis.o plugins/router_hash/router_hash.o plugins/router_expires/expires.o plugins/router_metrics/plugin.o plugins/transformation_template/tt.o plugins/stats_pusher_socket/plugin.o -lpthread -lm -rdynamic -ldl -lpthread -ldl -lcrypt -lncurses -lutil -lm -lm -lpython3.9 -lcrypt
+    /nix/store/wa59khxfvx6nf1wgdr5bjyyf9rdk23jc-binutils-2.35.2/bin/ld: cannot find -lncurses
+    collect2: error: ld returned 1 exit status
+    *** error linking uWSGI ***
+    ----------------------------------------
+ERROR: Command errored out with exit status 1: /home/jeff/code/graphs/agora/agora-server/venv/bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/run/user/1000/pip-install-fs4s91yn/uwsgi_f77145f0b1134cd3963f23b154af7363/setup.py'"'"'; __file__='"'"'/run/user/1000/pip-install-fs4s91yn/uwsgi_f77145f0b1134cd3963f23b154af7363/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record /run/user/1000/pip-record-s5ubehgv/install-record.txt --single-version-externally-managed --compile --install-headers /home/jeff/code/graphs/agora/agora-server/venv/include/site/python3.9/uWSGI Check the logs for full command output.
+WARNING: You are using pip version 21.1.3; however, version 22.0.4 is available.
+You should consider upgrading via the '/home/jeff/code/graphs/agora/agora-server/venv/bin/python3 -m pip install --upgrade pip' command.
