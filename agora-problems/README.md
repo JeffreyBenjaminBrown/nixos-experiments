@@ -19,7 +19,7 @@ python3 -m venv venv
 pip install -r requirements.txt 2>&1 | tee error.txt
 ```
 
-That produces [errors](https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/agora-problems/agora-problems/error-without-shell.txt). They involve the term "uWSGI", which I didn't think I'd installed so I installed (uwsgi, the package with the most similar name I could find)[https://search.nixos.org/packages?channel=21.11&from=0&size=50&sort=relevance&type=packages&query=uwsgi]. I then created a `shell.nix` file containing the following:
+That produces [errors](https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/agora-problems/agora-problems/error-without-shell.txt). They involve the term "uWSGI", which I didn't think I'd installed so I installed [uwsgi, the package with the most similar name I could find](https://search.nixos.org/packages?channel=21.11&from=0&size=50&sort=relevance&type=packages&query=uwsgi). I then created a `shell.nix` file containing the following:
 ```
 with import <nixpkgs> { };
 mkShell {
@@ -30,6 +30,6 @@ mkShell {
 (venv)
 ```
 
-ran `nix-shell`, and tried again. That created [similar but not identical errors]([errors](https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/agora-problems/agora-problems/error-without-shell.txt)).
+ran `nix-shell`, and tried again. That created [similar but not identical errors](https://github.com/JeffreyBenjaminBrown/nixos-experiments/tree/agora-problems/agora-problems/error-without-shell.txt).
 
 The errors say to "Check the logs for full command output" but I don't know what logs it's talking about.
