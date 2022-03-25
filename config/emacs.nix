@@ -25,6 +25,7 @@ in
       magit        # ; Integrate git <C-x g>
       nix-mode
       use-package
+      perspective
 
     ]) ++ (with epkgs.melpaPackages; [
       native-complete # Tab-completion in *shell* buffers.
@@ -76,6 +77,7 @@ in
       helm
       helm-company
       consult # for consult-ripgrep. (Requires ripgrep.)
+      deadgrep
       # company-org-roam
 
     ]) ++ (with epkgs.elpaPackages; [

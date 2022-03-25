@@ -67,7 +67,7 @@
     libsForQt5.dolphin # A             file manager.
     lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
     agrep # fuzzy search!
-    ripgrep
+    ripgrep # "rg"
 
     ### explore system ##
     #####################
@@ -107,17 +107,22 @@
     # haskellPackages.stackage-to-hackage # marked as broken
     purescript
     spago # a PureScript build tool
+    nodejs-17_x
     haskellPackages.Cabal_3_6_2_0
-    cabal-install
-    stack
     ghc
+    cabal-install
+    # Used to be simply `ghc`. The rest is voodoo monkey-pasted from
+    # https://github.com/haskell/cabal/issues/6228#issuecomment-529566609
+    haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
+    zlib
+    zlib.dev
+
     # I hoped these next two would let me build a new Stack project
     # (stack new, cd, stack build) but I still get the error
     # "libffi.so.6: cannot open shared object file: No such file or directory"
     haskellPackages.libffi
     libffi
     haskellPackages.hasktags
-    # haskellPackages.tidal # Broken.
     haskellPackages.jack
     jack2
     haskellPackages.SDL  # a sound library
@@ -146,8 +151,10 @@
     ghostscript  # manipulate images
     imagemagick  # manipulate images
     kdenlive     # video editor
-      ffmpeg-full  # video tools, not required by kdenlive but recommended
+    ffmpeg-full  # video tools, not required by kdenlive but recommended
     pdftk        # manipulate pdfs
+    qpdf         # manipulate pdfs
+    poppler_utils # for pdfunite, among others
     libsForQt5.okular
     vlc
     capture              # screen capture (video, I think)
@@ -167,6 +174,7 @@
     gnumeric
     tmux
     acpi # show battery status
+    gnome.gnome-disk-utility
     # eternal-terminal # Better than Mosh, but
                        # the server doesn't work on Amazon Linux.
     # mosh # An ssh connection robust to interruptions, but
@@ -178,8 +186,9 @@
     firefox
     brave
     google-chrome
-    teams
+    spotify
     # skypeforlinux
+    # teams
     # zoom-us
   ];
 }
