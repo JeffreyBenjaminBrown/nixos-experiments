@@ -1,25 +1,19 @@
-Now I don't know if it's working or not. My two questions in brief are:
-
-(1) How can I log into `anagora.org`? Automatically?
-(2) Should I be getting a warning about each garden, repeatedly?
+Now it does stuff! But it issues a lot of warnings, and then gets stuck asking for credentials for `anagora.org`.
 
 # Details
+
+Here's how I start it:
 
 ```
 cd ~/agora
 nix-shell
 . venv/bin/activate
 
-# Seems dumb to run `gh auth login` and still do this,
-# but the other way definitely failed; let's see if this does.
-# ssh-agent bash
-# ssh-add
-
-cd ~/agora-bridge # I seem to have to do this so that the
+cd ~/agora-bridge # I seem to have to do this so that `this_path` is defined correctly in `~/agora-bridge/pull.py`
 ~/agora/bin/pull
 ```
 
-If I do that, it hangs asking me for credentials for `git.anagora.org`. If I just press enter a few times it returns to what looks like checking peoples' gardens:
+After doing that, it issues a lot of warnings about gardens already existing, thenhangs asking me for credentials for `git.anagora.org`. If I just press enter a few times it returns to what looks like checking peoples' gardens:
 ```
 ...
 WARNING:pull:/home/jeff/agora/garden/flancia.org exists, won't clone to it.
@@ -36,4 +30,4 @@ WARNING:pull:/home/jeff/agora/garden/evan doesn't exist, couldn't pull to it.
 ...
 ```
 
-But then it eventually cycles into the `anagora.org` login again.
+But then it eventually gets stuck at the `anagora.org` login again.
