@@ -1,40 +1,39 @@
-More progress!
+Now I don't know if it's working or not. My two questions in brief are:
 
-First it's worth mentioning that I have symlinks in my home folder that allow the scripts to work:
-```
-[nix-shell:~]$ ls agora* -l
-lrwxrwxrwx 1 jeff users 17 mar 25 19:07 agora -> agora-repos/agora
-lrwxrwxrwx 1 jeff users 25 mar 25 19:08 agora-bridge -> agora-repos/agora-bridge/
-lrwxrwxrwx 1 jeff users 23 mar 25 18:51 agora-repos -> code/graphs/agora-repos
-lrwxrwxrwx 1 jeff users 25 mar 25 19:08 agora-server -> agora-repos/agora-server/
-```
+(1) How can I log into `anagora.org`? Automatically?
+(2) Should I be getting a warning about each garden, repeatedly?
 
-At this point it pulls a lot of gardens -- 39 of them -- but eventually it runs into this problem and halts:
+# Details
 
 ```
-Process worker_process_1:
-Traceback (most recent call last):
-  File "/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
-    self.run()
-  File "/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/multiprocessing/process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "/home/jeff/agora-bridge/pull.py", line 91, in worker
-    task[0](*task[1:])
-  File "/home/jeff/agora-bridge/pull.py", line 84, in fedwiki_import
-    output = subprocess.run([f"{this_path}/fedwiki.sh", url, path], capture_output=True)
-  File "/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/subprocess.py", line 505, in run
-    with Popen(*popenargs, **kwargs) as process:
-  File "/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/subprocess.py", line 951, in __init__
-    self._execute_child(args, executable, preexec_fn, close_fds,
-  File "/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/subprocess.py", line 1821, in _execute_child
-    raise child_exception_type(errno_num, err_msg, err_filename)
-FileNotFoundError: [Errno 2] No such file or directory: '/home/jeff/code/graphs/agora-repos/agora/fedwiki.sh'
+cd ~/agora
+nix-shell
+. venv/bin/activate
+
+# Seems dumb to run `gh auth login` and still do this,
+# but the other way definitely failed; let's see if this does.
+# ssh-agent bash
+# ssh-add
+
+cd ~/agora-bridge # I seem to have to do this so that the
+~/agora/bin/pull
 ```
 
-And yet the file it's not finding exists:
+If I do that, it hangs asking me for credentials for `git.anagora.org`. If I just press enter a few times it returns to what looks like checking peoples' gardens:
 ```
-[nix-shell:~/agora-repos/agora-bridge]$ cat /home/jeff/code/graphs/agora-repos/agora-bridge/fedwiki.sh
-#!/bin/bash
-cd fedwiki
-go run main.go $1 $2 (.venv)
+...
+WARNING:pull:/home/jeff/agora/garden/flancia.org exists, won't clone to it.
+WARNING:pull:/home/jeff/agora/garden/maya exists, won't clone to it.
+WARNING:pull:/home/jeff/agora/garden/Jayu exists, won't clone to it.
+WARNING:pull:/home/jeff/agora/garden/darlim doesn't exist, couldn't pull to it.
+Username for 'https://git.anagora.org': Username for 'https://git.anagora.org':
+Password for 'https://git.anagora.org': Password for 'https://git.anagora.org':
+WARNING:pull:/home/jeff/agora/garden/melanocarpa exists, won't clone to it.
+WARNING:pull:/home/jeff/agora/garden/evan doesn't exist, couldn't pull to it.
+WARNING:pull:/home/jeff/agora/garden/darlim doesn't exist, couldn't pull to it.
+WARNING:pull:/home/jeff/agora/garden/protopian doesn't exist, couldn't pull to it.
+WARNING:pull:/home/jeff/agora/garden/evan doesn't exist, couldn't pull to it.
+...
 ```
+
+But then it eventually cycles into the `anagora.org` login again.

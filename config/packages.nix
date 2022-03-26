@@ -34,6 +34,7 @@
     pinentry # needed by gnupg
     gitMinimal
     nix-prefetch-git # to compute "the" sha256 of a git repo
+    gh # official Github CLI: https://cli.github.com/
     nixos-option
     # cachix # CL client for Nix binary cache hosting. https://cachix.org
     #        # Used by Karya.
