@@ -1,4 +1,15 @@
-More progress! Now it's pulled a lot of gardens -- 39, specifically -- but it runs into this problem:
+More progress!
+
+First it's worth mentioning that I have symlinks in my home folder that allow the scripts to work:
+```
+[nix-shell:~]$ ls agora* -l
+lrwxrwxrwx 1 jeff users 17 mar 25 19:07 agora -> agora-repos/agora
+lrwxrwxrwx 1 jeff users 25 mar 25 19:08 agora-bridge -> agora-repos/agora-bridge/
+lrwxrwxrwx 1 jeff users 23 mar 25 18:51 agora-repos -> code/graphs/agora-repos
+lrwxrwxrwx 1 jeff users 25 mar 25 19:08 agora-server -> agora-repos/agora-server/
+```
+
+At this point it pulls a lot of gardens -- 39 of them -- but eventually it runs into this problem and halts:
 
 ```
 Process worker_process_1:
@@ -18,4 +29,12 @@ Traceback (most recent call last):
   File "/nix/store/y3inmdhijqkb4qj36yphj4cbllljhqzz-python3-3.9.6/lib/python3.9/subprocess.py", line 1821, in _execute_child
     raise child_exception_type(errno_num, err_msg, err_filename)
 FileNotFoundError: [Errno 2] No such file or directory: '/home/jeff/code/graphs/agora-repos/agora/fedwiki.sh'
+```
+
+And yet the file it's not finding exists:
+```
+[nix-shell:~/agora-repos/agora-bridge]$ cat /home/jeff/code/graphs/agora-repos/agora-bridge/fedwiki.sh
+#!/bin/bash
+cd fedwiki
+go run main.go $1 $2 (.venv)
 ```
