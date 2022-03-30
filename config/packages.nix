@@ -99,6 +99,7 @@
     ponyc # like Erlang but stricter typing, maybe?
     python
     python3
+    python39Packages.pytest
     coconut
     gcc
     go_1_17 # aka golang
