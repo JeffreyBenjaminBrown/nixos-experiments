@@ -26,16 +26,18 @@
   virtualisation.docker.enable = true;
   environment.homeBinInPath = true; # that is, ~/bin
 
-  networking.hostName = "jbb-dell";
+  networking.hostName = "jbb-hp17";
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlp1s0.useDHCP = true;
+  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking.interfaces.wlp2s0.useDHCP = true;
+  # networking.wireless.enable = true;
+    # conflicts with networking.networkmanager
 
   services.printing.enable = true; # Enable CUPS
 
-  # Enable sound
   sound.enable = true;
+  # hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -113,8 +115,6 @@
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
@@ -124,19 +124,9 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Use the GRUB 2 boot loader.
-  boot.loader = {
-    grub = {
-      enable = true;
-      version = 2;
-      devices = ["/dev/sda"]; # Where to put GRUB. "nodev" means EFI only.
-
-      # TODO ? Re-enable
-      # configurationLimit = 15;
-        # Deletes all but the newest 15 generations automatically.
-        # Suggested here: https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
-    };
-  };
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
@@ -144,7 +134,8 @@
   # on your system were taken. It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05";
+  # (e.g. `man configuration.nix`
+  # or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "21.11";
   # PITFALL: Read preceding comment.
 }
