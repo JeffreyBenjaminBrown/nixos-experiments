@@ -1,22 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
-
   system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = true;
 
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./audio-configuration.nix
-      ./packages.nix
-      # ./emacs.nix # This is imported from packages.nix, not here.
-      # ./cachix.nix
     ];
 
   environment.variables = # customize Bash (and other stuff?)
@@ -115,20 +105,34 @@
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  # TODO : nixos-generate-config should generate either
-  # something about GRUB or something about EFI boot.
-  # Put that here.
+  # List packages installed in system profile. To search, run:
+  environment.systemPackages = with pkgs; [
+    # Cool stuff
+    emacs
+    mg
+    tmux
+
+    # Internet
+    firefox
+    networkmanager
+    plasma-nm
+    wget
+
+    # system
+    acpi
+    file
+    git
+    gnome.gnome-disk-utility
+    ntfs3g
+    tree
+  ];
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
