@@ -81,6 +81,8 @@
     lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
     agrep # fuzzy search!
     ripgrep # "rg"
+    psmisc # Tools that use the proc filesystem,
+           # including fuser, killall, pstree.
 
     ### explore system ##
     #####################

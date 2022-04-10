@@ -72,7 +72,8 @@ in
       # right next to nix-mode: https://melpa.org/#/nix-mode
       # but for some reason this line makes NixOS throw an error:
         # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
-      # org-roam
+      org-roam
+      emacsql-sqlite3
       ac-helm # autocomplete with Helm
       helm
       helm-company
