@@ -161,6 +161,8 @@
       # tesseract4 # Google OCR. Too huge to keep.
       # ocrad # Gnu OCR. Too huge to keep.
       # tabula # extract tables from PDFs
+    gnumake
+    cmake
     xdotool      # "fakes keyboard and mouse input, among other things"
     gimp         # manipulate images
     ghostscript  # manipulate images

@@ -36,6 +36,7 @@
 
   services.printing.enable = true; # Enable CUPS
 
+  # Enable sound
   sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
@@ -114,6 +115,8 @@
     pinentryFlavor = "gtk2"; # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
     enableSSHSupport = true;
   };
+
+  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
