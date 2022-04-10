@@ -9,6 +9,12 @@
       # Fun fact: Does not rely on the `with pkgs` statement.
     mg
 
+    ### printer ###
+    ###############
+    # hplip # Drivers for HP printers, scanners, fax machines
+            # Worthless (tried it for my worthless HP Deskjet 1112,
+            # which was not recognized).
+
     ### storage, versioning, formatting ###
     #######################################
     parted
@@ -68,6 +74,8 @@
     lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
     agrep # fuzzy search!
     ripgrep # "rg"
+    psmisc # Tools that use the proc filesystem,
+           # including fuser, killall, pstree.
 
     ### explore system ##
     #####################
@@ -140,7 +148,7 @@
     sqlite
     zsh
 
-    ### photo|video ###
+    ### graphics|photo|video ###
     ###################
     # Image to text.
       # tesseract4 # Google OCR. Too huge to keep.
@@ -148,6 +156,7 @@
       # tabula # extract tables from PDFs
     gnumake
     cmake
+    xdotool      # "fakes keyboard and mouse input, among other things"
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick  # manipulate images

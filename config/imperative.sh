@@ -6,6 +6,20 @@ git config --global user.name "Jeffrey Benjamin Brown"
 git config --global core.editor "emacs -nw --no-init-file"
 git config --global status.showUntrackedFiles all
 
+# Things I build in nixpkgs by hand
+cd /nix/nixpkgs
+
+git checkout master
+git fetch upstream
+git merge upstream/master
+git checkout jbb-oddities
+git merge master
+
+nix-build -A     libmonome
+nix-build -A     sc3-plugins
+nix-build -A     serialosc
+nix-env -f . -iA libmonome serialosc sc3-plugins
+
 # Haskell
 cabal update
 cabal install vivid vivid-osc vivid-supercollider
@@ -47,9 +61,9 @@ cabal repl
 #     fi
 # fi
 
-# Manual KDE config.
+# Manual KDE config. Search terms are in quotation marks.
 In_kde settings: search for "search", disable content indexing.
-In_kde settings: set a keyboard shortcut to invert a window's colors.
-In_kde settings: add Spanish as a second language, configure shortcuts.
-In_kde settings: use 16 Desktops, 2 Activities, set shortcuts to move between them and move windows between them.
-In_kde settings: set shortcuts to zoom, to view all desktops.
+In_kde settings: set a keyboard shortcut to "invert" the color of a window.
+In_kde settings: add Spanish as a second "language", configure "keyboard" shortcuts.
+In_kde settings: use 16 "Virtual Desktops", 2 "Activities", set "KWin" shortcuts to move between them and move windows between them.
+In_kde settings: set shortcuts to "zoom", and to view all desktops.

@@ -73,6 +73,7 @@ in
       # but for some reason this line makes NixOS throw an error:
         # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
       org-roam
+      emacsql-sqlite3
       ac-helm # autocomplete with Helm
       helm
       helm-company
