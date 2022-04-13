@@ -117,6 +117,7 @@
     python39Packages.pytest
     coconut
     gcc
+    glibc
     go_1_17 # aka golang
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
@@ -124,7 +125,7 @@
     purescript
     spago # a PureScript build tool
     nodejs-17_x
-    haskellPackages.Cabal_3_6_2_0
+    haskellPackages.Cabal_3_6_3_0
     ghc
     cabal-install
     # Used to be simply `ghc`. The rest is voodoo monkey-pasted from
@@ -251,7 +252,7 @@
     shntool # view and modify WAVE files
     x42-plugins # level meters
     ladspa-sdk
-    QmidiNet # "a midi network gateway"
+    qmidinet # "a midi network gateway"
 
     # some LV2 plugins (e.g. guitar effects)
     gxplugins-lv2
