@@ -9,6 +9,8 @@ git config --global status.showUntrackedFiles all
 # Things I build in nixpkgs by hand
 cd /nix/nixpkgs
 
+magically_update_the_nixpkgs_repo to match whatever channel I'm on.
+
 git checkout master
 git fetch upstream
 git merge upstream/master
