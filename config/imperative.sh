@@ -9,7 +9,7 @@ git config --global status.showUntrackedFiles all
 # Things I build in nixpkgs by hand
 cd /nix/nixpkgs
 
-magically_update_the_nixpkgs_repo to match whatever channel I'm on.
+magically_update_the_nixpkgs_repo to match whatever channel I am on.
 
 git checkout master
 git fetch upstream
@@ -17,10 +17,12 @@ git merge upstream/master
 git checkout jbb-oddities
 git merge master
 
+# So far I can't build sc3-plugins.
+# Once I can, uncomment the sc3-plugins lines below.
 nix-build -A     libmonome
-nix-build -A     sc3-plugins
 nix-build -A     serialosc
-nix-env -f . -iA libmonome serialosc sc3-plugins
+# nix-build -A     sc3-plugins
+nix-env -f . -iA libmonome serialosc # sc3-plugins
 
 # Haskell
 cabal update

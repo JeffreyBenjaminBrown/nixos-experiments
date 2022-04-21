@@ -111,7 +111,7 @@
       # gleam # like Erlang but with more robust typing
       # rebar3 # A REPL for Gleam
 
-    ponyc # like Erlang but stricter typing, maybe?
+    # ponyc # like Erlang but stricter typing, maybe?
     python
     python3
     python39Packages.pytest
@@ -123,7 +123,7 @@
     libmemcached # C/C++ library. Requirement for Agora.
     # haskellPackages.stackage-to-hackage # marked as broken
     purescript
-    spago # a PureScript build tool
+    # spago # a PureScript build tool
     nodejs-17_x
     haskellPackages.Cabal_3_6_3_0
     ghc
