@@ -24,7 +24,9 @@
 
     ### storage, versioning, formatting ###
     #######################################
+    smartmontools # to monitor disks' health
     parted
+    gparted
     ntfs3g # NTFS driver (e.g. for Windows hard drives)
     archiver
     zip
@@ -120,15 +122,12 @@
     go_1_17 # aka golang
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
-    # haskellPackages.stackage-to-hackage # marked as broken
     purescript
     spago # a PureScript build tool
     nodejs-17_x
     haskellPackages.Cabal_3_6_2_0
     ghc
     cabal-install
-    # Used to be simply `ghc`. The rest is voodoo monkey-pasted from
-    # https://github.com/haskell/cabal/issues/6228#issuecomment-529566609
     haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
     zlib
     zlib.dev
