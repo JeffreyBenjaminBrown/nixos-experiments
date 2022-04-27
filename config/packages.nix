@@ -124,14 +124,16 @@
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
     purescript
-    # spago # a PureScript build tool
+    # spago # a PureScript build tool.
+            # Broke on nixpks unstable after nixpkgs 21.11
     nodejs-17_x
-    haskellPackages.Cabal_3_6_3_0
+
     ghc
     cabal-install
-    haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
+
     zlib
     zlib.dev
+    haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
 
     # I hoped these next two would let me build a new Stack project
     # (stack new, cd, stack build) but I still get the error
