@@ -23,11 +23,11 @@ in
       go-mode
       json-mode
       magit        # ; Integrate git <C-x g>
-      nix-mode
       use-package
       perspective
 
     ]) ++ (with epkgs.melpaPackages; [
+      nix-mode
       native-complete # Tab-completion in *shell* buffers.
 
       neotree # wonderful visually branching file navigator
