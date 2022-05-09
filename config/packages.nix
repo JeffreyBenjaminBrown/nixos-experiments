@@ -253,7 +253,7 @@
     shntool # view and modify WAVE files
     x42-plugins # level meters
     ladspa-sdk
-    QmidiNet # "a midi network gateway"
+    qmidinet # "a midi network gateway"
 
     # some LV2 plugins (e.g. guitar effects)
     gxplugins-lv2
