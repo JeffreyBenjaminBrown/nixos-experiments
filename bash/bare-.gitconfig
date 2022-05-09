@@ -1,0 +1,10 @@
+[core]
+#	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = emacs -nw --no-init-file
+#[interactive]
+#	diffFilter = diff-so-fancy --patch
+[user]
+	email = jeffbrown.the@gmail.com
+	name = Jeffrey Benjamin Brown
+[status]
+	showUntrackedFiles = normal
