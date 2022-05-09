@@ -69,6 +69,7 @@
     ### networking, trafficking ###
     ###############################
     networkmanager
+    nmap
     plasma-nm
     rtorrent
     wget
