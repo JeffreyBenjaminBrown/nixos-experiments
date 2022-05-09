@@ -50,6 +50,8 @@
 
   # Select internationalisation properties.
   i18n = {
+    # PITFALL: I might someday want some of these to instead be
+    # Colombian Spanish: es_CO.UTF-8
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
       # These are copied near-verbatim from my work system
@@ -57,23 +59,23 @@
       # (it used them for English but not Spanish),
       # and space around the equals signs.
       # Most of them are Colombian Spanish; exceptions are noted.
-      LANG              = "en_US.UTF-8"; # English
-      # LANGUAGE=   # The Ubuntu system shows "LANGUAGE="
-                    # when I evaluate `locale`.
-      LC_CTYPE          = "en_US.UTF-8"; # English
-      LC_NUMERIC        = "es_CO.UTF-8";
-      LC_TIME           = "es_CO.UTF-8";
-      LC_COLLATE        = "en_US.UTF-8"; # English
-      LC_MONETARY       = "es_CO.UTF-8";
-      LC_MESSAGES       = "en_US.UTF-8"; # English
-      LC_PAPER          = "es_CO.UTF-8";
-      LC_NAME           = "es_CO.UTF-8";
-      LC_ADDRESS        = "es_CO.UTF-8";
-      LC_TELEPHONE      = "es_CO.UTF-8";
-      LC_MEASUREMENT    = "es_CO.UTF-8";
-      LC_IDENTIFICATION = "es_CO.UTF-8";
-      # LC_ALL = # The Ubuntu system shows "LANGUAGE="
-                 # when I evaluate `locale`.
+      LANG              = "en_US.UTF-8";
+      LANGUAGE          = "en_US.UTF-8";
+        # The Ubuntu system shows "LANGUAGE="
+        # when I evaluate `locale`.
+      LC_CTYPE          = "en_US.UTF-8";
+      LC_NUMERIC        = "en_US.UTF-8";
+      LC_TIME           = "en_US.UTF-8";
+      LC_COLLATE        = "en_US.UTF-8";
+      LC_MONETARY       = "en_US.UTF-8";
+      LC_MESSAGES       = "en_US.UTF-8";
+      LC_PAPER          = "en_US.UTF-8";
+      LC_NAME           = "en_US.UTF-8";
+      LC_ADDRESS        = "en_US.UTF-8";
+      LC_TELEPHONE      = "en_US.UTF-8";
+      LC_MEASUREMENT    = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_ALL            = "en_US.UTF-8";
     };
   };
 
