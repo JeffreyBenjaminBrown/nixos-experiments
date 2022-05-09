@@ -108,6 +108,9 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  # TODO : The autogen might say to use BIOS or MBR
+  # instead of UEFI. This is for UEFI.
+  #
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
