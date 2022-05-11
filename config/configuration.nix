@@ -27,7 +27,7 @@
   environment.homeBinInPath = true; # that is, ~/bin
 
   networking.hostName = "server-2022";
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = false;
   networking.useDHCP = false;
   networking.interfaces.enp1s0.useDHCP = true;
   networking.interfaces.wlp2s0.useDHCP = true;

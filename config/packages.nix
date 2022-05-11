@@ -69,6 +69,8 @@
     ### networking, trafficking ###
     ###############################
     networkmanager
+    wpa_supplicant
+    wpa_supplicant_gui
     plasma-nm
     rtorrent
     wget
