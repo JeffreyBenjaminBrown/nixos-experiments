@@ -3,6 +3,7 @@
 {
   environment.systemPackages =
   with pkgs; [
+
     ### editors ###
     ###############
     (import ./emacs.nix { inherit pkgs; })
@@ -88,6 +89,7 @@
 
     ### explore system ##
     #####################
+    pkg-config # lets packages know things about other packages
     dmidecode # to learn about system RAM
     i2c-tools # includes decode-dimms
     pciutils # for lspci, to learn about sound card, per musnix readme
@@ -131,6 +133,7 @@
     ghc
     cabal-install
 
+    darcs
     zlib
     zlib.dev
     haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
