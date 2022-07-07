@@ -19,7 +19,7 @@ in
                # which is part of my PATH.
                # For now it's installed the normal Emacs way,
                # via `M-x pack-list-pack`
-      visual-fill-column # line wrap at word boundaries
+      # visual-fill-column # line wrap at word boundaries
       go-mode
       json-mode
       magit        # ; Integrate git <C-x g>
