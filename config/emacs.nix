@@ -10,7 +10,7 @@
 
 let
   myEmacs = pkgs.emacs;
-  emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+  emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
