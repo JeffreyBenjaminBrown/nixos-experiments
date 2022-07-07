@@ -10,7 +10,11 @@
 
 let
   myEmacs = pkgs.emacs;
+
+  # TODO: This is UNTESTED in any branch excep
+  # system-hp17-unstable-post-21.11
   emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
+
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
