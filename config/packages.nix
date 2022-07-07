@@ -31,6 +31,7 @@
     ntfs3g # NTFS driver (e.g. for Windows hard drives)
     archiver
     zip
+    p7zip
     unzip
     gzip
     gnupg # to encrypt, decrypt
@@ -70,6 +71,7 @@
     ### networking, trafficking ###
     ###############################
     networkmanager
+    nmap
     plasma-nm
     rtorrent
     wget
@@ -116,10 +118,13 @@
       # rebar3 # A REPL for Gleam
 
     # ponyc # like Erlang but stricter typing, maybe?
+
     python
     python3
     python39Packages.pytest
+    virtualenv
     coconut
+
     gcc
     glibc
     go_1_17 # aka golang
@@ -128,7 +133,7 @@
     purescript
     # spago # a PureScript build tool.
             # Broke on nixpks unstable after nixpkgs 21.11
-    nodejs-17_x
+    nodejs-18_x
 
     ghc
     cabal-install
