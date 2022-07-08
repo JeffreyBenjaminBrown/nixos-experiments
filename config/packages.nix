@@ -2,7 +2,52 @@
 
 {
   environment.systemPackages =
-  with pkgs; [
+    with pkgs;
+    let
+      # TODO | PITFALL : These definitions are, so far, unused.
+      # They might let me make the config cleaner. Specifically,
+      # I could substitute python-with-my-packages (defined here)
+      # for python3 in environment.systemPackages,
+      # and then delete a lot of python310Packages.* declarations,
+      # and also move the Python list to a separate file.
+      # That would not be equivalent to this current config,
+      # because I declare more Python libraries in my-python-packages
+      # than I declare outside of it.
+      my-python-packages = python-packages: with python-packages; [
+        # Things NixOS won't install.
+        # coconut[mypy]
+        # csv-diff
+        # django-stubs    # Maybe django is (now) enough?
+        # pandas-stubs
+        # pydotplus       # Maybe pydot is enough?
+        # surbtc          # Phanaeros needs this.
+        # weightedcalcs   # Phanaeros needs this.
+        # yahoofinancials # Phanaeros needs this.
+        awscli
+        coconut
+        django
+        google-api-python-client
+        google-auth-oauthlib
+        graphviz
+        icecream
+        mypy
+        numpy
+        openpyxl
+        pandas
+        pip
+        psutil
+        pydot
+        pytest
+        requests
+        setuptools
+        types-requests
+        typing
+        virtualenv
+        wheel
+        yfinance
+      ];
+      python-with-my-packages = python3.withPackages my-python-packages;
+    in [
 
       ### editors ###
       ###############
@@ -119,9 +164,17 @@
 
       # ponyc # like Erlang but stricter typing, maybe?
 
+        ### Python \ programming languages ###
+        ######################################
         python
         python3
-        python39Packages.pytest
+
+        # Some especially ornery or critical Python packages,
+        # that it feels like a bad idea to install via virtualenv.
+        python310Packages.mypy
+        python310Packages.pip
+        python310Packages.setuptools
+        python310Packages.wheel
         virtualenv
         coconut
 
