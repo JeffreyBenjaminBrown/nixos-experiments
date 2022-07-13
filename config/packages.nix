@@ -170,8 +170,11 @@
         python3
 
         # Some especially ornery or critical Python packages,
-        # that it feels like a bad idea to install via virtualenv.
+        # for which either I was unable to install via virtualenv,
+        # or I thought it would be a bad idea.
         python310Packages.mypy
+        python310Packages.numpy
+        python310Packages.pandas
         python310Packages.pip
         python310Packages.setuptools
         python310Packages.wheel
