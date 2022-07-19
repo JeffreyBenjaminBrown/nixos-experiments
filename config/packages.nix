@@ -3,6 +3,7 @@
 {
   environment.systemPackages =
   with pkgs; [
+
     ### editors ###
     ###############
     (import ./emacs.nix { inherit pkgs; })
@@ -11,10 +12,13 @@
 
     ### storage, versioning, formatting ###
     #######################################
+    smartmontools # to monitor disks' health
     parted
+    gparted
     ntfs3g # NTFS driver (e.g. for Windows hard drives)
     archiver
     zip
+    p7zip
     unzip
     gzip
     gnupg # to encrypt, decrypt
@@ -54,6 +58,7 @@
     ### networking, trafficking ###
     ###############################
     networkmanager
+    nmap
     plasma-nm
     rtorrent
     wget
@@ -68,9 +73,12 @@
     lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
     agrep # fuzzy search!
     ripgrep # "rg"
+    psmisc # Tools that use the proc filesystem,
+           # including fuser, killall, pstree.
 
     ### explore system ##
     #####################
+    pkg-config # lets packages know things about other packages
     dmidecode # to learn about system RAM
     i2c-tools # includes decode-dimms
     pciutils # for lspci, to learn about sound card, per musnix readme
@@ -96,27 +104,31 @@
       # gleam # like Erlang but with more robust typing
       # rebar3 # A REPL for Gleam
 
-    ponyc # like Erlang but stricter typing, maybe?
+    # ponyc # like Erlang but stricter typing, maybe?
+
     python
     python3
     python39Packages.pytest
+    virtualenv
     coconut
+
     gcc
+    glibc
     go_1_17 # aka golang
     memcached    # Requirement for Agora.
     libmemcached # C/C++ library. Requirement for Agora.
-    # haskellPackages.stackage-to-hackage # marked as broken
     purescript
-    spago # a PureScript build tool
-    nodejs-17_x
-    haskellPackages.Cabal_3_6_2_0
+    # spago # a PureScript build tool.
+            # Broke on nixpks unstable after nixpkgs 21.11
+    nodejs-18_x
+
     ghc
     cabal-install
-    # Used to be simply `ghc`. The rest is voodoo monkey-pasted from
-    # https://github.com/haskell/cabal/issues/6228#issuecomment-529566609
-    haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
+
+    darcs
     zlib
     zlib.dev
+    haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
 
     # I hoped these next two would let me build a new Stack project
     # (stack new, cd, stack build) but I still get the error
@@ -148,6 +160,7 @@
       # tabula # extract tables from PDFs
     gnumake
     cmake
+    xdotool      # "fakes keyboard and mouse input, among other things"
     gimp         # manipulate images
     ghostscript  # manipulate images
     imagemagick  # manipulate images

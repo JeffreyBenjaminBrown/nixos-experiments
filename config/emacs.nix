@@ -10,7 +10,11 @@
 
 let
   myEmacs = pkgs.emacs;
-  emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+
+  # TODO: This is UNTESTED in any branch except
+  # system-hp17-unstable-post-21.11
+  emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
+
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
@@ -19,15 +23,15 @@ in
                # which is part of my PATH.
                # For now it's installed the normal Emacs way,
                # via `M-x pack-list-pack`
-      visual-fill-column # line wrap at word boundaries
+      # visual-fill-column # line wrap at word boundaries
       go-mode
       json-mode
       magit        # ; Integrate git <C-x g>
-      nix-mode
       use-package
       perspective
 
     ]) ++ (with epkgs.melpaPackages; [
+      nix-mode
       native-complete # Tab-completion in *shell* buffers.
 
       neotree # wonderful visually branching file navigator
@@ -73,6 +77,7 @@ in
       # but for some reason this line makes NixOS throw an error:
         # error: undefined variable 'org-roam' at /etc/nixos/emacs.nix:16:7
       org-roam
+      emacsql-sqlite3
       ac-helm # autocomplete with Helm
       helm
       helm-company

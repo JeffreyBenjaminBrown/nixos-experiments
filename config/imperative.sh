@@ -5,6 +5,25 @@ git config --global user.email "jeffbrown.the@gmail.com"
 git config --global user.name "Jeffrey Benjamin Brown"
 git config --global core.editor "emacs -nw --no-init-file"
 git config --global status.showUntrackedFiles all
+git config --global init.defaultBranch main
+
+# Things I build in nixpkgs by hand
+cd /nix/nixpkgs
+
+magically_update_the_nixpkgs_repo to match whatever channel I am on.
+
+git checkout master
+git fetch upstream
+git merge upstream/master
+git checkout jbb-oddities
+git merge master
+
+# So far I can't build sc3-plugins.
+# Once I can, uncomment the sc3-plugins lines below.
+nix-build -A     libmonome
+nix-build -A     serialosc
+# nix-build -A     sc3-plugins
+nix-env -f . -iA libmonome serialosc # sc3-plugins
 
 # Haskell
 cabal update
@@ -47,9 +66,9 @@ cabal repl
 #     fi
 # fi
 
-# Manual KDE config.
+# Manual KDE config. Search terms are in quotation marks.
 In_kde settings: search for "search", disable content indexing.
-In_kde settings: set a keyboard shortcut to invert a window's colors.
-In_kde settings: add Spanish as a second language, configure shortcuts.
-In_kde settings: use 16 Desktops, 2 Activities, set shortcuts to move between them and move windows between them.
-In_kde settings: set shortcuts to zoom, to view all desktops.
+In_kde settings: set a keyboard shortcut to "invert" the color of a window.
+In_kde settings: add Spanish as a second "language", configure "keyboard" shortcuts.
+In_kde settings: use 16 "Virtual Desktops", 2 "Activities", set "KWin" shortcuts to move between them and move windows between them.
+In_kde settings: set shortcuts to "zoom", and to view all desktops.
