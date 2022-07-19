@@ -103,7 +103,7 @@
       "audio"
       "jackaudio"
       "dialout" # to use the monome without root privileges
-      ];
+    ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -128,9 +128,15 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # TODO : nixos-generate-config should generate either
-  # something about GRUB or something about EFI boot.
-  # Put that here.
+  # Use the GRUB 2 boot loader.
+  boot.loader.grub = {
+    enable = true;
+    version = 2;
+    devices = ["/dev/sda"]; # Where to put GRUB. "nodev" means EFI only.
+    # configurationLimit = 15; # TODO ? Re-enable
+      # Deletes all but the newest 15 generations automatically.
+      # Suggested here: https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device                                                     };   };
+  };
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
