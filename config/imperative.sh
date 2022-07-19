@@ -5,6 +5,25 @@ git config --global user.email "jeffbrown.the@gmail.com"
 git config --global user.name "Jeffrey Benjamin Brown"
 git config --global core.editor "emacs -nw --no-init-file"
 git config --global status.showUntrackedFiles all
+git config --global init.defaultBranch main
+
+# Things I build in nixpkgs by hand
+cd /nix/nixpkgs
+
+magically_update_the_nixpkgs_repo to match whatever channel I am on.
+
+git checkout master
+git fetch upstream
+git merge upstream/master
+git checkout jbb-oddities
+git merge master
+
+# So far I can't build sc3-plugins.
+# Once I can, uncomment the sc3-plugins lines below.
+nix-build -A     libmonome
+nix-build -A     serialosc
+# nix-build -A     sc3-plugins
+nix-env -f . -iA libmonome serialosc # sc3-plugins
 
 # Things I build in nixpkgs by hand
 cd /nix/nixpkgs

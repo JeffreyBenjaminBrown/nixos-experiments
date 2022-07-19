@@ -1,6 +1,9 @@
+bin
+.aws
 .emacs
 .emacs.d
 .gitconfig
 .inputrc
+.profile
 .tmux
 .tmux.conf
