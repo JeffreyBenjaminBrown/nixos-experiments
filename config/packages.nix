@@ -172,6 +172,7 @@
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
+        python310Packages.awscli
         python310Packages.mypy
         python310Packages.numpy
         python310Packages.pandas
