@@ -186,6 +186,7 @@
       go_1_17 # aka golang
       memcached    # Requirement for Agora.
       libmemcached # C/C++ library. Requirement for Agora.
+      libssh2      # a C library needed by Lumatone
       purescript
       # spago # a PureScript build tool.
               # Broke on nixpks unstable after nixpkgs 21.11
