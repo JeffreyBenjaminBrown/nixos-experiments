@@ -10,7 +10,10 @@
 
 let
   myEmacs = pkgs.emacs;
+  # TODO: This is UNTESTED in any branch except
+  # system-hp17-unstable-post-21.11
   emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
+
 in
   emacsWithPackages (epkgs: (
     with epkgs.melpaStablePackages; [
@@ -19,7 +22,7 @@ in
                # which is part of my PATH.
                # For now it's installed the normal Emacs way,
                # via `M-x pack-list-pack`
-      visual-fill-column # line wrap at word boundaries
+      # visual-fill-column # line wrap at word boundaries
       go-mode
       json-mode
       magit        # ; Integrate git <C-x g>

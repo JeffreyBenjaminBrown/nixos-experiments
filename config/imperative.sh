@@ -5,6 +5,7 @@ git config --global user.email "jeffbrown.the@gmail.com"
 git config --global user.name "Jeffrey Benjamin Brown"
 git config --global core.editor "emacs -nw --no-init-file"
 git config --global status.showUntrackedFiles all
+git config --global init.defaultBranch main
 
 # Things I build in nixpkgs by hand
 cd /nix/nixpkgs
