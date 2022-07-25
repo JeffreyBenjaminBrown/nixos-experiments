@@ -255,4 +255,5 @@
       # skypeforlinux
       # teams
       # zoom-us
+    ];
 }
