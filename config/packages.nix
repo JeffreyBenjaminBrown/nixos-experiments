@@ -77,6 +77,7 @@
       archiver
       zip
       p7zip
+      unrar
       unzip
       gzip
       gnupg # to encrypt, decrypt
@@ -107,9 +108,6 @@
 
       ### build tools ###
       ###################
-      # waf # broken -- builds to a file, not a folder
-            # see my issues on StackOverflow
-      wafHook
       gnumake
       cmake
 
@@ -155,14 +153,7 @@
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
 
-      # To get the latest one I'm installing gleam and rebar3
-      # "semi-procedurally"
-      # from my nixpkgs fork; see org node
-      # [[id:c15685f2-54d8-40dd-a49c-d87ec0bd5034][3 - commands to build it]]
-        # gleam # like Erlang but with more robust typing
-        # rebar3 # A REPL for Gleam
-
-      # ponyc # like Erlang but stricter typing, maybe?
+    # ponyc # like Erlang but with stricter typing, maybe?
 
         ### Python \ programming languages ###
         ######################################
@@ -228,8 +219,6 @@
         # tesseract4 # Google OCR. Too huge to keep.
         # ocrad # Gnu OCR. Too huge to keep.
         # tabula # extract tables from PDFs
-      gnumake
-      cmake
       xdotool      # "fakes keyboard and mouse input, among other things"
       gimp         # manipulate images
       ghostscript  # manipulate images
