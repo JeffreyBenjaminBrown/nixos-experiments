@@ -70,6 +70,7 @@
       archiver
       zip
       p7zip
+      unrar
       unzip
       gzip
       gnupg # to encrypt, decrypt
