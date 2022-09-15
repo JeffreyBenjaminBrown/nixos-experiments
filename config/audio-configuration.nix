@@ -36,8 +36,8 @@ with pkgs; {
     #   When I start using the external one, change it.
     soundcardPciId = "00:1f.3";
 
-    # If I build with either of these, I get a PREEMPT error, much like
-    #   https://github.com/musnix/musnix/issues/100
+    # At least one of these doesn't seem to want to build.
+    # I haven't tried either without the other.
     # kernel.realtime = true;
     # kernel.optimize = true;
 
