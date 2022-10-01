@@ -134,6 +134,7 @@
 
       ### explore system ##
       #####################
+      cpufrequtils
       pkg-config # lets packages know things about other packages
       dmidecode # to learn about system RAM
       i2c-tools # includes decode-dimms
@@ -275,7 +276,6 @@
       SDL
       SDL2
       carla
-      jack2Full
       jack_capture
       qjackctl
       cadence
