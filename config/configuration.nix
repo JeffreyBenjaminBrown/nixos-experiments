@@ -7,8 +7,11 @@
     }))
   ];
 
-  system.autoUpgrade.enable = true;
-  # system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade = {
+    enable = true;
+    dates = "02:00";
+    # allowReboot = true;
+  };
 
   imports =
     [ # Include the results of the hardware scan.

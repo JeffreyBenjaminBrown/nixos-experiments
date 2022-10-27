@@ -145,6 +145,7 @@
       awscli
       docker
       docker-compose
+      nushell
       steam-run # To run standalone binaries, e.g. Lumatone Editor
 
       # Java
