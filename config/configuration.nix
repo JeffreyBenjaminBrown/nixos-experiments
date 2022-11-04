@@ -18,31 +18,18 @@
       ./hardware-configuration.nix
     ];
 
-  environment.variables = # customize Bash (and other stuff?)
-    { EDITOR = "mg"; };
-
-  nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
-  virtualisation.docker.enable = true;
-  environment.homeBinInPath = true; # that is, ~/bin
+  # PITFALL : There's a choice of BIOS or UEFI. This is UEFI.
+  #
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # TODO : pick a name
   # networking.hostName = "jbb-dell";
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
 
-  services.printing.enable = true; # Enable CUPS
-  sound.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = {
-    "caps:escape" # map caps to escape
-  };
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  time.timeZone = "America/Bogota";
 
   # Select internationalisation properties.
   i18n = {
@@ -80,8 +67,23 @@
     keyMap = "us";
   };
 
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the KDE Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = {
+    "caps:escape" # map caps to escape
+  };
+
+  services.printing.enable = true; # Enable CUPS
+
+  sound.enable = true;
+
   services.xserver.libinput.enable = true; # touchpad support
-  time.timeZone = "America/Bogota";
 
   # User accounts.
   # TODO : Don't forget to set a password with ‘passwd’.
@@ -99,18 +101,6 @@
       ];
   };
 
-  services.pcscd.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "gtk2"; # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
-    enableSSHSupport = true;
-  };
-
-  # PITFALL : There's a choice of BIOS or UEFI. This is UEFI.
-  #
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -133,6 +123,20 @@
     ntfs3g
     tree
   ];
+
+  environment.variables = # customize Bash (and other stuff?)
+    { EDITOR = "mg"; };
+
+  nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
+  virtualisation.docker.enable = true;
+  environment.homeBinInPath = true; # that is, ~/bin
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2"; # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
+    enableSSHSupport = true;
+  };
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
