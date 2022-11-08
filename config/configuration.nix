@@ -75,9 +75,7 @@
   services.xserver.desktopManager.plasma5.enable = true;
 
   services.xserver.layout = "us";
-  services.xserver.xkbOptions = {
-    "caps:escape" # map caps to escape
-  };
+  services.xserver.xkbOptions = "caps:escape";
 
   services.printing.enable = true; # Enable CUPS
 
