@@ -25,7 +25,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # TODO : pick a name
-  # networking.hostName = "jbb-dell";
+  networking.hostName = "020EFCE211530"; # PITFALL: Claudia says my PUJ machine needs this name.
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
 
@@ -146,7 +146,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix
   # or on https://nixos.org/nixos/options.html).
-  #   TODO : fill in this line from nixos-generate-config
-  #   system.stateVersion = "xx.xx";
+  system.stateVersion = "22.05";
   # PITFALL: Read preceding comment.
 }
