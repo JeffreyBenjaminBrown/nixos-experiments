@@ -113,6 +113,7 @@
 
       ### networking, trafficking ###
       ###############################
+      element-desktop # for Matrix.org
       networkmanager
       nmap
       plasma-nm
@@ -145,6 +146,7 @@
       awscli
       docker
       docker-compose
+      libcgroup # control the CPU consumption of process hierarchies
       nushell
       steam-run # To run standalone binaries, e.g. Lumatone Editor
 
@@ -178,7 +180,7 @@
 
       gcc
       glibc
-      go_1_17 # aka golang
+      go           # aka golang
       memcached    # Requirement for Agora.
       libmemcached # C/C++ library. Requirement for Agora.
       libssh2      # a C library needed by Lumatone
