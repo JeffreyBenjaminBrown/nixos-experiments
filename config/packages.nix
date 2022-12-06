@@ -113,6 +113,7 @@
 
       ### networking, trafficking ###
       ###############################
+      element-desktop # for Matrix.org
       networkmanager
       nmap
       plasma-nm
@@ -139,12 +140,16 @@
       dmidecode # to learn about system RAM
       i2c-tools # includes decode-dimms
       pciutils # for lspci, to learn about sound card, per musnix readme
+      xorg.xev # to view keycodes corresponding keyboard keys
+      xorg.xmodmap # to remap keycodes (in ~/.xmodmap)
 
       ### programming languages, or close neighbors ###
       #################################################
       awscli
+      calc
       docker
       docker-compose
+      libcgroup # control the CPU consumption of process hierarchies
       nushell
       steam-run # To run standalone binaries, e.g. Lumatone Editor
 
@@ -178,7 +183,7 @@
 
       gcc
       glibc
-      go_1_17 # aka golang
+      go           # aka golang
       memcached    # Requirement for Agora.
       libmemcached # C/C++ library. Requirement for Agora.
       libssh2      # a C library needed by Lumatone
@@ -186,6 +191,7 @@
       # spago # a PureScript build tool.
               # Broke on nixpks unstable after nixpkgs 21.11
       nodejs-18_x
+      nodePackages.typescript
 
       ghc
       cabal-install
@@ -284,8 +290,7 @@
       sox
       ladspaH
       faust # for Karya
-      supercollider
-      supercollider_scel
+      supercollider-with-sc3-plugins
       vmpk # virtual MIDI keyboard
 
       #### Audio

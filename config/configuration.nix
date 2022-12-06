@@ -136,6 +136,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # NixOS uses the LTS Linux kernel by default.
+  # This uses a later one.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
