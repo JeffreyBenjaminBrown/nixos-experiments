@@ -140,10 +140,13 @@
       dmidecode # to learn about system RAM
       i2c-tools # includes decode-dimms
       pciutils # for lspci, to learn about sound card, per musnix readme
+      xorg.xev # to view keycodes corresponding keyboard keys
+      xorg.xmodmap # to remap keycodes (in ~/.xmodmap)
 
       ### programming languages, or close neighbors ###
       #################################################
       awscli
+      calc
       docker
       docker-compose
       libcgroup # control the CPU consumption of process hierarchies
@@ -188,6 +191,7 @@
       # spago # a PureScript build tool.
               # Broke on nixpks unstable after nixpkgs 21.11
       nodejs-18_x
+      nodePackages.typescript
 
       ghc
       cabal-install
@@ -286,8 +290,7 @@
       sox
       ladspaH
       faust # for Karya
-      supercollider
-      supercollider_scel
+      supercollider-with-sc3-plugins
       vmpk # virtual MIDI keyboard
 
       #### Audio
