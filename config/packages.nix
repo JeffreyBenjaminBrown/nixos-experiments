@@ -172,12 +172,14 @@
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
+        python310Packages.pytest
         python310Packages.mypy
         python310Packages.numpy
         python310Packages.pandas
         python310Packages.pip
         python310Packages.setuptools
         python310Packages.wheel
+        python310Packages.torch
         virtualenv
         coconut
 
@@ -200,6 +202,8 @@
       zlib
       zlib.dev
       haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
+      # haskellPackages.hasktorch
+        # Can't build, because the backprop package is marked as broken.
 
       # I hoped these next two would let me build a new Stack project
       # (stack new, cd, stack build) but I still get the error
