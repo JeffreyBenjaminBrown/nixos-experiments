@@ -166,7 +166,6 @@
 
         ### Python \ programming languages ###
         ######################################
-        python
         python3
 
         # Some especially ornery or critical Python packages,
