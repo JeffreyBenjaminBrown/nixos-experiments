@@ -24,6 +24,7 @@
         # weightedcalcs   # Phanaeros needs this.
         # yahoofinancials # Phanaeros needs this.
         awscli
+        libpst
         coconut
         django
         google-api-python-client
