@@ -270,7 +270,7 @@
 
       ### big | sketchy | unfree ###
       ##############################
-      libreoffice
+      libreoffice-fresh
       firefox
       brave
       google-chrome
@@ -328,7 +328,7 @@
       mda_lv2
       x42-plugins
       zam-plugins
-      infamousPlugins
+      # infamousPlugins # broke Feb 2023, never used to my knowledge
       lsp-plugins
       kapitonov-plugins-pack
       magnetophonDSP.pluginUtils
