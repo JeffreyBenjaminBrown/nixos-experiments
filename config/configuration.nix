@@ -79,10 +79,9 @@
     keyMap = "us";
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true; # touchpad support
+    # (Enabled by default in most `desktopManager`s.)
 
-  # Set your time zone.
   time.timeZone = "America/Bogota";
 
   # User accounts.
