@@ -16,6 +16,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./packages.nix
+      # ./emacs.nix # This is imported from packages.nix, not here.
     ];
 
   # PITFALL : There's a choice of BIOS or UEFI. This is UEFI.
@@ -24,8 +26,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # TODO : pick a name
-  networking.hostName = "020EFCE211530"; # PITFALL: Claudia says my PUJ machine needs this name.
+  # PITFALL: Claudia says my PUJ machine needs this name.
+  networking.hostName = "020EFCE211530";
+
   networking.networkmanager.enable = true;
   networking.useDHCP = false;
 
@@ -82,6 +85,7 @@
   sound.enable = true;
 
   services.xserver.libinput.enable = true; # touchpad support
+    # (Enabled by default in most `desktopManager`s.)
 
   # User accounts.
   # TODO : Don't forget to set a password with ‘passwd’.
@@ -99,29 +103,6 @@
       ];
   };
 
-
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
-    # Cool stuff
-    emacs
-    mg
-    tmux
-
-    # Internet
-    firefox
-    networkmanager
-    plasma-nm
-    wget
-
-    # system
-    acpi
-    file
-    git
-    gnome.gnome-disk-utility
-    ntfs3g
-    tree
-  ];
-
   environment.variables = # customize Bash (and other stuff?)
     { EDITOR = "mg"; };
 
@@ -138,7 +119,8 @@
 
   # NixOS uses the LTS Linux kernel by default.
   # This uses a later one.
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # PITFALL: Twice, I have been unable to use X until I enabled this.
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
@@ -146,7 +128,7 @@
   # on your system were taken. It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix
+  # (e.g. `man configuration.nix`)
   # or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05";
   # PITFALL: Read preceding comment.
