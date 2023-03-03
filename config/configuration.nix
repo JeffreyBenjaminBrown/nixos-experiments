@@ -1,12 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
-
   system.autoUpgrade = {
     enable = true;
     dates = "02:00";
@@ -20,19 +14,30 @@
       # ./emacs.nix # This is imported from packages.nix, not here.
     ];
 
-  # PITFALL : There's a choice of BIOS or UEFI. This is UEFI.
-  #
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  environment.variables = # customize Bash (and other stuff?)
+    { EDITOR = "mg"; };
+
+  nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
+  virtualisation.docker.enable = true;
+  environment.homeBinInPath = true; # that is, ~/bin
 
   # PITFALL: Claudia says my PUJ machine needs this name.
   networking.hostName = "020EFCE211530";
-
-  networking.networkmanager.enable = true;
   networking.useDHCP = false;
+  networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Bogota";
+  services.printing.enable = true; # Enable CUPS
+
+  sound.enable = true;
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "caps:escape";
+
+  # Enable the KDE Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Select internationalisation properties.
   i18n = {
@@ -70,22 +75,10 @@
     keyMap = "us";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "caps:escape";
-
-  services.printing.enable = true; # Enable CUPS
-
-  sound.enable = true;
-
   services.xserver.libinput.enable = true; # touchpad support
     # (Enabled by default in most `desktopManager`s.)
+
+  time.timeZone = "America/Bogota";
 
   # User accounts.
   # TODO : Don't forget to set a password with ‘passwd’.
@@ -103,19 +96,18 @@
       ];
   };
 
-  environment.variables = # customize Bash (and other stuff?)
-    { EDITOR = "mg"; };
-
-  nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
-  virtualisation.docker.enable = true;
-  environment.homeBinInPath = true; # that is, ~/bin
-
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gtk2"; # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
     enableSSHSupport = true;
   };
+
+  # PITFALL : There's a choice of BIOS or UEFI. This is UEFI.
+  #
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # NixOS uses the LTS Linux kernel by default.
   # This uses a later one.
