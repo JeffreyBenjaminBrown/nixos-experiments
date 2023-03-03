@@ -38,7 +38,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkbOptions = "caps:escape";
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -80,10 +80,9 @@
     keyMap = "us";
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true; # touchpad support
+    # (Enabled by default in most `desktopManager`s.)
 
-  # Set your time zone.
   time.timeZone = "America/Bogota";
 
   # User accounts.

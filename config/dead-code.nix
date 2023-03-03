@@ -3,7 +3,6 @@
 { config, pkgs, ... }:
 
 {
-
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
@@ -27,7 +26,6 @@
   networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
-
 }
 
 # from packages.nix
