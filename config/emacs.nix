@@ -72,7 +72,7 @@ in
       company
 
       org-roam
-      emacsql-sqlite3
+      emacsql-sqlite
       ac-helm # autocomplete with Helm
       helm
       helm-company
