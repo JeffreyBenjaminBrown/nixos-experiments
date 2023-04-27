@@ -90,6 +90,10 @@
       nushell
       steam-run # To run standalone binaries, e.g. Lumatone Editor
 
+      # java-related
+      gradle
+      kotlin
+
       erlang
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
