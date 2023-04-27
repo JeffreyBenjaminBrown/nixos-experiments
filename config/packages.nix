@@ -8,7 +8,7 @@
       # They might let me make the config cleaner. Specifically,
       # I could substitute python-with-my-packages (defined here)
       # for python3 in environment.systemPackages,
-      # and then delete a lot of python310Packages.* declarations,
+      # and then delete a lot of python311Packages.* declarations,
       # and also move the Python list to a separate file.
       # That would not be equivalent to this current config,
       # because I declare more Python libraries in my-python-packages
