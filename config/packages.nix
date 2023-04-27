@@ -2,7 +2,8 @@
 
 {
   environment.systemPackages =
-    with pkgs;
+    with pkgs; [
+
       ### editors ###
       ###############
       (import ./emacs.nix { inherit pkgs; })
