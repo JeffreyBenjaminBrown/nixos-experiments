@@ -1,12 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  #nixpkgs.overlays = [
-  #  (import (builtins.fetchTarball {
-  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-  #  }))
-  #];
-
   system.autoUpgrade = {
     enable = true;
     dates = "02:00";
@@ -19,7 +13,6 @@
       ./audio-configuration.nix
       ./packages.nix
       # ./emacs.nix # This is imported from packages.nix, not here.
-      # ./cachix.nix
     ];
 
   environment.variables = # customize Bash (and other stuff?)
@@ -41,12 +34,11 @@
 
   # Enable sound
   sound.enable = true;
-  # hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkbOptions = "caps:escape";
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -88,10 +80,8 @@
     keyMap = "us";
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true; # touchpad support
 
-  # Set your time zone.
   time.timeZone = "America/Bogota";
 
   # User accounts.
@@ -110,27 +100,12 @@
       ];
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "gtk2"; # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
     enableSSHSupport = true;
   };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

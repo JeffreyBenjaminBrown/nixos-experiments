@@ -3,64 +3,11 @@
 {
   environment.systemPackages =
     with pkgs;
-    let
-      # TODO | PITFALL : These definitions are, so far, unused.
-      # They might let me make the config cleaner. Specifically,
-      # I could substitute python-with-my-packages (defined here)
-      # for python3 in environment.systemPackages,
-      # and then delete a lot of python311Packages.* declarations,
-      # and also move the Python list to a separate file.
-      # That would not be equivalent to this current config,
-      # because I declare more Python libraries in my-python-packages
-      # than I declare outside of it.
-      my-python-packages = python-packages: with python-packages; [
-        # Things NixOS won't install.
-        # coconut[mypy]
-        # csv-diff
-        # django-stubs    # Maybe django is (now) enough?
-        # pandas-stubs
-        # pydotplus       # Maybe pydot is enough?
-        # surbtc          # Phanaeros needs this.
-        # weightedcalcs   # Phanaeros needs this.
-        # yahoofinancials # Phanaeros needs this.
-        awscli
-        libpst
-        coconut
-        django
-        google-api-python-client
-        google-auth-oauthlib
-        graphviz
-        icecream
-        mypy
-        numpy
-        openpyxl
-        pandas
-        pip
-        psutil
-        pydot
-        pytest
-        requests
-        setuptools
-        types-requests
-        typing
-        virtualenv
-        wheel
-        yfinance
-      ];
-      python-with-my-packages = python3.withPackages my-python-packages;
-    in [
-
       ### editors ###
       ###############
       (import ./emacs.nix { inherit pkgs; })
         # Fun fact: Does not rely on the `with pkgs` statement.
       mg
-
-      ### printer ###
-      ###############
-      # hplip # Drivers for HP printers, scanners, fax machines
-              # Worthless (tried it for my worthless HP Deskjet 1112,
-              # which was not recognized).
 
       ### for monome ###
       ##################
@@ -86,8 +33,6 @@
       gitMinimal
       nix-prefetch-git # to compute "the" sha256 of a git repo
       nixos-option
-      # cachix # CL client for Nix binary cache hosting. https://cachix.org
-      #        # Used by Karya.
       ark
       borgbackup
       rclone # sync a clone to a (big commercial) cloud
@@ -95,15 +40,7 @@
       pandoc
       dos2unix
       corefonts # to build Mikhal's code, which hasn't worked yet
-      # (texlive.combine { inherit (texlive)
-      #   scheme-small
-      #   latexmk
-      #   bibtex; }) #for pdflatex
       lmodern # pandoc needs this to convert .md to .pdf
-      # samsung-UnifiedLinuxDriver
-        # to connect phone to computer, hopefully,
-        # but I suspect it's just for pinters, not phone.
-        # After installing it I still couldn't connect my M-31.
       mtools # For `mlabel`, for relabeling a drive
       diff-so-fancy
 
@@ -154,16 +91,9 @@
       nushell
       steam-run # To run standalone binaries, e.g. Lumatone Editor
 
-      # Java
-        # gradle_4_10 # Builds Java code. Used by SmSn.
-        #             # The latest one, 5.6.1, is just called "gradle".
-        #             # I'm using 4 because SmSn won't build with gradle 5.
-        # maven # a build tool
       erlang
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
-
-    # ponyc # like Erlang but with stricter typing, maybe?
 
         ### Python \ programming languages ###
         ######################################
@@ -190,8 +120,6 @@
       libmemcached # C/C++ library. Requirement for Agora.
       libssh2      # a C library needed by Lumatone
       purescript
-      # spago # a PureScript build tool.
-              # Broke on nixpks unstable after nixpkgs 21.11
       nodejs-18_x
       nodePackages.typescript
 
@@ -202,8 +130,6 @@
       zlib
       zlib.dev
       haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
-      # haskellPackages.hasktorch
-        # Can't build, because the backprop package is marked as broken.
 
       # I hoped these next two would let me build a new Stack project
       # (stack new, cd, stack build) but I still get the error
@@ -216,24 +142,11 @@
       jack2
       haskellPackages.SDL  # a sound library
       haskellPackages.sdl2 # another version of that
-
-      # Didn't work. Installed instead by ./imperative.sh
-        # haskellPackages.vivid
-        # haskellPackages.vivid-supercollider
-        # haskellPackages.vivid-osc
-
-      # scala
-        # scala
-        # sbt   # scala build tool
       sqlite
       zsh
 
       ### graphics|photo|video ###
       ###################
-      # Image to text.
-        # tesseract4 # Google OCR. Too huge to keep.
-        # ocrad # Gnu OCR. Too huge to keep.
-        # tabula # extract tables from PDFs
       xdotool      # "fakes keyboard and mouse input, among other things"
       gimp         # manipulate images
       ghostscript  # manipulate images
@@ -246,8 +159,6 @@
       libsForQt5.okular
       vlc
       capture              # screen capture (video, I think)
-      # qscreenshot        # shows up as a KDE menu widget
-        # Not needed -- I've already got Spectacle installed (presss Print).
       screenkey            # show what I'm typing on the screen
       lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
       simplescreenrecorder # includes mic input
@@ -263,10 +174,6 @@
       tmux
       acpi # show battery status
       gnome.gnome-disk-utility
-      # eternal-terminal # Better than Mosh, but
-                         # the server doesn't work on Amazon Linux.
-      # mosh # An ssh connection robust to interruptions, but
-             # the server doesn't work on Amazon Linux.
 
       ### big | sketchy | unfree ###
       ##############################
@@ -275,10 +182,6 @@
       brave
       google-chrome
       spotify
-      # skypeforlinux
-      # teams
-      # zoom-us
-
       #### audio, important ###
       #########################
       a2jmidid
