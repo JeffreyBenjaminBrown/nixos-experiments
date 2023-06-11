@@ -184,7 +184,6 @@
 
       ### big | sketchy | unfree ###
       ##############################
-      adobe-reader
       libreoffice-fresh
       firefox
       brave
