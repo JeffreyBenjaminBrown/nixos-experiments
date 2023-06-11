@@ -90,7 +90,6 @@
       docker-compose
       libcgroup # control the CPU consumption of process hierarchies
       nushell
-      steam-run # To run standalone binaries, e.g. Lumatone Editor
 
       # to build thumbkey (Android keyboard)
       #
