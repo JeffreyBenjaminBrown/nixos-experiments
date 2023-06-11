@@ -92,6 +92,13 @@
       nushell
       steam-run # To run standalone binaries, e.g. Lumatone Editor
 
+      # to build thumbkey (Android keyboard)
+      #
+      # gradle
+      # kotlin
+      # android-studio
+      # androidenv.androidPkgs_9_0.androidsdk
+
       erlang
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
@@ -125,7 +132,6 @@
       ghc
       cabal-install
 
-      darcs
       zlib
       zlib.dev
       haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
@@ -176,6 +182,7 @@
 
       ### big | sketchy | unfree ###
       ##############################
+      adobe-reader
       libreoffice-fresh
       firefox
       brave
