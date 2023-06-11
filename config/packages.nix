@@ -95,7 +95,7 @@
       # to build thumbkey (Android keyboard)
       #
       # gradle
-      # kotlin
+      # kotlin  # Compiles to java, javascript, or native binary (many OSs).
       # android-studio
       # androidenv.androidPkgs_9_0.androidsdk
 
