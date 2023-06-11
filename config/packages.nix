@@ -110,12 +110,14 @@
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
+        python310Packages.pytest
         python310Packages.mypy
         python310Packages.numpy
         python310Packages.pandas
         python310Packages.pip
         python310Packages.setuptools
         python310Packages.wheel
+        python310Packages.torch
         virtualenv
         coconut
 
@@ -211,6 +213,8 @@
       fftw           #            Needed for sc3-plugins.
       fftwFloat      # Maybe also needed for sc3-plugins?
       fftwLongDouble # Maybe also needed for sc3-plugins?
+      # vscode   # This or vscodium might be needed for wagsi
+      # vscodium # This or vscode   might be needed for wagsi
 
       #### audio, maybe gratuitous, selected from magnetophon's config: ###
       #### https://github.com/magnetophon/nixosConfig ######################
@@ -236,6 +240,7 @@
       mda_lv2
       x42-plugins
       zam-plugins
+      # infamousPlugins # broke Feb 2023, never used to my knowledge
       lsp-plugins
       kapitonov-plugins-pack
       magnetophonDSP.pluginUtils
