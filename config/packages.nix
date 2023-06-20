@@ -172,6 +172,7 @@
 
       ### misc ###
       ############
+      arianna
       beep # since `tput bel` stopped working
       aspell aspellDicts.en aspellDicts.es
       killall
