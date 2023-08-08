@@ -6,7 +6,7 @@
 # epkgs.melpaPackages to the epkgs.melpaStablePackages sections might help
 # (that is, of course, if they're available in Melpa Stable).
 
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs, ... }:
 
 let
   myEmacs = pkgs.emacs;
