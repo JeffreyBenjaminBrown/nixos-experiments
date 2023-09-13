@@ -185,8 +185,8 @@
       ### big | sketchy | unfree ###
       ##############################
       libreoffice-fresh
+      unoconv # shell script for converting docs using libreoffice
       firefox
-      brave
       google-chrome
       spotify
 
