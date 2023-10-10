@@ -2,7 +2,7 @@
 
 {
   system.autoUpgrade = {
-    enable = true;
+    enable = false;
     dates = "02:00";
     # allowReboot = true;
   };
