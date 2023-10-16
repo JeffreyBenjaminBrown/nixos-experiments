@@ -28,6 +28,7 @@ in
       magit        # ; Integrate git <C-x g>
       use-package
       perspective
+      yasnippet
 
     ]) ++ (with epkgs.melpaPackages; [
       nix-mode
