@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   system.autoUpgrade = {
@@ -76,7 +76,6 @@
   };
 
   services.xserver.libinput.enable = true; # touchpad support
-    # (Enabled by default in most `desktopManager`s.)
 
   time.timeZone = "America/Bogota";
 

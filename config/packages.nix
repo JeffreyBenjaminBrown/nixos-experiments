@@ -1,9 +1,9 @@
-{ config, pkgs, nixpkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages =
-    with pkgs;
-    [
+    with pkgs; [
+
       ### editors ###
       ###############
       (import ./emacs.nix { inherit pkgs; })
@@ -88,7 +88,13 @@
       docker
       docker-compose
       nushell
-      steam-run # To run standalone binaries, e.g. Lumatone Editor
+
+      # to build thumbkey (Android keyboard)
+      #
+      # gradle
+      # kotlin  # Compiles to java, javascript, or native binary (many OSs).
+      # android-studio
+      # androidenv.androidPkgs_9_0.androidsdk
 
       # java-related
       gradle
@@ -105,12 +111,14 @@
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
+        python310Packages.pytest
         python310Packages.mypy
         python310Packages.numpy
         python310Packages.pandas
         python310Packages.pip
         python310Packages.setuptools
         python310Packages.wheel
+        python310Packages.torch
         virtualenv
         coconut
 
@@ -127,7 +135,6 @@
       ghc
       cabal-install
 
-      darcs
       zlib
       zlib.dev
       haskellPackages.zlib # Needed by Hackage's AWS lib, I guess?
@@ -167,6 +174,7 @@
 
       ### misc ###
       ############
+      arianna
       beep # since `tput bel` stopped working
       aspell aspellDicts.en aspellDicts.es
       killall
@@ -179,8 +187,8 @@
       ### big | sketchy | unfree ###
       ##############################
       libreoffice-fresh
+      unoconv # shell script for converting docs using libreoffice
       firefox
-      brave
       google-chrome
       spotify
     ];
