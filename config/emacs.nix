@@ -47,6 +47,8 @@ in
       psci            # PureScript repl
       purescript-mode # PureScript
 
+      broadcast # link cursors ("points") and edits across buffers
+
       # New (2021-03-23), and (to me) experimental.
       mwim
       block-nav
