@@ -28,6 +28,7 @@ in
       magit        # ; Integrate git <C-x g>
       use-package
       perspective
+      yasnippet
 
     ]) ++ (with epkgs.melpaPackages; [
       nix-mode
@@ -45,6 +46,8 @@ in
       psc-ide         # PureScript
       psci            # PureScript repl
       purescript-mode # PureScript
+
+      broadcast # link cursors ("points") and edits across buffers
 
       # New (2021-03-23), and (to me) experimental.
       mwim
