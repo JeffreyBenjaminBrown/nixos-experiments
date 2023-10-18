@@ -66,6 +66,7 @@
       tree
       exiftool
       file # shows types of files
+      go-mtpfs # to mount Android filesystem
       libsForQt5.dolphin # A             file manager.
       lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
       agrep # fuzzy search!
