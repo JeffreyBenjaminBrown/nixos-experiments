@@ -200,9 +200,9 @@
       SDL
       SDL2
       carla
-      jack_capture
+      # jack_capture # record speaker output to file
       qjackctl
-      cadence
+      # cadence      # broken because jack_capture is
       flac
       sox
       ladspaH
