@@ -195,6 +195,7 @@
       #### audio, important ###
       #########################
       a2jmidid
+      audacity # good for editing samples
       ardour
       reaper
       SDL
