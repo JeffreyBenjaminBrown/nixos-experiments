@@ -22,23 +22,29 @@
   virtualisation.docker.enable = true;
   environment.homeBinInPath = true; # that is, ~/bin
 
-  networking.hostName = "jbb-hp17";
+  networking.hostName = "jbb-hp24-oled";
   networking.networkmanager.enable = true;
-  networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = true;
-  networking.interfaces.wlp2s0.useDHCP = true;
-  # networking.wireless.enable = true;
-    # conflicts with networking.networkmanager
 
   services.printing.enable = true; # Enable CUPS
 
-  # Enable sound
+  # Sound (default NixOS 23.11 installer options)
   sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "caps:escape";
+  services.xserver = { # X11
+    enable = true;
+    layout = "us";
+    xkbOptions = "caps:escape";
+    xkbVariant = "";
+  };
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -123,6 +129,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. `man configuration.nix`
   # or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11";
+  system.stateVersion = "23.11";
   # PITFALL: Read preceding comment.
 }
