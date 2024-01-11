@@ -92,6 +92,7 @@
       docker-compose
       libcgroup # control the CPU consumption of process hierarchies
       nushell
+      libnotify # I use this for the `notify-send` command.
 
       # to build thumbkey (Android keyboard)
       #
