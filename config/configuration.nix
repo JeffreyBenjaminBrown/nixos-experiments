@@ -27,7 +27,11 @@
 
   services.printing.enable = true; # Enable CUPS
 
-  # Sound (default NixOS 23.11 installer options)
+  # ---- Sound ----
+  # These are *almost* the default NixOS 23.11 installer options.
+  # The exception is services.pipewire.pulse.enable,
+  # which I have made "false".
+  # So far, nothing seems to mind -- not even Chrome.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -35,7 +39,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
+    pulse.enable = false;
     jack.enable = true;
   };
 
