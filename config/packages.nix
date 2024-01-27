@@ -86,6 +86,11 @@
 
       ### programming languages, or close neighbors ###
       #################################################
+      vscode
+      roslyn # roslyn compiles microsoft stuff --
+             # Visual Basic, C# (and .NET?)
+      mono   # mono *also* compiles microsoft stuff.
+
       awscli
       calc
       docker
