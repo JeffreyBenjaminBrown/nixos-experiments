@@ -43,6 +43,11 @@
     jack.enable = true;
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   services.xserver = { # X11
     enable = true;
     layout = "us";

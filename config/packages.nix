@@ -87,9 +87,10 @@
       ### programming languages, or close neighbors ###
       #################################################
       vscode
-      roslyn # roslyn compiles microsoft stuff --
-             # Visual Basic, C# (and .NET?)
-      mono   # mono *also* compiles microsoft stuff.
+      dotnet-sdk # dotnet  *also* compiles microsoft stuff.
+      mono       # mono    *also* compiles microsoft stuff.
+      msbuild    # msbuild *also* compiles microsoft stuff.
+      roslyn     # roslyn  *also* compiles microsoft stuff.
 
       awscli
       calc
@@ -169,6 +170,7 @@
       ffmpeg-full  # video tools, not required by kdenlive but recommended
       pdftk        # manipulate pdfs
       qpdf         # manipulate pdfs
+      xournal      # manipulate pdfs
       poppler_utils # for pdfunite, among others
       libsForQt5.okular
       vlc
