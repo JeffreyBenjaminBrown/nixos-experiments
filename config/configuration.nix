@@ -34,10 +34,17 @@
   # Enable sound
   sound.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "caps:escape";
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  services.xserver = { # X11
+    enable = true;
+    layout = "us";
+    xkbOptions = "caps:escape";
+    xkbVariant = "";
+  };
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;

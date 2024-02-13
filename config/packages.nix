@@ -86,6 +86,12 @@
 
       ### programming languages, or close neighbors ###
       #################################################
+      vscode
+      # vscodium # This or vscode   might be needed for wagsi
+      dotnet-sdk # dotnet  *also* compiles microsoft stuff.
+      mono       # mono    *also* compiles microsoft stuff.
+      msbuild    # msbuild *also* compiles microsoft stuff.
+      roslyn     # roslyn  *also* compiles microsoft stuff.
       awscli
       calc
       docker
@@ -164,6 +170,7 @@
       ffmpeg-full  # video tools, not required by kdenlive but recommended
       pdftk        # manipulate pdfs
       qpdf         # manipulate pdfs
+      xournal      # manipulate pdfs
       poppler_utils # for pdfunite, among others
       libsForQt5.okular
       vlc
@@ -216,8 +223,6 @@
       fftw           #            Needed for sc3-plugins.
       fftwFloat      # Maybe also needed for sc3-plugins?
       fftwLongDouble # Maybe also needed for sc3-plugins?
-      # vscode   # This or vscodium might be needed for wagsi
-      # vscodium # This or vscode   might be needed for wagsi
 
       #### audio, maybe gratuitous, selected from magnetophon's config: ###
       #### https://github.com/magnetophon/nixosConfig ######################
