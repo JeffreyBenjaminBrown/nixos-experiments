@@ -173,7 +173,6 @@
       xournal      # manipulate pdfs
       poppler_utils # for pdfunite, among others
       libsForQt5.okular
-      foliate # an eBook reader, supposedly with font control
       vlc
       capture              # screen capture (video, I think)
       screenkey            # show what I'm typing on the screen
