@@ -118,14 +118,14 @@
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
-        python310Packages.pytest
-        python310Packages.mypy
-        python310Packages.numpy
-        python310Packages.pandas
-        python310Packages.pip
-        python310Packages.setuptools
-        python310Packages.wheel
-        python310Packages.torch
+        python311Packages.pytest
+        python311Packages.mypy
+        python311Packages.numpy
+        python311Packages.pandas
+        python311Packages.pip
+        python311Packages.setuptools
+        python311Packages.wheel
+        python311Packages.torch
         virtualenv
         coconut
 
@@ -136,7 +136,7 @@
       libmemcached # C/C++ library. Requirement for Agora.
       libssh2      # a C library needed by Lumatone
       purescript
-      nodejs-18_x
+      nodejs_21
       nodePackages.typescript
 
       ghc
@@ -173,6 +173,7 @@
       xournal      # manipulate pdfs
       poppler_utils # for pdfunite, among others
       libsForQt5.okular
+      foliate # an eBook reader, supposedly with font control
       vlc
       capture              # screen capture (video, I think)
       screenkey            # show what I'm typing on the screen
