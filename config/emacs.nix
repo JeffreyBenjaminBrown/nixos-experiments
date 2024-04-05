@@ -28,6 +28,7 @@ in
       magit        # ; Integrate git <C-x g>
       use-package
       perspective
+      ripgrep
       yasnippet
 
     ]) ++ (with epkgs.melpaPackages; [
