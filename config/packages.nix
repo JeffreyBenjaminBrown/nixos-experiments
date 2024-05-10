@@ -141,6 +141,7 @@
 
       ghc
       cabal-install
+      idris2
 
       zlib
       zlib.dev
