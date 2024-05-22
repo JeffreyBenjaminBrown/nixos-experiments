@@ -84,6 +84,11 @@
       xorg.xev # to view keycodes corresponding keyboard keys
       xorg.xmodmap # to remap keycodes (in ~/.xmodmap)
 
+#      # These are both to read an iPhone. See
+#      #   https://nixos.wiki/wiki/IOS
+#      libimobiledevice
+#      ifuse
+
       ### programming languages, or close neighbors ###
       #################################################
       vscode
@@ -118,14 +123,15 @@
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
-        python311Packages.pytest
         python311Packages.mypy
         python311Packages.numpy
         python311Packages.pandas
         python311Packages.pip
+        python311Packages.pytest
         python311Packages.setuptools
-        python311Packages.wheel
         python311Packages.torch
+        python311Packages.wheel
+        jupyter # ipython and other stuff
         virtualenv
         coconut
 

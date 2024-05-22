@@ -7,6 +7,10 @@
     # allowReboot = true;
   };
 
+#  # I'm adding this so I can read an iPhone; see
+#  # https://nixos.wiki/wiki/IOS
+#  services.usbmuxd.enable = true;
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
