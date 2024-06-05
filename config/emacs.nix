@@ -26,9 +26,10 @@ in
       go-mode
       json-mode
       magit        # ; Integrate git <C-x g>
-      use-package
       perspective
       ripgrep
+      typescript-mode
+      use-package
       yasnippet
 
     ]) ++ (with epkgs.melpaPackages; [

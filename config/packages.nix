@@ -118,19 +118,19 @@
 
         ### Python \ programming languages ###
         ######################################
-        python3
+        python312
 
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
-        python311Packages.mypy
-        python311Packages.numpy
-        python311Packages.pandas
-        python311Packages.pip
-        python311Packages.pytest
-        python311Packages.setuptools
-        python311Packages.torch
-        python311Packages.wheel
+        python312Packages.mypy
+        python312Packages.numpy
+        python312Packages.pandas
+        python312Packages.pip
+        python312Packages.pytest
+        python312Packages.setuptools
+        python312Packages.torch
+        python312Packages.wheel
         jupyter # ipython and other stuff
         virtualenv
         coconut
@@ -142,8 +142,13 @@
       libmemcached # C/C++ library. Requirement for Agora.
       libssh2      # a C library needed by Lumatone
       purescript
-      nodejs_21
+      # spago # purescript package manager, marked broken
+      nodejs_22
+      typescript
       nodePackages.typescript
+      nodePackages.webpack
+      nodePackages.webpack-cli
+      esbuild
 
       ghc
       cabal-install

@@ -54,13 +54,15 @@
 
   services.xserver = { # X11
     enable = true;
-    layout = "us";
-    xkbOptions = "caps:escape";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      options = "caps:escape";
+      variant = "";
+    };
   };
 
   # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Select internationalisation properties.
@@ -99,7 +101,7 @@
     keyMap = "us";
   };
 
-  services.xserver.libinput.enable = true; # touchpad support
+  services.libinput.enable = true; # touchpad support
 
   time.timeZone = "America/Bogota";
 
@@ -122,8 +124,19 @@
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "gtk2"; # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
     enableSSHSupport = true;
+
+    # pinentryPackage = lib.mkForce pkgs.pinentry-gtk2;
+    # I first put this here as a result of the discussion at
+    # https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/2
+    # At that time the option was called `pinentryFlavor`
+    # rather than `pinentryPackage`,
+    # and it only needed a string like "gtk2"
+    # rather than a `lib.mkForce` statement, which was suggested at
+    # https://discourse.nixos.org/t/help-with-pinentrypackage/41393/7
+    # I haven't been able to get it to work,
+    # and I can't remember why I needed it once,
+    # so I'll just comment it out for now.
   };
 
   # Use the systemd-boot EFI boot loader.
