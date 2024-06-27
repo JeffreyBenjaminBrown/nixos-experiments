@@ -23,7 +23,14 @@
     { EDITOR = "mg"; };
 
   nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   environment.homeBinInPath = true; # that is, ~/bin
 
   networking.hostName = "jbb-hp24-oled";
