@@ -127,6 +127,7 @@
         python312Packages.numpy
         python312Packages.pandas
         python312Packages.pip
+        python312Packages.pygame
         python312Packages.pytest
         python312Packages.setuptools
         python312Packages.torch
@@ -211,6 +212,7 @@
       firefox
       google-chrome
       spotify
+      teams-for-linux # unofficial Microsoft Teams client
 
       #### audio, important ###
       #########################
