@@ -38,10 +38,12 @@
       borgbackup
       rclone # sync a clone to a (big commercial) cloud
       encfs
-      pandoc
       dos2unix
+      pandoc
       corefonts # to build Mikhal's code, which hasn't worked yet
-      lmodern # pandoc needs this to convert .md to .pdf
+      groff # pandoc said it needs this to convert .md to .pdf
+      lmodern      # pandoc said it needs this for the same reason
+      texliveSmall # pandoc said it needs this for the same reason
       mtools # For `mlabel`, for relabeling a drive
       diff-so-fancy
 

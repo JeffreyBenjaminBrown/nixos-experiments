@@ -25,10 +25,11 @@
   nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
   virtualisation.docker = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    # Just run `docker exec -u 0` to get around this stuff.
+    #rootless = {
+    #  enable = true;
+    #  setSocketVariable = true;
+    #};
   };
 
   environment.homeBinInPath = true; # that is, ~/bin
