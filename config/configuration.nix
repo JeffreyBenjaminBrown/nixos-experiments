@@ -32,6 +32,8 @@
     #};
   };
 
+  powerManagement.enable = true;
+
   environment.homeBinInPath = true; # that is, ~/bin
 
   networking.hostName = "jbb-hp24-oled";

@@ -215,6 +215,8 @@
       google-chrome
       spotify
       teams-for-linux # unofficial Microsoft Teams client
+      winetricks
+      wineWowPackages.staging
 
       #### audio, important ###
       #########################
@@ -234,6 +236,8 @@
       faust # for Karya
       supercollider-with-sc3-plugins
       vmpk # virtual MIDI keyboard
+      yabridge # run VSTs from Wine in a Linux-native VST host
+      yabridgectl
 
       #### Audio
       fftw           #            Needed for sc3-plugins.
