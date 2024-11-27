@@ -75,6 +75,7 @@
       ripgrep # "rg"
       psmisc # Tools that use the proc filesystem,
              # including fuser, killall, pstree.
+      anki-bin
 
       ### explore system ##
       #####################
@@ -193,7 +194,7 @@
       screenkey            # show what I'm typing on the screen
       lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
       simplescreenrecorder # includes mic input
-      gnome.cheese
+      cheese
 
       ### misc ###
       ############
@@ -205,7 +206,7 @@
       gnumeric
       tmux
       acpi # show battery status
-      gnome.gnome-disk-utility
+      gnome-disk-utility
 
       ### big | sketchy | unfree ###
       ##############################
@@ -240,6 +241,7 @@
       yabridgectl
 
       #### Audio
+      alsa-utils
       fftw           #            Needed for sc3-plugins.
       fftwFloat      # Maybe also needed for sc3-plugins?
       fftwLongDouble # Maybe also needed for sc3-plugins?
@@ -274,7 +276,6 @@
       lsp-plugins
       kapitonov-plugins-pack
       magnetophonDSP.pluginUtils
-      distrho
       eq10q
       fomp
       tap-plugins

@@ -46,7 +46,6 @@
   # The exception is services.pipewire.pulse.enable,
   # which I have made "false".
   # So far, nothing seems to mind -- not even Chrome.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
