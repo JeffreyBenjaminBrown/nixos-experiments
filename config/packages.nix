@@ -95,10 +95,17 @@
       ### programming languages, or close neighbors ###
       #################################################
       vscode
-      dotnet-sdk # dotnet  *also* compiles microsoft stuff.
-      mono       # mono    *also* compiles microsoft stuff.
-      msbuild    # msbuild *also* compiles microsoft stuff.
-      roslyn     # roslyn  *also* compiles microsoft stuff.
+
+      # Dotnet is inevaluable and marked as insecure lately.
+      # If I disable only dotnet-sdk, I still get warned about it.
+      # If I disable all of the below, I don't.
+      # So that might be overkill, but until I need dotnet again,
+      # it works.
+      #
+      # mono       # mono    *also* compiles microsoft stuff.
+      # msbuild    # msbuild *also* compiles microsoft stuff.
+      # roslyn     # roslyn  *also* compiles microsoft stuff.
+      # dotnet-sdk # dotnet  *also* compiles microsoft stuff,
 
       awscli
       calc
