@@ -161,7 +161,16 @@
       nodePackages.webpack-cli
       esbuild
 
-      ghc
+      # When I disabled ghc, it meant version 9.6.
+      # I never tried version 9.8, which has three sub-versions.
+      # Instead I skipped straight to 9.10, which only has 1,
+      # and therefore might not be stable.
+      # If it gives me problems, try backtracking to 9.8.3.
+      # (So far all the code I've tried compiles with it.)
+      #
+      # ghc
+      # haskellPackages.ghc_9_10_1 # failed
+      haskell.compiler.ghc910
       cabal-install
       idris2
 
