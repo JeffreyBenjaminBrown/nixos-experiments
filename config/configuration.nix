@@ -19,8 +19,16 @@
       # ./emacs.nix # This is imported from packages.nix, not here.
     ];
 
-  environment.variables = # customize Bash (and other stuff?)
-    { EDITOR = "mg"; };
+  environment = {
+    # The `pathsToLink` and `LV2_PATH` code here is from polygon:
+    # https://discourse.nixos.org/t/manually-installed-audio-plugins-found-but-nix-built-ones-not-found/57149/2
+    pathsToLink = [
+      "/lib/vst2" "/lib/vst3" "/lib/clap" "lib/lv2" ];
+    variables = {
+      # LV2_PATH = "/run/current-system/sw/lib/lv2";
+      EDITOR = "mg"; };
+    homeBinInPath = true; # that is, ~/bin
+  };
 
   nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
   virtualisation.docker = {
@@ -33,8 +41,6 @@
   };
 
   powerManagement.enable = true;
-
-  environment.homeBinInPath = true; # that is, ~/bin
 
   networking.hostName = "jbb-hp24-oled";
   networking.networkmanager.enable = true;

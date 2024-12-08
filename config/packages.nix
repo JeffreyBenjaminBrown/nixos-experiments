@@ -264,36 +264,47 @@
       # vscode   # This or vscodium might be needed for wagsi
       # vscodium # This or vscode   might be needed for wagsi
 
-      #### audio, maybe gratuitous, selected from magnetophon's config: ###
-      #### https://github.com/magnetophon/nixosConfig ######################
-      #####################################################################
-      jack_oscrolloscope
-      jackmeter
-      jalv
-      lilv
-      liblo
-      graphviz # why is this here?
-      jaaa # signal analyzer
-      japa # psychoacoustic signal analyzer
-      sooperlooper
-      squishyball # for A/B testing. Not clearly audio software.
-      shntool # view and modify WAVE files
-      x42-plugins # level meters
-      ladspa-sdk
-      qmidinet # "a midi network gateway"
+      (symlinkJoin {
 
-      # some LV2 plugins (e.g. guitar effects)
-      gxplugins-lv2
-      swh_lv2
-      mda_lv2
-      x42-plugins
-      zam-plugins
-      # infamousPlugins # broke Feb 2023, never used to my knowledge
-      lsp-plugins
-      kapitonov-plugins-pack
-      magnetophonDSP.pluginUtils
-      eq10q
-      fomp
-      tap-plugins
+        name = "jbb-plugins";
+        paths = [
+          drumgizmo
+
+          #### Below:                                       ########
+          ####   audio, maybe gratuitous,                   ########
+          ####   selected from magnetophon's config:        ########
+          ####   https://github.com/magnetophon/nixosConfig ########
+          ##########################################################
+
+          jack_oscrolloscope
+          jackmeter
+          jalv
+          lilv
+          liblo
+          graphviz # why is this here?
+          jaaa # signal analyzer
+          japa # psychoacoustic signal analyzer
+          sooperlooper
+          squishyball # for A/B testing. Not clearly audio software.
+          shntool # view and modify WAVE files
+          x42-plugins # level meters
+          ladspa-sdk
+          qmidinet # "a midi network gateway"
+
+          # some LV2 plugins (e.g. guitar effects)
+          gxplugins-lv2
+          swh_lv2
+          mda_lv2
+          x42-plugins
+          zam-plugins
+          # infamousPlugins # broke Feb 2023, never used to my knowledge
+          lsp-plugins
+          kapitonov-plugins-pack
+          magnetophonDSP.pluginUtils
+          eq10q
+          fomp
+          tap-plugins
+        ];
+      })
     ];
 }
