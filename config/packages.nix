@@ -187,6 +187,8 @@
       haskellPackages.hasktags
       haskellPackages.jack
       jack2
+      libjack2
+      jack-example-tools
       haskellPackages.SDL  # a sound library
       haskellPackages.sdl2 # another version of that
       sqlite

@@ -7,9 +7,9 @@
     # allowReboot = true;
   };
 
-#  # I'm adding this so I can read an iPhone; see
-#  # https://nixos.wiki/wiki/IOS
-#  services.usbmuxd.enable = true;
+  #  # I added this so I can read an iPhone; see
+  #  # https://nixos.wiki/wiki/IOS
+  #  services.usbmuxd.enable = true;
 
   imports =
     [ # Include the results of the hardware scan.
@@ -47,20 +47,6 @@
 
   services.printing.enable = true; # Enable CUPS
 
-  # ---- Sound ----
-  # These are *almost* the default NixOS 23.11 installer options.
-  # The exception is services.pipewire.pulse.enable,
-  # which I have made "false".
-  # So far, nothing seems to mind -- not even Chrome.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = false;
-    jack.enable = true;
-  };
 
   hardware.bluetooth = {
     enable = true;
@@ -133,7 +119,7 @@
       "audio"
       "jackaudio"
       "dialout" # to use the monome without root privileges
-      ];
+    ];
   };
 
   services.pcscd.enable = true;
