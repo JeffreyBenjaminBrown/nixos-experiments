@@ -62,9 +62,11 @@
     };
   };
 
-  # Enable the KDE Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # Use the XFCE Desktop Environment.
+  # PITFALL: The Wiki says this might need
+  #   nixpkgs.config.pulseaudio = true;
+  services.xserver.desktopManager.xfce.enable = true;
+  # sudo nixos-rebuild switch --profile-name XFCE_no_pulseaudio
 
   # Select internationalisation properties.
   i18n = {
