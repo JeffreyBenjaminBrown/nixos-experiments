@@ -25,7 +25,9 @@ with pkgs; {
       jack = {
         "10-clock-rate" = {
           "jack.properties" = {
-            "node.latency" = "128/48000";
+            # Last I remember, KDE could not handle 256
+            # when running both Pianoteq and Drumgizmo.
+            "node.latency" = "512/48000";
             "node.rate" = "1/48000";
           };
         };
@@ -38,7 +40,9 @@ with pkgs; {
               44100
               48000
             ];
-            "default.clock.quantum" = 128;
+            # Last I remember, KDE could not handle 256
+            # when running both Pianoteq and Drumgizmo.
+            "default.clock.quantum" = 512;
             "default.clock.min-quantum" = 16;
             "default.clock.max-quantum" = 8192;
           };
