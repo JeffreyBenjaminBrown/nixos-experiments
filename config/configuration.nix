@@ -47,7 +47,6 @@
 
   services.printing.enable = true; # Enable CUPS
 
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;

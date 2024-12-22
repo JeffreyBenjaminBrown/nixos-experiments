@@ -196,6 +196,7 @@
 
       ### graphics|photo|video ###
       ###################
+      xcalib       # to invert color (of entire screen), for xfce
       xdotool      # "fakes keyboard and mouse input, among other things"
       gimp         # manipulate images
       ghostscript  # manipulate images
