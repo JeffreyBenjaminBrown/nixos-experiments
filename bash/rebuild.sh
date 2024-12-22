@@ -1,4 +1,4 @@
 git checkout kde
-nixos-rebuild switch --profile-name KDE.buffer_128
+nixos-rebuild switch --profile-name KDE
 git checkout xfce
-nixos-rebuild switch --profile-name XFCE.buffer_128.no_pulseaudio
+nixos-rebuild switch --profile-name Xfce
