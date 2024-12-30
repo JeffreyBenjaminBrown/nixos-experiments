@@ -2,3 +2,4 @@
 .emacs.desktop*
 git-comment*
 custom-packages/libuv/libuv-clone
+config/network-secrets.nix
