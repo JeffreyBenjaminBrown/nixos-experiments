@@ -19,6 +19,8 @@
       # ./emacs.nix # This is imported from packages.nix, not here.
     ];
 
+  programs.steam.enable = true;
+
   environment = {
     # The `pathsToLink` and `LV2_PATH` code here is from polygon:
     # https://discourse.nixos.org/t/manually-installed-audio-plugins-found-but-nix-built-ones-not-found/57149/2
