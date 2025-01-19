@@ -23,7 +23,7 @@
       parted
       gparted
       ntfs3g # NTFS driver (e.g. for Windows hard drives)
-      archiver
+      # archiver # Marked as insecure as of 2025-01-19.
       zip
       p7zip
       unrar
