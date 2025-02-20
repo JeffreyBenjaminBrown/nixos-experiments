@@ -61,7 +61,7 @@
       rtorrent
       wget
       signal-desktop
-      # tdesktop # telegram
+      tdesktop # telegram
 
       ### exploring filetree ###
       ##########################
