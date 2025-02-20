@@ -5,8 +5,12 @@ sudo echo ""
 
 git checkout xfce
 sudo ./bash/copy.sh
-sudo nixos-rebuild switch --profile-name "Xfce___l___l___l___Xfce"
+sudo nixos-rebuild switch \
+     --keep-failed        \
+     --profile-name "Xfce___l___l___l___Xfce"
 
 git checkout kde
 sudo ./bash/copy.sh
-sudo nixos-rebuild switch --profile-name "KDE________________KDE"
+sudo nixos-rebuild switch \
+     --keep-failed        \
+     --profile-name "KDE________________KDE"
