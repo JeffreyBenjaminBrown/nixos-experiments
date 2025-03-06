@@ -107,7 +107,8 @@
       # roslyn     # roslyn  *also* compiles microsoft stuff.
       # dotnet-sdk # dotnet  *also* compiles microsoft stuff,
 
-      awscli
+      awscli2                    # AWS
+      ssm-session-manager-plugin # AWS
       calc
       docker
       docker-compose
