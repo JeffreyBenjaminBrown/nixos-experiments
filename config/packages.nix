@@ -59,6 +59,8 @@
       nmap
       plasma-nm
       rtorrent
+      remmina  # remote desktop (RDP, p for protocol) client
+      freerdp3 # remote desktop (RDP, p for protocol) client
       wget
       signal-desktop
       tdesktop # telegram
