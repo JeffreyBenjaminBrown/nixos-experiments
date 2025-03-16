@@ -45,6 +45,7 @@ in
         # https://discourse.nixos.org/t/emacs-python-mode-marked-as-broken-cant-rebuild-nixos-config/12674/2
       haskell-mode
       idris-mode # also in melpa-stable
+      rust-mode
       scala-mode
       psc-ide         # PureScript
       psci            # PureScript repl
