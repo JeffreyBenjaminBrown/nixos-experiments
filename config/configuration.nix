@@ -57,13 +57,12 @@
 
   services.printing.enable = true; # Enable CUPS
 
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
 
-  services.xserver = { # X11
+  services.xserver = { # X11. "Optional", per the wiki page on KDE: https://wiki.nixos.org/wiki/KDE
     enable = true;
     xkb = {
       layout = "us";
@@ -72,9 +71,10 @@
     };
   };
 
-  # Enable the KDE Desktop Environment.
+  # KDE
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Select internationalisation properties.
   i18n = {
