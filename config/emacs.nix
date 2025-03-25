@@ -79,6 +79,7 @@ in
       company
 
       org-roam
+      org-tidy # to hide properties drawers
       emacsql-sqlite
       ac-helm # autocomplete with Helm
       helm
