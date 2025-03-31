@@ -176,6 +176,8 @@
       haskell.compiler.ghc910
       cabal-install
       idris2
+      rustup # for rust
+      cargo  # for rust
 
       zlib
       zlib.dev
