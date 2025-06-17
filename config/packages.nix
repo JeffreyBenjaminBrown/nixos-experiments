@@ -43,7 +43,7 @@
       corefonts # to build Mikhal's code, which hasn't worked yet
       groff # pandoc said it needs this to convert .md to .pdf
       lmodern      # pandoc said it needs this for the same reason
-      texliveSmall # pandoc said it needs this for the same reason
+      texliveFull
       mtools # For `mlabel`, for relabeling a drive
       diff-so-fancy
 
@@ -128,6 +128,7 @@
       erlang
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
+      R
 
         ### Python \ programming languages ###
         ######################################
