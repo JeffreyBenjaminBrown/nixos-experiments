@@ -37,6 +37,7 @@ in
       native-complete # Tab-completion in *shell* buffers.
 
       neotree # wonderful visually branching file navigator
+      ess # Emacs Speaks Statistics: R, S, Julia, Stata, SAS, others
       elpy
       hide-lines
       markdown-mode
