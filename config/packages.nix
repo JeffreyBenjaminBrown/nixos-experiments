@@ -34,7 +34,7 @@
       gitMinimal
       nix-prefetch-git # to compute "the" sha256 of a git repo
       nixos-option
-      ark
+      kdePackages.ark
       borgbackup
       rclone # sync a clone to a (big commercial) cloud
       encfs
@@ -57,7 +57,7 @@
       element-desktop # for Matrix.org
       networkmanager
       nmap
-      plasma-nm
+      kdePackages.plasma-nm
       rtorrent
       remmina  # remote desktop (RDP, p for protocol) client
       freerdp3 # remote desktop (RDP, p for protocol) client
@@ -210,11 +210,11 @@
       gimp         # manipulate images
       ghostscript  # manipulate images
       imagemagick  # manipulate images
-      kdenlive     # video editor
-      ffmpeg-full  # video tools, not required by kdenlive but recommended
+      kdePackages.kdenlive # video editor
+      ffmpeg-full          # video tools, not required by kdenlive but recommended
       pdftk        # manipulate pdfs
       qpdf         # manipulate pdfs
-      xournal      # manipulate pdfs
+      xournalpp    # manipulate pdfs
       poppler_utils # for pdfunite, among others
       libsForQt5.okular
       vlc
@@ -226,7 +226,7 @@
 
       ### misc ###
       ############
-      arianna
+      kdePackages.arianna
       beep # since `tput bel` stopped working
       aspell aspellDicts.en aspellDicts.es
       killall

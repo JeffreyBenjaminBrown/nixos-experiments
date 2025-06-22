@@ -15,8 +15,10 @@ let
   emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
 
 in
-  emacsWithPackages (epkgs: (
-    with epkgs.melpaStablePackages; [
+  emacsWithPackages (epkgs:
+    [ epkgs.use-package
+      epkgs.sqlite3
+    ] ++ (with epkgs.melpaStablePackages; [
       # erlang # Won't't build; doesn't find Perl 5.
                # I even put a symlink called perl5 in ~/bin/,
                # which is part of my PATH.
@@ -29,7 +31,6 @@ in
       perspective
       ripgrep
       typescript-mode
-      use-package
       yasnippet
 
     ]) ++ (with epkgs.melpaPackages; [
@@ -80,7 +81,6 @@ in
       company
 
       org-roam
-      emacsql-sqlite
       ac-helm # autocomplete with Helm
       helm
       helm-company
