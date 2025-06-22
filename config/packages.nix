@@ -129,6 +129,9 @@
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
       R
+      rPackages.readxl
+      rPackages.openxlsx
+      rPackages.arrow
 
         ### Python \ programming languages ###
         ######################################
