@@ -81,6 +81,7 @@ in
       company
 
       org-roam
+      org-tidy # to hide properties drawers
       ac-helm # autocomplete with Helm
       helm
       helm-company
