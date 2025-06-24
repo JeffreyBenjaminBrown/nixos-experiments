@@ -17,7 +17,7 @@ let
 in
   emacsWithPackages (epkgs:
     [ epkgs.use-package
-      epkgs.sqlite3
+      # epkgs.sqlite3
     ] ++ (with epkgs.melpaStablePackages; [
       # erlang # Won't't build; doesn't find Perl 5.
                # I even put a symlink called perl5 in ~/bin/,
