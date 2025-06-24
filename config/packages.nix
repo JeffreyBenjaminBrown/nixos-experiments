@@ -62,7 +62,11 @@
       remmina  # remote desktop (RDP, p for protocol) client
       freerdp3 # remote desktop (RDP, p for protocol) client
       wget
-      signal-desktop
+      # signal-desktop # Broken on 25.05-stable.
+      #   Was fixed recently here:
+      #   https://github.com/nixos/nixpkgs/issues/418971
+      #   Should emrge to main soon enough.
+      #   Meanwhile there's the web browser interface.
       tdesktop # telegram
 
       ### exploring filetree ###
