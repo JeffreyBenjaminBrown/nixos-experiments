@@ -85,6 +85,7 @@
 
       ### explore system ##
       #####################
+      android-tools
       cpufrequtils
       pkg-config # lets packages know things about other packages
       dmidecode # to learn about system RAM
