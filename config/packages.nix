@@ -225,7 +225,8 @@
       capture              # screen capture (video, I think)
       screenkey            # show what I'm typing on the screen
       lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
-      simplescreenrecorder # includes mic input
+      # simplescreenrecorder # Screen record. Doesn't work on Wayland as of <2025-07-18 Fri>. Includes mic input.
+      obs-studio             # Screen record.
       cheese
 
       ### misc ###
