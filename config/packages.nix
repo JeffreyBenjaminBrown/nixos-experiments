@@ -182,7 +182,7 @@
       #
       # ghc
       # haskellPackages.ghc_9_10_1 # failed
-      haskell.compiler.ghc910
+      haskell.compiler.ghc9102
       cabal-install
       idris2
       rustup # for rust
