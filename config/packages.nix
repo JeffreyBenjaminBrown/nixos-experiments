@@ -101,7 +101,7 @@
 
       ### programming languages, or close neighbors ###
       #################################################
-      vscode
+      vscodium-fhs
 
       # Dotnet is inevaluable and marked as insecure lately.
       # If I disable only dotnet-sdk, I still get warned about it.
@@ -166,7 +166,7 @@
       libssh2      # a C library needed by Lumatone
       purescript
       # spago # purescript package manager, marked broken
-      nodejs_22
+      nodejs_24
       typescript
       nodePackages.typescript
       nodePackages.webpack
