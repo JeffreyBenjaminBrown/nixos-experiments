@@ -75,8 +75,8 @@
       exiftool
       file # shows types of files
       go-mtpfs # to mount Android filesystem
-      libsForQt5.dolphin # A             file manager.
-      lxqt.pcmanfm-qt    # A lightweight file manager with eject buttons.
+      kdePackages.dolphin # a file manager
+      lxqt.pcmanfm-qt     # a file manager
       agrep # fuzzy search!
       ripgrep # "rg"
       psmisc # Tools that use the proc filesystem,
@@ -221,7 +221,7 @@
       qpdf         # manipulate pdfs
       xournalpp    # manipulate pdfs
       poppler_utils # for pdfunite, among others
-      libsForQt5.okular
+      kdePackages.okular
       vlc
       capture              # screen capture (video, I think)
       screenkey            # show what I'm typing on the screen
@@ -261,7 +261,7 @@
       reaper
       SDL
       SDL2
-      carla
+      # carla # broken as of <2025-08-31 Sun>
       # jack_capture # record speaker output to file
       qjackctl
       # cadence      # broken because jack_capture is
