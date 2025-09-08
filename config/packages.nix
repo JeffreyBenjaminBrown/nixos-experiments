@@ -54,7 +54,7 @@
 
       ### networking, trafficking ###
       ###############################
-      element-desktop # for Matrix.org
+      # element-desktop # Big. For Matrix.org.
       networkmanager
       nmap
       kdePackages.plasma-nm
@@ -152,7 +152,6 @@
         python312Packages.pygame
         python312Packages.pytest
         python312Packages.setuptools
-        python312Packages.torch
         python312Packages.wheel
         jupyter # ipython and other stuff
         virtualenv
@@ -184,7 +183,6 @@
       # haskellPackages.ghc_9_10_1 # failed
       haskell.compiler.ghc9102
       cabal-install
-      idris2
       rustup # for rust
       cargo  # for rust
 
@@ -215,8 +213,6 @@
       gimp         # manipulate images
       ghostscript  # manipulate images
       imagemagick  # manipulate images
-      kdePackages.kdenlive # video editor
-      ffmpeg-full          # video tools, not required by kdenlive but recommended
       pdftk        # manipulate pdfs
       qpdf         # manipulate pdfs
       xournalpp    # manipulate pdfs
@@ -226,7 +222,6 @@
       capture              # screen capture (video, I think)
       screenkey            # show what I'm typing on the screen
       lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
-      # simplescreenrecorder # Screen record. Doesn't work on Wayland as of <2025-07-18 Fri>. Includes mic input.
       obs-studio             # Screen record.
       cheese
 
@@ -249,7 +244,6 @@
       firefox
       google-chrome
       spotify
-      teams-for-linux # unofficial Microsoft Teams client
       winetricks
       wineWowPackages.staging
 
@@ -257,7 +251,6 @@
       #########################
       a2jmidid
       audacity # good for editing samples
-      ardour
       reaper
       SDL
       SDL2
