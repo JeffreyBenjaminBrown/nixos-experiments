@@ -19,4 +19,5 @@ echo ""
 rebuild_branch "xfce" "Xfce____llllll____Xfce"
 rebuild_branch "kde"  "KDE________________KDE"
 
-git push origin kde xfce
+git push origin kde
+git push origin xfce

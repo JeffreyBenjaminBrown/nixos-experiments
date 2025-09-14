@@ -304,7 +304,7 @@
           zam-plugins
           # infamousPlugins # broke Feb 2023, never used to my knowledge
           lsp-plugins
-          kapitonov-plugins-pack
+          # kapitonov-plugins-pack  # broke Sept 2025, never used to my knowledge
           magnetophonDSP.pluginUtils
           eq10q
           fomp
