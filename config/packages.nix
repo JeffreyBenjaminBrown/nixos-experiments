@@ -55,6 +55,7 @@
       ### networking, trafficking ###
       ###############################
       # element-desktop # Big. For Matrix.org.
+      irssi # IRC client
       networkmanager
       nmap
       kdePackages.plasma-nm
