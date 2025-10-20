@@ -144,6 +144,7 @@
         python312Packages.mypy
         python312Packages.numpy
         python312Packages.pandas
+        python312Packages.pathspec
         python312Packages.pip
         python312Packages.pygame
         python312Packages.pytest
@@ -307,7 +308,7 @@
           lsp-plugins
           # kapitonov-plugins-pack  # broke Sept 2025, never used to my knowledge
           magnetophonDSP.pluginUtils
-          eq10q
+          # eq10q  # broke Oct 2025, and never used to my knowledge
           fomp
           tap-plugins
         ];
