@@ -276,6 +276,7 @@
         name = "jbb-plugins";
         paths = [
           drumgizmo
+          ffmpeg
 
           #### Below:                                       ########
           ####   audio, maybe gratuitous,                   ########
