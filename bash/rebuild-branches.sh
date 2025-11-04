@@ -4,7 +4,6 @@
 rebuild_branch () {
     local branch="$1"
     local profile_name="$2"
-
     git checkout "$branch"
     sudo ./bash/copy.sh
     sudo nixos-rebuild switch \

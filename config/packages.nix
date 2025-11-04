@@ -30,7 +30,7 @@
       unzip
       gzip
       gnupg # to encrypt, decrypt
-      pinentry # needed by gnupg
+      pinentry-curses # gnupg needs *some* pinentry. Trying this one.
       gitMinimal
       nix-prefetch-git # to compute "the" sha256 of a git repo
       nixos-option
@@ -60,15 +60,13 @@
       nmap
       kdePackages.plasma-nm
       rtorrent
-      remmina  # remote desktop (RDP, p for protocol) client
-      freerdp3 # remote desktop (RDP, p for protocol) client
       wget
       # signal-desktop # Broken on 25.05-stable.
       #   Was fixed recently here:
       #   https://github.com/nixos/nixpkgs/issues/418971
       #   Should emrge to main soon enough.
       #   Meanwhile there's the web browser interface.
-      tdesktop # telegram
+      telegram-desktop
 
       ### exploring filetree ###
       ##########################
@@ -218,7 +216,7 @@
       pdftk        # manipulate pdfs
       qpdf         # manipulate pdfs
       xournalpp    # manipulate pdfs
-      poppler_utils # for pdfunite, among others
+      poppler-utils # for pdfunite, among others
       kdePackages.okular
       vlc
       capture              # screen capture (video, I think)
