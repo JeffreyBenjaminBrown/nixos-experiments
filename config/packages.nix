@@ -163,8 +163,6 @@
       nodejs_24
       typescript
       nodePackages.typescript
-      nodePackages.webpack
-      nodePackages.webpack-cli
       esbuild
 
       # When I disabled ghc, it meant version 9.6.
