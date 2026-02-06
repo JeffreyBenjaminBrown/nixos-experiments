@@ -27,6 +27,7 @@ in
       # visual-fill-column # line wrap at word boundaries
       go-mode
       json-mode
+      lua-mode # Easier in Reaper than Python
       magit        # ; Integrate git <C-x g>
       perspective
       ripgrep

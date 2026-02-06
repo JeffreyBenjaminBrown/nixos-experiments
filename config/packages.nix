@@ -76,7 +76,7 @@
       go-mtpfs # to mount Android filesystem
       kdePackages.dolphin # a file manager
       lxqt.pcmanfm-qt     # a file manager
-      agrep # fuzzy search!
+      # agrep # fuzzy search!
       ripgrep # "rg"
       psmisc # Tools that use the proc filesystem,
              # including fuser, killall, pstree.
@@ -256,7 +256,7 @@
       faust # for Karya
       supercollider-with-sc3-plugins
       vmpk # virtual MIDI keyboard
-      yabridge # run VSTs from Wine in a Linux-native VST host
+      # yabridge # run VSTs from Wine in a Linux-native VST host
       yabridgectl
 
       #### Audio
