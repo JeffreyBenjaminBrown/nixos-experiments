@@ -295,7 +295,6 @@
           jaaa # signal analyzer
           japa # psychoacoustic signal analyzer
           sooperlooper
-          squishyball # for A/B testing. Not clearly audio software.
           shntool # view and modify WAVE files
           x42-plugins # level meters
           ladspa-sdk
