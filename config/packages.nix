@@ -90,8 +90,8 @@
       dmidecode # to learn about system RAM
       i2c-tools # includes decode-dimms
       pciutils # for lspci, to learn about sound card, per musnix readme
-      xorg.xev # to view keycodes corresponding keyboard keys
-      xorg.xmodmap # to remap keycodes (in ~/.xmodmap)
+      xev # to view keycodes corresponding keyboard keys
+      xmodmap # to remap keycodes (in ~/.xmodmap)
 
 #      # These are both to read an iPhone. See
 #      #   https://nixos.wiki/wiki/IOS
