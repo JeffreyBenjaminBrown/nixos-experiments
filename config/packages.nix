@@ -237,7 +237,7 @@
       google-chrome
       spotify
       winetricks
-      wineWowPackages.staging
+      wineWow64Packages.staging
 
       #### audio, important ###
       #########################
