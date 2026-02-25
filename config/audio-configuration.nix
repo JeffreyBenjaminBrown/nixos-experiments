@@ -16,8 +16,8 @@ with pkgs; {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = false;
-    jack.enable = true;
+    pulse.enable = true; # apps that use Pulse thereby use Pipewire
+    jack.enable = true; # apps that use Jack thereby use Pipewire
     extraConfig = {
       # The default JACK latency is 1024/48000.
       # This entire `extraConfig` was just to change that.
@@ -27,7 +27,7 @@ with pkgs; {
           "jack.properties" = {
             # Last I remember, KDE could not handle 256
             # when running both Pianoteq and Drumgizmo.
-            "node.latency" = "512/48000";
+            "node.latency" = "256/48000";
             "node.rate" = "1/48000";
           };
         };
@@ -42,8 +42,8 @@ with pkgs; {
             ];
             # Last I remember, KDE could not handle 256
             # when running both Pianoteq and Drumgizmo.
-            "default.clock.quantum" = 512;
-            "default.clock.min-quantum" = 16;
+            "default.clock.quantum" = 256;
+            "default.clock.min-quantum" = 32;
             "default.clock.max-quantum" = 8192;
           };
         };

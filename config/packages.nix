@@ -139,23 +139,23 @@
 
         ### Python \ programming languages ###
         ######################################
-        python312
+        python3
 
         # Some especially ornery or critical Python packages,
         # for which either I was unable to install via virtualenv,
         # or I thought it would be a bad idea.
-        python312Packages.mypy
-        python312Packages.numpy
-        python312Packages.pandas
-        python312Packages.pathspec
-        python312Packages.pip
-        python312Packages.pygame
-        python312Packages.pytest
-        python312Packages.setuptools
-        python312Packages.wheel
+        python3Packages.mypy
+        python3Packages.numpy
+        python3Packages.pandas
+        python3Packages.pathspec
+        python3Packages.pip
+        python3Packages.pygame
+        python3Packages.pytest
+        python3Packages.setuptools
+        python3Packages.wheel
         jupyter # ipython and other stuff
         virtualenv
-        coconut
+      # coconut -- Python with pattern matching, laziness, ADTs
 
       gcc
       glibc
