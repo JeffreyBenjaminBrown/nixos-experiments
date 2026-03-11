@@ -25,9 +25,8 @@ with pkgs; {
       jack = {
         "10-clock-rate" = {
           "jack.properties" = {
-            # Last I remember, KDE could not handle 256
-            # when running both Pianoteq and Drumgizmo.
-            "node.latency" = "256/48000";
+            # 2026 03 10, KDE could not handle 256 when running *only Pianoteq* (in Reaper) -- it crackled. But maybe XFCE could.
+            "node.latency" = "512/48000";
             "node.rate" = "1/48000";
           };
         };
@@ -40,9 +39,8 @@ with pkgs; {
               44100
               48000
             ];
-            # Last I remember, KDE could not handle 256
-            # when running both Pianoteq and Drumgizmo.
-            "default.clock.quantum" = 256;
+            # 2026 03 10, KDE could not handle 256 when running *only Pianoteq* (in Reaper) -- it crackled. But maybe XFCE could.
+            "default.clock.quantum" = 512;
             "default.clock.min-quantum" = 32;
             "default.clock.max-quantum" = 8192;
           };
