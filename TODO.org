@@ -1,0 +1,22 @@
+* try even lower latency audio settings
+** Here's how I dropped it from 512 to 256 samples
+@@ -27,7 +27,7 @@ with pkgs; {
+           "jack.properties" = {
+             # Last I remember, KDE could not handle 256
+             # when running both Pianoteq and Drumgizmo.
+-            "node.latency" = "512/48000";
++            "node.latency" = "256/48000";
+             "node.rate" = "1/48000";
+           };
+         };
+@@ -42,8 +42,8 @@ with pkgs; {
+             ];
+             # Last I remember, KDE could not handle 256
+             # when running both Pianoteq and Drumgizmo.
+-            "default.clock.quantum" = 512;
+-            "default.clock.min-quantum" = 16;
++            "default.clock.quantum" = 256;
++            "default.clock.min-quantum" = 32;
+             "default.clock.max-quantum" = 8192;
+           };
+         };

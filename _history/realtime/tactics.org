@@ -1,0 +1,209 @@
+#+TITLE: Tactics — Low-Latency Audio on NixOS RT Kernel
+#+DATE: 2026-03-14
+
+* Goal
+
+Run Reaper at 256/48000 (5.3ms latency) without crackles on an HP
+Raptor Lake laptop with musnix RT kernel (6.18.17 PREEMPT_RT), KDE
+Plasma 6 on X11, PipeWire with JACK bridge.
+
+* Observations
+
+** Audio path
+PipeWire's data-loop.0 thread is the single RT thread that drives
+ALL audio callbacks — including Reaper's pw-REAPER threads. Reaper
+itself does not manage RT scheduling when using the JACK backend;
+it relies on PipeWire/JACK to call it from an RT context.
+
+Reaper's own threads (reaper/mediaafx, reaper/livefx, pw-REAPER,
+etc.) all show TS (SCHED_OTHER). This is normal for JACK clients.
+
+** PipeWire RT priority
+data-loop.0 runs at RR 20 after a clean boot. 20 is the default
+rt.prio for libpipewire-module-rt. At 256/48000, this appears
+insufficient for heavy passages (many simultaneous notes/plugins).
+
+rtkit's MaxRealtimePriority was 20 (matching the observed priority).
+We raised it to 88 via security.rtkit.args. However, module-rt
+likely uses rlimits (PipeWire has RLIMIT_RTPRIO=99), not rtkit,
+and its default rt.prio is 20 regardless of the rtkit ceiling.
+
+** PipeWire RT breaks on restart
+PipeWire loses RT entirely (data-loop.0 goes from RR 20 to TS)
+after =systemctl --user restart pipewire=. This happens every time.
+Only a full reboot restores RT. Likely a module-rt initialization
+race or dependency on boot-time systemd state. This means:
+- Never restart PipeWire mid-session
+- Any PipeWire config change that triggers a restart needs a reboot
+
+** Crackles
+At 256/48000 with a dense passage (many simultaneous notes), Reaper
+crackles. PipeWire logs show xruns:
+
+#+begin_example
+pw.node: (alsa_output...) xrun ... waiting:18446744073699235481 process:22298
+#+end_example
+
+The astronomically large "waiting" value (near UINT64_MAX) indicates
+the node missed its deadline entirely — it didn't just run late,
+it wasn't scheduled in time.
+
+** Quantum
+512/48000 (10.7ms) had no crackles. 256/48000 (5.3ms) crackles on
+heavy passages. The boundary is somewhere between.
+
+** What launches Reaper matters
+Launching Reaper from the regular KDE desktop entry gives it
+RTPRIO=0 (cgroup 0::/). Launching from the "REAPER (RT)" desktop
+entry gives it RTPRIO=99 (cgroup under reaper-rt.service). After
+a clean reboot, KDE may put apps in systemd scopes (observed once
+with cgroup =app-cockos\x2dreaper@...=), but this isn't reliable.
+
+The RT wrapper makes an audible difference: crackles at a heavy
+passage without it, none with it (at the same quantum). This is
+surprising since Reaper's threads are all TS either way — the
+difference might be that the wrapper's LimitMEMLOCK=infinity
+prevents page faults, or that being under the user manager changes
+scheduling behavior subtly.
+
+* What we've done
+
+** Solved problems (since kde branch)
+| Problem                     | Root cause                           | Fix                                                       |
+|-----------------------------+--------------------------------------+-----------------------------------------------------------|
+| No audio (Dummy Output)     | i915 absent from RT kernel           | xe.force_probe=a7a0, softdep pre: xe                      |
+| Brightness keys broken      | Same — no GPU driver, no backlight   | Same fix                                                  |
+| Still on Wayland            | SDDM remembers last session          | defaultSession = "plasmax11", delete state.conf            |
+| CPU governor on powersave   | power-profiles-daemon overriding     | services.power-profiles-daemon.enable = false              |
+| WiFi gone                   | iwlwifi not auto-loading on RT kernel | boot.kernelModules = ["iwlwifi"]                          |
+| Reaper silence after rebuild | JACK connections not persisted       | Reconnect in QJackCtl (manual, each reboot)               |
+| Reaper RTPRIO=0 from KDE   | X11 KDE doesn't use systemd scopes   | REAPER (RT) desktop entry via systemd-run                 |
+| diagnose.sh paging          | systemctl/bootctl invoking pagers    | SYSTEMD_PAGER="", --no-pager on all commands              |
+
+** Things we tried that failed or were reverted
+| Attempt                                            | Result                                              |
+|----------------------------------------------------+-----------------------------------------------------|
+| extraConfig: second module-rt with rt.prio=88      | Module loaded twice, RT broke entirely (all TS)      |
+| context.properties: loop.rt-prio=88                | Not a valid property, no effect (still RR 20)        |
+| environment.etc pipewire.conf.d fragment            | Same problem as extraConfig (array appends, not merges) |
+| security.rtkit.args --max-realtime-priority=88     | WORKED! module-rt WAS using rtkit. data-loop.0 now RR 88     |
+| Restart PipeWire to pick up config                  | Always loses RT entirely until reboot                |
+| Disable KDE compositor                             | Helped with crackles but kills zoom + desktop overview |
+
+* What remains to try
+
+** DONE A: Raise PipeWire data-loop RT priority
+SOLVED by raising rtkit's MaxRealtimePriority to 88 via
+security.rtkit.args. module-rt uses rtkit (not direct rlimits)
+despite PipeWire having RLIMIT_RTPRIO=99. The rtkit ceiling of 20
+was the bottleneck. data-loop.0 now runs at RR 88 after clean boot.
+No crackles at 256/48000 on heavy passages.
+
+** B: Increase quantum to 384
+A middle ground: 384/48000 = 8ms. PipeWire supports non-power-of-2
+quantums. Try:
+
+#+begin_src nix
+"default.clock.quantum" = 384;
+# Also in jack.properties:
+"node.latency" = "384/48000";
+#+end_src
+
+Or keep quantum at 256 but raise max-quantum so PipeWire can
+adaptively buffer during heavy passages:
+
+#+begin_src nix
+"default.clock.quantum" = 256;
+"default.clock.min-quantum" = 256;
+"default.clock.max-quantum" = 2048;
+#+end_src
+
+** C: IRQ thread priorities
+The RT kernel runs hardware IRQs as schedulable threads. The audio
+IRQ thread (snd/sof) should have HIGHER priority than PipeWire's
+data-loop. If not, audio hardware interrupts get delayed.
+
+musnix.rtirq is configured with prioLow=0. Raising it:
+
+#+begin_src nix
+musnix.rtirq = {
+  enable = true;
+  nameList = "rtc0 snd";
+  resetAll = 1;
+  prioLow = 50;
+};
+#+end_src
+
+Diagnostic: =ps -eLo pid,tid,cls,rtprio,comm | grep -E 'snd|sof|irq'=
+to see current IRQ thread priorities.
+
+** D: CPU isolation
+Reserve CPU cores exclusively for audio:
+
+#+begin_src nix
+boot.kernelParams = [
+  # ... existing params ...
+  "isolcpus=14,15"       # keep cores 14-15 off the general scheduler
+  "nohz_full=14,15"      # disable timer ticks on isolated cores
+];
+#+end_src
+
+Then pin PipeWire and Reaper to those cores via taskset or systemd
+CPUAffinity. This eliminates contention from KDE, Firefox, etc.
+
+** E: ALSA backend in Reaper
+Switch Reaper from JACK to ALSA backend. In Reaper Preferences →
+Audio → Device, select ALSA and type =pipewire= in device fields.
+The ALSA backend has an explicit "RT Priority" field — Reaper
+manages its own RT threads (RR 65 observed from terminal launch).
+
+Advantages: Reaper threads become RT directly (not dependent on
+PipeWire's data-loop priority). Disadvantages: less flexible
+routing, potential conflicts with other PipeWire clients.
+
+** F: Reduce desktop overhead
+From kde-optimizations.org (most to least impactful):
+1. Disable compositor (Alt+Shift+F12) — but kills zoom/overview
+2. Disable Baloo file indexer
+3. Kill Firefox/Chrome during recording
+4. Disable all KDE animations (set to Instant)
+5. Disable notification sounds
+6. Use a lighter WM for recording (i3, sway)
+
+** G: Kernel config investigation
+Check musnix RT kernel config for audio-relevant settings:
+
+#+begin_src sh
+zcat /proc/config.gz | grep -E 'CONFIG_HZ[= ]|NO_HZ|PREEMPT'
+#+end_src
+
+Expected: CONFIG_HZ=1000, CONFIG_PREEMPT_RT=y.
+If CONFIG_HZ=250 or 100, audio latency suffers.
+
+** H: JACK auto-reconnection
+Currently, JACK connections in QJackCtl don't persist across
+reboots. Reaper goes silent until manually reconnected. Options:
+- QJackCtl "Patchbay" feature (saves/restores connections)
+- wireplumber rules to auto-connect Reaper ports
+- a2jmidid and other auto-connection scripts
+
+* Decision log
+
+| Date       | Decision                              | Rationale                                  |
+|------------+---------------------------------------+--------------------------------------------|
+| 2026-03-14 | Use xe, not i915                      | i915 not compiled in RT kernel             |
+| 2026-03-14 | X11, not Wayland                      | Can disable compositor; less CPU overhead   |
+| 2026-03-14 | Don't disable compositor               | Kills zoom + desktop overview              |
+| 2026-03-14 | REAPER (RT) wrapper required          | Regular KDE launch gives RTPRIO=0          |
+| 2026-03-14 | Never restart PipeWire mid-session    | Module-rt loses RT; only reboot restores it |
+| 2026-03-14 | Raised rtkit max to 88                | SOLVED crackles — module-rt uses rtkit, was capped at 20 |
+
+* References
+
+- PipeWire RT module: https://docs.pipewire.org/page_module_rt.html
+- PipeWire config merging: https://docs.pipewire.org/page_man_pipewire_conf_5.html
+- NixOS PipeWire: https://wiki.nixos.org/wiki/PipeWire
+- systemd RTPRIO: systemd #4851, Red Hat #1364332, Debian #838191
+- Reaper RT on Linux: https://wuoti.com/blog/linux-realtime-group-lag/
+- PipeWire xrun discussion: https://www.kvraudio.com/forum/viewtopic.php?t=524190
+- NixOS rtkit module: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/security/rtkit.nix

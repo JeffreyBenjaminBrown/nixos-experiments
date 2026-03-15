@@ -91,6 +91,7 @@
       pciutils # for lspci, to learn about sound card, per musnix readme
       xev # to view keycodes corresponding keyboard keys
       xmodmap # to remap keycodes (in ~/.xmodmap)
+      xorg.xhost # to allow X11 connections (e.g. from Docker)
 
 #      # These are both to read an iPhone. See
 #      #   https://nixos.wiki/wiki/IOS
@@ -243,7 +244,33 @@
       #########################
       a2jmidid
       audacity # good for editing samples
+      # Reaper is wrapped in systemd-run so it gets RT scheduling
+      # (LimitRTPRIO=99, LimitMEMLOCK=infinity). On X11, KDE
+      # doesn't give launched apps these limits otherwise.
+      # The desktop entry overrides the one from the reaper package.
       reaper
+      (makeDesktopItem {
+        name = "cockos-reaper";  # same name as reaper's own .desktop → overrides it
+        desktopName = "REAPER";
+        comment = "REAPER Digital Audio Workstation";
+        exec = "${writeShellScript "reaper-rt" ''
+          ${pkgs.systemd}/bin/systemctl --user reset-failed reaper-rt.service 2>/dev/null || true
+          exec ${pkgs.systemd}/bin/systemd-run \
+            --user --unit=reaper-rt \
+            --service-type=exec --collect \
+            -p LimitRTPRIO=99 \
+            -p LimitMEMLOCK=infinity \
+            -E DISPLAY="$DISPLAY" \
+            -E XAUTHORITY="$XAUTHORITY" \
+            -E XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" \
+            -E DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
+            -E HOME="$HOME" \
+            ${pkgs.reaper}/bin/reaper "$@"
+        ''} %U";
+        icon = "cockos-reaper";
+        categories = [ "AudioVideo" "Audio" ];
+        mimeTypes = [ "application/x-reaper-project" ];
+      })
       SDL
       SDL2
       # carla # broken as of <2025-08-31 Sun>
