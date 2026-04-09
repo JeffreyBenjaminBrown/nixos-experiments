@@ -61,7 +61,7 @@
       kdePackages.plasma-nm
       rtorrent
       wget
-      # signal-desktop # Broken on 25.05-stable.
+      signal-desktop # Broken on 25.05-stable.
       #   Was fixed recently here:
       #   https://github.com/nixos/nixpkgs/issues/418971
       #   Should emrge to main soon enough.
@@ -91,7 +91,7 @@
       pciutils # for lspci, to learn about sound card, per musnix readme
       xev # to view keycodes corresponding keyboard keys
       xmodmap # to remap keycodes (in ~/.xmodmap)
-      xorg.xhost # to allow X11 connections (e.g. from Docker)
+      xhost # to allow X11 connections (e.g. from Docker)
 
 #      # These are both to read an iPhone. See
 #      #   https://nixos.wiki/wiki/IOS
@@ -163,7 +163,6 @@
       # spago # purescript package manager, marked broken
       nodejs_24
       typescript
-      nodePackages.typescript
       esbuild
 
       # When I disabled ghc, it meant version 9.6.
@@ -279,7 +278,7 @@
       # cadence      # broken because jack_capture is
       flac
       sox
-      ladspaH
+      ladspa-header
       faust # for Karya
       supercollider-with-sc3-plugins
       vmpk # virtual MIDI keyboard
