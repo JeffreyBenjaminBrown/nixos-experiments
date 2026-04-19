@@ -2,5 +2,5 @@
 .emacs.desktop*
 /rebuild-branches.log
 config/network-secrets.nix
-custom-packages/libuv/libuv-clone
+custom-packages/result
 git-comment*
