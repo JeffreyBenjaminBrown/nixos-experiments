@@ -10,13 +10,6 @@
         # Fun fact: Does not rely on the `with pkgs` statement.
       mg
 
-      ### for monome ###
-      ##################
-      systemd      # for libudev
-      udev         # for libudev
-      avahi        # for libavahi-compat-libdnssd-dev
-      avahi-compat # for libavahi-compat-libdnssd-dev
-
       ### storage, versioning, formatting ###
       #######################################
       smartmontools # to monitor disks' health
@@ -61,6 +54,7 @@
       kdePackages.plasma-nm
       rtorrent
       wget
+      gh # GitHub CLI — PRs, repo sync, etc.
       signal-desktop # Broken on 25.05-stable.
       #   Was fixed recently here:
       #   https://github.com/nixos/nixpkgs/issues/418971

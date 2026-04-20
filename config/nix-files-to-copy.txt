@@ -2,3 +2,4 @@ configuration.nix
 emacs.nix
 packages.nix
 audio-configuration.nix
+monome.nix

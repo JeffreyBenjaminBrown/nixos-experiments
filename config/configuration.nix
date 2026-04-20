@@ -16,6 +16,7 @@
       ./hardware-configuration.nix
       ./audio-configuration.nix
       ./packages.nix
+      ./monome.nix
       # ./emacs.nix # This is imported from packages.nix, not here.
     ];
 
