@@ -1,9 +1,10 @@
 # PITFALL: Profile names should not contain spaces.
 # (If they do, deleting them becomes difficult.)
-
-# TODO: As of <2026-03-15 Sun> the only branch I want
-# is the 'rt' branch, so I have commented out the others.
-# I ought to clean up this code (and the branches) accordingly.
+#
+# After this script finishes the system has NOT switched to either
+# profile. To activate one, run:
+#   bash/my-switch-config.sh xfce
+#   bash/my-switch-config.sh kde
 
 rebuild_branch () {
     local branch="$1"
@@ -21,8 +22,5 @@ exec &> ~/code/midi/nix/rebuild-branches.log
 cd ~/code/midi/nix/
 echo ""
 
-rebuild_branch "xfce" "xfce____llllll____xfce"
-rebuild_branch "kde"  "KDE________________KDE"
-
-git push origin kde
-git push origin xfce
+rebuild_branch "xfce" "xfce"
+rebuild_branch "kde"  "kde"
