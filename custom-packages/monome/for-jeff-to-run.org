@@ -1,0 +1,402 @@
+#+TITLE: Monome resurrection — instructions for Jeff to run on the host
+#+STARTUP: showall
+* Overview
+Claude runs in Docker without USB access, so anything involving the
+hardware, =nix-build=, =nixos-rebuild=, or /dev inspection has to be
+run by Jeff on the host. All such steps land here.
+
+Host paths:
+- Repo on host: =/home/jeff/code/midi/nix-jbb=
+- This project: =/home/jeff/code/midi/nix-jbb/custom-packages/monome=
+
+(Inside Claude's Docker container the same repo is at
+=/home/ubuntu/nix-jbb=. Container-side paths should only appear if
+Claude asks you to run something inside the container, which should
+be rare.)
+* Conventions:
+- Each step writes its output to a file in this directory. Tell Claude
+  when a step is done and point to the output file.
+- Scripts are committed next to this file so both of us can read them.
+* DONE Step 1 — Baseline diagnostics
+Captures nixos version, kernel modules, USB devices, udev rules, and
+whether any old leftover /nix/nixpkgs clone is still around.
+
+Run it TWICE: once with the monome unplugged, once with it plugged in.
+The second run should happen ~3 seconds after plugging so the kernel
+has time to enumerate the device.
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+rm -f 01-diagnose.out
+bash ./01-diagnose.sh unplugged
+# -- now plug the monome in, wait ~3 seconds --
+bash ./01-diagnose.sh plugged
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/01-diagnose.out=
+
+After running, tell Claude "step 1 done".
+* DONE Step 2 — Build the new libmonome derivation
+** Attempt 1
+Summary of what changed in =custom-packages/libmonome/default.nix=:
+- Bumped version 1.4.2 → 1.4.9.
+- Switched to CMake (upstream dropped waf).
+- Replaced =fetchgit= with =fetchFromGitHub=.
+- Dropped =liblo= and =python3= from buildInputs (no longer needed by
+  libmonome proper; liblo is only needed by serialosc).
+- Replaced =libudev= with =udev= (current nixpkgs attr name).
+- Added a =meta= block (required for nixpkgs acceptance).
+- Used =lib.fakeHash= for the source hash — you'll get it for real on
+  the first build attempt.
+
+Run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./02-build-libmonome.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/02-build-libmonome.out=
+
+The FIRST run is EXPECTED to fail with a "hash mismatch" message
+— that's how we discover the real sha256 for version 1.4.9. Just
+tell Claude "step 2 attempt 1 done" and he will patch the derivation
+with the correct hash. Then re-run this same script; second attempt
+should succeed.
+
+** Attempt 2 — real hash in place
+
+The hash has been patched in. Re-run:
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./02-build-libmonome.sh
+#+end_src
+
+Tell Claude "step 2 attempt 2 done" when the output file has been
+regenerated.
+
+* DONE Step 3 — Build the new serialosc derivation
+** attempt 1
+Step 2 succeeded: libmonome 1.4.9 built cleanly (libmonome.so,
+libmonome.a, monome.h installed to the nix store).
+
+Summary of what changed in =custom-packages/serialosc/default.nix=:
+- Bumped version 1.4.1 → 1.4.7.
+- Replaced =fetchgit= with =fetchFromGitHub= (with submodules).
+- Replaced =libudev= with =udev= (current nixpkgs attr).
+- Dropped the =git-commit-in-wscript.patch=. Instead, =git= is added
+  to =nativeBuildInputs= so the upstream wscript's unhandled OSError
+  becomes a handled CalledProcessError. (The patch is no longer
+  needed; the old .patch file can be deleted once this works.)
+- Dropped redundant =systemd= buildInput (already provided via =udev=).
+- Added a =meta= block.
+- Kept =--enable-system-libuv= so we don't build the vendored libuv.
+
+Run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./03-build-serialosc.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/03-build-serialosc.out=
+
+First run will fail with a hash mismatch (same deal as step 2). Say
+"step 3 attempt 1 done" and Claude will patch in the real hash.
+
+** Attempt 2 — real hash in place
+
+The hash has been patched in. Re-run:
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./03-build-serialosc.sh
+#+end_src
+
+Tell Claude "step 3 attempt 2 done" when the output file has been
+regenerated.
+
+** Attempt 3 — drop removed =--enable-system-libuv= flag
+
+Attempt 2 failed: upstream removed the =--enable-system-libuv= waf
+option. The current wscript only exposes =--enable-multilib=,
+=--disable-zeroconf=, and =--enable-debug=. System libuv is still used
+(it's in buildInputs and the compiler picks it up implicitly); the
+flag is just dead weight.
+
+Fix: =wafConfigureFlags= entry removed from the derivation.
+
+Re-run:
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./03-build-serialosc.sh
+#+end_src
+
+Tell Claude "3:3 done" when the output file has been regenerated.
+
+* DONE Step 4 — Wire into main config, do a DRY build
+** attempt 1
+Step 3 succeeded: serialosc 1.4.7 built. All deps detected.
+
+Changes Claude made to your repo:
+
+- =config/monome.nix= — new module. Adds an overlay that builds
+  libmonome and serialosc from =custom-packages/=, puts both in
+  =environment.systemPackages=, and defines a systemd *user* service
+  =serialoscd.service= set to =wantedBy default.target= so it starts
+  on login.
+- =config/configuration.nix= — imports =./monome.nix=.
+- =config/packages.nix= — dropped the stale "for monome" block
+  (=systemd=/=udev=/=avahi=/=avahi-compat=); those are now pulled
+  automatically as buildInputs of the derivations.
+- =config/nix-files-to-copy.txt= — added =monome.nix=.
+- =bash/copy.sh= — also rsyncs =custom-packages/= to
+  =/etc/nixos/custom-packages/= so the overlay can find them.
+
+This step does a DRY build only — =nixos-rebuild build=, which builds
+the system derivation but does NOT activate it. Nothing on your
+running system changes. If it evaluates and builds, we move on to
+a real =switch=.
+
+Run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./04-rebuild-dry.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/04-rebuild-dry.out=
+
+=nixos-rebuild build= requires sudo (for writing to /etc/nixos and
+for the usual nix store operations); you'll be prompted once.
+
+Say "step 4 done" when the output file has been regenerated.
+
+** Attempt 2 — fix relative path after copy-flattening
+
+Attempt 1 failed with =path '/etc/custom-packages/libmonome' does not
+exist=. Cause: =monome.nix= referenced =../custom-packages/...=, which
+was correct when reading from =config/= in the source repo, but wrong
+after =copy.sh= flattens everything into =/etc/nixos= (where
+=monome.nix= and =custom-packages/= are siblings, not parent-child).
+Fixed the paths in =monome.nix= to =./custom-packages/...= and added
+a comment explaining why.
+
+Re-run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./04-rebuild-dry.sh
+#+end_src
+
+Tell Claude "4:2 done" when done.
+
+* DONE Step 5 — Real =switch= + verify serialoscd runs
+Step 4 dry build succeeded. The nix store already has the new system
+derivation; switching just activates it.
+
+What the script does:
+1. =sudo bash ./bash/copy.sh= (idempotent, same as step 4).
+2. =sudo nixos-rebuild switch --keep-failed=.
+3. =systemctl --user daemon-reload= then =systemctl --user start
+   serialoscd.service= — so the new unit starts now, without waiting
+   for a logout.
+4. Reports =systemctl --user status serialoscd= and the last 50
+   lines of its journal.
+5. Lists =/dev/ttyUSB*= and the binaries on PATH.
+6. If =oscsend=/=oscdump= are installed (from =liblo=), sends
+   =/serialosc/list= to UDP port 12002 to see if any grid is
+   discovered. Otherwise skips that check quietly.
+
+Before running: plug the monome in (it should show up as
+=/dev/ttyUSB0=, same as in step 1).
+
+Run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./05-switch-and-verify.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/05-switch-and-verify.out=
+
+Tell Claude "step 5 done" afterward.
+
+If the service starts but doesn't see the grid, Claude will probably
+suggest replugging the device so ftdi_sio re-enumerates it after the
+new udev/systemd state is in place.
+
+* DONE Step 6 — Hardware end-to-end blink test
+** Attempt 1
+Step 5 confirmed: your grid is device =m0000102=, serialoscd is up
+and serving it on a local OSC port. This script sends
+=/grid/led/all 1= to light every LED, waits 1.5s, then sends
+=/grid/led/all 0= to turn them off. The device port is read from
+the serialoscd journal at run time (it differs on each restart).
+
+Run, then physically watch the grid:
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./06-blink.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/06-blink.out=
+
+Tell Claude "step 6 done — blinked" or "step 6 done — nothing
+happened" and include the output file.
+
+** Attempt 2 — set the prefix first
+First attempt sent =/grid/led/all= directly. Grid commands are
+filtered by a per-device prefix in serialosc (see
+https://monome.org/docs/serialosc/osc/); with no prefix set, our
+commands were silently dropped. The script now sets the device's
+prefix to =/m= first and then sends =/m/grid/led/all=.
+
+Re-run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./06-blink.sh
+#+end_src
+
+Tell Claude "6:2 blinked" or "6:2 nothing".
+
+* DONE Step 7 — Fix the zeroconf warning
+Step 5 logged =sosc_zeroconf_init(): couldn't load libdns_sd.so=.
+Non-fatal — local USB use works — but it means serialosc can't
+advertise over LAN/bonjour (so network monome apps can't discover
+the grid). Cause: serialosc calls =dlopen("libdns_sd.so")= at runtime
+with a bare filename, and Nix's dynamic-linker search path doesn't
+include =avahi-compat= unless we wrap the binary.
+
+Changes Claude made:
+
+- =custom-packages/serialosc/default.nix= — added =makeWrapper= to
+  =nativeBuildInputs= and a =postInstall= that wraps
+  =$out/bin/serialoscd= with =LD_LIBRARY_PATH= pointing at
+  =${avahi-compat}/lib=. Rebuild + switch required.
+
+Run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./07-fix-zeroconf.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/07-fix-zeroconf.out=
+
+The script copies the updated config, runs =sudo nixos-rebuild
+switch=, restarts the user service, and greps the journal since the
+latest restart for the old error message. The script prints
+=FIXED:= or =STILL FAILING:= at the bottom.
+
+Say "step 7 done" when the output file has been regenerated.
+* DONE Step 8 — Prepare nixpkgs submission
+** some context
+Step 7 succeeded — the dlopen warning is gone. Stack is complete.
+
+Polished versions of the two derivations live at:
+- =custom-packages/for-nixpkgs/libmonome/package.nix=
+- =custom-packages/for-nixpkgs/serialosc/package.nix=
+
+Differences from the Jeff-repo originals:
+- Filename =package.nix= (nixpkgs =by-name/= convention).
+- Formatting: trailing-comma argument list (nixfmt-rfc-style).
+- =passthru.updateScript = nix-update-script { };= so future bumps
+  can be automated.
+- Otherwise identical. No Jeff-specific overrides leaked in.
+
+** DONE Attempt 1 — stage the commits
+
+This script clones nixpkgs at =~/code/nix/nixpkgs= (or updates it if
+already present), creates a branch =jbb/libmonome-serialosc=, drops
+the two package.nix files under =pkgs/by-name/li/libmonome/= and
+=pkgs/by-name/se/serialosc/=, makes two commits, and runs nix-build
+against each.
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./08-prep-nixpkgs-fork.sh
+#+end_src
+
+Output: =/home/jeff/code/midi/nix-jbb/custom-packages/monome/08-prep-nixpkgs-fork.out=
+
+Tell Claude "step 8 prep done" afterward. Read the output; if both
+=nix-build -A= commands produced store paths at the end, the commits
+are ready to push.
+
+** Pushing + opening the PR (manual — decide whether to do it now)
+
+The script stops short of pushing to GitHub or opening a PR — those
+are irreversible/visible actions. Exact commands are printed at the
+bottom of the output file; review them, replace the GitHub username
+if needed, and run them by hand when you're ready.
+
+** DONE Attempt 2 — install the gh CLI first
+
+Attempt 1 got all the way through nix-build (both derivations produced
+store paths in the fresh nixpkgs checkout) but halted at =gh: command
+not found=. gh (the GitHub CLI) isn't in your packages yet; step 8
+needs it for =gh repo sync= and the eventual =gh pr create=.
+
+Fix: =gh= is now listed in =config/packages.nix= (under the
+"networking, trafficking" section). Run:
+
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./08a-install-gh.sh
+#+end_src
+
+The script rebuilds+switches and prints a reminder to run =gh auth
+login= (interactive; not something a script can drive). After you're
+authenticated, re-run step 8:
+
+#+begin_src bash
+bash /home/jeff/code/midi/nix-jbb/custom-packages/monome/08-prep-nixpkgs-fork.sh
+#+end_src
+
+Tell Claude "8:2 done" when the re-run has completed.
+
+** DONE Attempt 3 — add =workflow= scope, use SSH for fork
+
+Attempt 2 got past gh-auth but failed at two later steps:
+
+- =gh repo sync= was refused with: "Upstream commits contain workflow
+  changes, which require the =workflow= scope". Your token has
+  =admin:public_key, gist, read:org, repo= but not =workflow=.
+- =git push= tried HTTPS (because =FORK_URL= was https://...) and
+  popped up =ksshaskpass= for a password; you auth via SSH.
+
+Fixes:
+- Added =workflow= scope instruction (see command below).
+- Changed =FORK_URL= in the script to the SSH form
+  =git@github.com:JeffreyBenjaminBrown/nixpkgs.git=. Re-running will
+  =git remote set-url origin= to the new URL automatically.
+
+Run:
+#+begin_src bash
+# interactive: re-auths and adds the workflow scope
+gh auth refresh -s workflow
+
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./08-prep-nixpkgs-fork.sh
+#+end_src
+
+Tell Claude "8:3 done" when done.
+
+** ONGOING Attempt 4 — switch back to HTTPS, use gh as git credential helper
+
+Attempt 3: =gh repo sync= succeeded (workflow scope fixed that). But
+=git push= over SSH hit "Received disconnect from 140.82.114.4 port
+22:11: Bye Bye" — GitHub closed the SSH session, almost always a
+key/agent mismatch. Rather than debug ssh-agent, switch to HTTPS
+with gh providing the token.
+
+Fixes (already in the script):
+- =FORK_URL= reverted to =https://github.com/JeffreyBenjaminBrown/nixpkgs.git=.
+- Script now runs =gh auth setup-git= before the push, which makes
+  git call gh for https:// credentials.
+
+Re-run:
+#+begin_src bash
+cd /home/jeff/code/midi/nix-jbb/custom-packages/monome
+bash ./08-prep-nixpkgs-fork.sh
+#+end_src
+
+Tell Claude "8:4 done".

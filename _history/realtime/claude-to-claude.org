@@ -1,0 +1,178 @@
+#+TITLE: Claude-to-Claude Notes on Audio Configuration
+#+DATE: 2026-03-14
+
+* The System
+- HP laptop, Raptor Lake (13th gen Intel)
+- PCI audio device: 8086:51ca at 0000:00:1f.3
+  - "Intel Corporation Raptor Lake-P/U/H cAVS (rev 01)"
+- PCI GPU device: Intel Raptor Lake-P, device ID a7a0
+- NixOS 26.05 (unstable channel), kernel 6.18.17 PREEMPT_RT
+- Uses musnix with kernel.realtime = true
+- PipeWire with JACK bridge (for Reaper, etc.)
+- Desktop: KDE Plasma 6 on Wayland (via SDDM)
+
+* The "Only Dummy Output" Problem — ACTUAL Root Cause
+
+** The symptom
+QJackCtl (and wpctl, pw-dump, etc.) show only "Dummy Output" —
+no real audio hardware. /proc/asound/cards says
+"--- no soundcards ---".
+
+** ROOT CAUSE DISCOVERED 2026-03-14
+
+The musnix RT kernel (6.18.17 PREEMPT_RT) does NOT compile the
+i915 GPU driver at all! CONFIG_DRM_I915 is completely absent
+from /proc/config.gz. Only CONFIG_DRM_XE=m is available.
+
+Previous fix attempts all tried to force i915 — but the i915
+module literally does not exist in this kernel. It cannot load
+regardless of force_probe, softdep, or any other parameter.
+
+The chain:
+1. CONFIG_DRM_I915 not compiled in RT kernel
+2. i915.force_probe=a7a0 does nothing (module doesn't exist)
+3. CONFIG_DRM_XE=m exists but xe doesn't auto-probe for a7a0
+4. No GPU driver loads → simpledrm takes over
+5. SOF audio defers probe waiting for GPU driver
+6. SOF gives up → no ALSA cards → "Dummy Output"
+
+** How we confirmed this
+From the Docker container (which shares /proc with the host):
+#+begin_example
+$ zcat /proc/config.gz | grep -E 'CONFIG_DRM_I915|CONFIG_DRM_XE'
+CONFIG_DRM_XE=m
+CONFIG_DRM_XE_DISPLAY=y
+... (many CONFIG_DRM_XE_* options)
+... (NO CONFIG_DRM_I915 at all!)
+
+$ ls /sys/module/i915 2>&1
+ls: cannot access '/sys/module/i915': No such file or directory
+
+$ cat /proc/cmdline
+... i915.force_probe=a7a0 ...
+(parameter is there but useless — module doesn't exist)
+#+end_example
+
+** Why previous fix attempts ALL failed
+Every previous conversation tried variations of:
+- i915.force_probe=a7a0
+- boot.kernelModules = ["i915"]
+- softdep snd_sof_pci_intel_tgl pre: i915
+All of these reference i915, which DOES NOT EXIST in this kernel.
+
+* The Fix (xe-based)
+#+begin_src nix
+boot.kernelParams = [
+  "snd_intel_dspcfg.dsp_driver=3"  # Force SOF for audio
+  "xe.force_probe=a7a0"            # Force xe for Raptor Lake GPU
+];
+
+boot.blacklistedKernelModules = [ "snd_soc_avs" ];
+
+boot.extraModprobeConfig = ''
+  options snd-intel-dspcfg dsp_driver=3
+  softdep snd_sof_pci_intel_tgl pre: xe
+  blacklist snd_soc_avs
+'';
+
+boot.kernelModules = [ "xe" ];
+#+end_src
+
+** Why xe works for audio
+CONFIG_SND_HDA_I915=y is present in the kernel. Despite the name,
+the kernel code in hdac_i915.c was patched (in ~kernel 6.x) to
+accept BOTH "i915" and "xe" as valid driver names for
+I915_COMPONENT_AUDIO component matching. So SOF/HDA audio will
+bind to the xe driver just as it would to i915.
+
+* Key Diagnostic Commands
+| Command                                    | What it tells you                       |
+|--------------------------------------------+-----------------------------------------|
+| zcat /proc/config.gz | grep DRM_I915       | Whether i915 is even compiled           |
+| zcat /proc/config.gz | grep DRM_XE         | Whether xe is compiled                  |
+| lsmod | grep xe                            | Whether xe module is loaded             |
+| readlink /sys/bus/pci/devices/0000:00:02.0/driver | Which driver bound to GPU      |
+| cat /proc/asound/cards                     | Whether ALSA sees any hardware at all   |
+| dmesg | grep -i "deferred probe"          | Whether SOF is stuck waiting for GPU    |
+| ls /sys/class/backlight/                   | Whether backlight control is available  |
+| lsmod | grep avs                           | Whether competing AVS driver loaded     |
+| wpctl status                               | PipeWire/WirePlumber device listing     |
+
+* Things We Confirmed Are NOT the Problem
+- SOF kernel modules: all compiled and loadable (CONFIG_SND_SOC_SOF_INTEL_TGL=m, etc.)
+- SOF firmware: present at /run/current-system/firmware/intel/sof/sof-rpl.ri.zst
+  (and the symlinks are NOT broken — the old zst symlink bug is fixed)
+- SOF topology files: present (sof-rpl-*.tplg.zst)
+- PipeWire and WirePlumber: both running and active
+- User groups: jeff is in audio and jackaudio groups
+- dsp_driver=3 kernel param: correctly set and visible in /proc/cmdline
+- modprobe config: correctly generated in /etc/modprobe.d/nixos.conf
+- CONFIG_SND_HDA_I915=y is set (audio<->GPU integration exists)
+- boot.kernelParams ARE applied after rebuild (verified in /proc/cmdline)
+
+* Things That Were Red Herrings in Previous Attempts
+- i915.force_probe=a7a0 — useless because i915 not compiled
+- boot.kernelModules = ["i915"] — module doesn't exist
+- softdep snd_sof_pci_intel_tgl pre: i915 — i915 doesn't exist
+- Adding sof-firmware to hardware.firmware — was already fine
+
+* PipeWire / JACK Configuration Notes
+- wireplumber.enable should be explicitly true (it's the session
+  manager that tells PipeWire about ALSA devices)
+- QJackCtl connects to PipeWire's JACK bridge, not a standalone
+  JACK server — this is correct and expected on PipeWire systems
+- The "Dummy Output" in QJackCtl is PipeWire's auto_null sink,
+  which appears when WirePlumber finds no real ALSA hardware
+
+* About the RT Kernel and Rebuilds
+- musnix kernel.realtime = true overrides boot.kernelPackages with
+  an RT-patched kernel built from the nixpkgs channel's kernel source
+- THE RT KERNEL CONFIG IS DIFFERENT FROM STANDARD: notably it
+  does NOT include CONFIG_DRM_I915, only CONFIG_DRM_XE
+- Changes to boot.kernelParams, boot.extraModprobeConfig,
+  boot.blacklistedKernelModules, and boot.kernelModules do NOT
+  trigger a kernel recompilation — they only affect system config
+- A kernel rebuild is triggered by: nixpkgs channel update (new
+  kernel source), musnix repo update (new RT patches), or changes
+  to boot.kernelPatches
+- To avoid surprise kernel rebuilds: don't run
+  `sudo nix-channel --update` unless prepared to wait for a rebuild
+
+* PCI IDs Reference
+- 8086:51ca — Raptor Lake-P/U/H cAVS (audio controller)
+- a7a0 — Raptor Lake-P GPU (relevant for xe.force_probe)
+- The snd_sof_pci_intel_tgl driver covers TGL/ADL/RPL platforms
+- The snd_hda_intel modinfo for kernel 6.18.17 does NOT list 51ca
+  in its aliases — so dsp_driver=3 is critical to route to SOF
+
+* Brightness / Special Keys Not Working (same root cause)
+The laptop brightness keys (Fn+F2/F3 etc.) worked on the kde and
+xfce branches but broke on the rt branch. Symptom: pressing
+Fn+brightness-up prints incrementing numbers (56, 57, 58, 59...)
+to the screen as literal text.
+
+Cause: same GPU driver issue. Without ANY GPU driver (i915 or xe),
+there is no /sys/class/backlight/ device. KDE has nothing to
+control. The ACPI brightness hotkey events go unhandled and the
+raw brightness values from the embedded controller fall through
+as text input.
+
+On the kde/xfce branches, the standard (non-RT) kernel has
+CONFIG_DRM_I915=m and i915 auto-probed for GPU a7a0. The RT
+kernel doesn't compile i915 at all, so the fix is to use xe.
+
+Fix: same as audio — xe.force_probe=a7a0 in boot.kernelParams.
+Once xe loads and drives the GPU, backlight control should appear
+and KDE will handle brightness keys normally.
+
+Diagnostic: ls /sys/class/backlight/ — should show a backlight
+device (possibly "intel_backlight" or an ACPI one).
+
+* Potential Future Considerations
+- As the xe driver matures, auto-probe for Raptor Lake may be
+  added (eliminating the need for force_probe)
+- Watch for kernel changelogs when updating past 6.18
+- If audio breaks after a kernel update, first check:
+  1. Is xe loaded? (lsmod | grep xe)
+  2. Is there a new GPU driver requirement?
+  3. Has the force_probe list changed?

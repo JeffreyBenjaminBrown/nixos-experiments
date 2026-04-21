@@ -16,6 +16,7 @@
       ./hardware-configuration.nix
       ./audio-configuration.nix
       ./packages.nix
+      ./monome.nix
       # ./emacs.nix # This is imported from packages.nix, not here.
     ];
 
@@ -51,16 +52,26 @@
   };
 
   powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = "performance"; # for audio
+  services.power-profiles-daemon.enable = false; # overrides
+    # cpuFreqGovernor with "balanced" (powersave); KDE enables it
+    # by default
+
+  # SOF and ALSA firmware for Intel HDA audio via SOF driver
+  hardware.firmware = [
+    pkgs.sof-firmware
+    pkgs.alsa-firmware
+  ];
+  hardware.enableAllFirmware = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   networking.hostName = "jbb-hp24-oled";
   networking.networkmanager.enable = true;
 
   services.printing.enable = true; # Enable CUPS
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
 
   services.xserver = { # X11. "Optional", per the wiki page on KDE: https://wiki.nixos.org/wiki/KDE
     enable = true;
@@ -156,8 +167,26 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # NixOS uses the LTS Linux kernel by default.
-  # This uses a later one.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Musnix overrides the kernel to the RT one
+  #   when kernel.realtime = true.
+  # If musnix weren't doing that, this would use a more recent kernel:
+  #   boot.kernelPackages = pkgs.linuxPackages_latest;
+  #
+  # PITFALL: To avoid surprise RT kernel rebuilds (which take a long
+  # time), don't run `sudo nix-channel --update` unless you're
+  # prepared for a rebuild. Changes to boot.kernelParams,
+  # boot.extraModprobeConfig, boot.blacklistedKernelModules, and
+  # boot.kernelModules do NOT trigger kernel recompilation — only
+  # channel updates (new kernel source) or boot.kernelPatches changes do.
+  #
+  # To pin nixpkgs and prevent ANY channel drift, uncomment and
+  # adjust the following (you'll need to compute the sha256 once with
+  # `nix-prefetch-url --unpack <url>`):
+  #
+  #   nixpkgs.source = builtins.fetchTarball {
+  #     url = "https://github.com/NixOS/nixpkgs/archive/c06b4ae3d659.tar.gz";
+  #     sha256 = ""; # fill in via nix-prefetch-url --unpack <url>
+  #   };
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default

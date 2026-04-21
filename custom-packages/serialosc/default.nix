@@ -1,51 +1,62 @@
-# PITFALL: Depends on libmonome, which is available from this repo, or from
-# [my fork of nixpkgs](https://github.com/JeffreyBenjaminBrown/nixpkgs),
-# but which is not yet part of the nixpkgs master branch.
-
-# Built with sagacious help from Robert Kovacsics (@KoviRobi):
-# https://discourse.nixos.org/t/nix-build-fails-because-python-wants-something-thats-unavailable-without-saying-what-it-wants/5675/4
-
-{ stdenv, libmonome, liblo, fetchgit, python3, wafHook, libudev, udev, systemd, avahi-compat, avahi
-  #, git, less
+{ lib
+, stdenv
+, fetchFromGitHub
+, python3
+, wafHook
+, pkg-config
+, git
+, makeWrapper
+, libmonome
+, liblo
 , libuv
+, avahi-compat
+, udev
 }:
 
-stdenv.mkDerivation rec {
-  name = "serialosc";
-  version = "v1.4.1";
+stdenv.mkDerivation (finalAttrs: {
+  pname = "serialosc";
+  version = "1.4.7";
 
-  src = fetchgit {
-    url = https://github.com/monome/serialosc;
-    rev = "cec0ea76b2d5f69afa74d3ffc14a0950e32a7914";
-    # date: "2019-06-09T21:46:13+02:00"
-    sha256 = "03qkzslhih72idwafgfxmkwp5v3x048njh0c682phw2ks11plmbp";
+  src = fetchFromGitHub {
+    owner = "monome";
+    repo = "serialosc";
+    rev = "v${finalAttrs.version}";
     fetchSubmodules = true;
+    hash = "sha256-zglwhRXKJCvVwGIj+72ZUUxzhHaFHVggMrJunDcY2UE=";
   };
 
-  patches = ./git-commit-in-wscript.patch;
+  # `git` is a nativeBuildInput because the upstream wscript calls
+  # `git rev-parse` unconditionally and only catches CalledProcessError
+  # (not FileNotFoundError). With git present, the call fails cleanly
+  # with CalledProcessError (we're not inside a git repo) and the
+  # version string is built without a commit suffix.
+  nativeBuildInputs = [ python3 wafHook pkg-config git makeWrapper ];
 
-  # The"LIBUV"  error message suggested this.
-  # It causes more details to be reported upon failure.
-  wafFlags = [ "-v" ];
-
-  # @simonvanderveldt suggested this, here:
-  # https://github.com/monome/serialosc/issues/49#issuecomment-583134920
-  # As of libuv 1.34.1 (which is on the nixpkgs master branch,
-  # but the default nixpkgs used by nix-rebuild is 1.34.0),
-  # the `packed-address` warning that was breaking the build is suppressed.
-  wafConfigureFlags = [ "--enable-system-libuv" ];
-
-  nativeBuildInputs = [ wafHook ];
   buildInputs = [
-    avahi
-    avahi-compat
-    liblo
     libmonome
-    libudev
-    python3
-    systemd
-    udev
+    liblo
     libuv
-#    git less # for debugging
+    avahi-compat
+    udev
   ];
-}
+
+  # serialosc calls `dlopen("libdns_sd.so")` at runtime (with a bare
+  # filename) for its zeroconf/Bonjour code. Nix's dynamic linker
+  # search path doesn't include avahi-compat by default, so the dlopen
+  # fails with a non-fatal but noisy warning. Wrap the daemon so that
+  # LD_LIBRARY_PATH covers avahi-compat's lib dir, making the dlopen
+  # succeed and enabling LAN-visible device advertisement.
+  postInstall = ''
+    wrapProgram $out/bin/serialoscd \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ avahi-compat ]}
+  '';
+
+  meta = {
+    description = "Multi-device, Bonjour-capable OSC server for monome devices";
+    homepage = "https://github.com/monome/serialosc";
+    license = lib.licenses.isc;
+    platforms = lib.platforms.linux;
+    mainProgram = "serialoscd";
+    maintainers = [ ];
+  };
+})
