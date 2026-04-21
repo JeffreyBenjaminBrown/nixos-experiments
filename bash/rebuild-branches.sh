@@ -21,10 +21,8 @@ exec &> ~/code/midi/nix/rebuild-branches.log
 cd ~/code/midi/nix/
 echo ""
 
-# rebuild_branch "xfce" "Xfce____llllll____Xfce"
-# rebuild_branch "kde"  "KDE________________KDE"
-rebuild_branch "rt"  "rt___256_________256___rt"
+rebuild_branch "xfce" "xfce____llllll____xfce"
+rebuild_branch "kde"  "KDE________________KDE"
 
-# git push origin kde
-# git push origin xfce
-git push origin rt
+git push origin kde
+git push origin xfce

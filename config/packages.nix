@@ -78,7 +78,6 @@
 
       ### explore system ##
       #####################
-      android-tools
       cpufrequtils
       pkg-config # lets packages know things about other packages
       dmidecode # to learn about system RAM
@@ -127,10 +126,6 @@
       erlang
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
-      R
-      rPackages.readxl
-      rPackages.openxlsx
-      rPackages.arrow
 
         ### Python \ programming languages ###
         ######################################
