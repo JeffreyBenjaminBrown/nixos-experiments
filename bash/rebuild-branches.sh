@@ -11,14 +11,21 @@ rebuild_branch () {
     local profile_name="$2"
     git checkout "$branch"
     sudo ./bash/copy.sh
+    # --cores / --max-jobs limit CPU use so the laptop doesn't
+    # overheat during long builds (esp. the RT kernel). These are
+    # the only knobs nix honors for thermal politeness — nice/ionice
+    # on nixos-rebuild don't propagate to nix-daemon, which does the
+    # actual work.
     sudo nixos-rebuild switch \
          --keep-failed \
+         --cores 2 \
+         --max-jobs 1 \
          --profile-name "$profile_name"
 }
 
 exec &> ~/code/midi/nix/rebuild-branches.log
 
-# sudo nix-channel --update nixos
+sudo nix-channel --update nixos
 cd ~/code/midi/nix/
 echo ""
 
