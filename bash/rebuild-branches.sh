@@ -23,9 +23,21 @@ rebuild_branch () {
          --profile-name "$profile_name"
 }
 
+# Ask BEFORE redirecting stdout to the log, so the prompt is visible.
+# Updating the channel can pull a new kernel source; with musnix's
+# realtime kernel there's no binary cache, so a channel update often
+# triggers a multi-hour, laptop-overheating full kernel rebuild.
+read -r -p "Update nix channel? Doing so may trigger a slow kernel rebuild. [y/N] " reply
+case "$reply" in
+    [yY]|[yY][eE][sS]) update_channel=1 ;;
+    *)                 update_channel=0 ;;
+esac
+
 exec &> ~/code/midi/nix/rebuild-branches.log
 
-sudo nix-channel --update nixos
+if [[ "$update_channel" == 1 ]]; then
+    sudo nix-channel --update nixos
+fi
 cd ~/code/midi/nix/
 echo ""
 
