@@ -16,7 +16,7 @@ rebuild_branch () {
     # the only knobs nix honors for thermal politeness — nice/ionice
     # on nixos-rebuild don't propagate to nix-daemon, which does the
     # actual work.
-    sudo nixos-rebuild switch \
+    sudo nixos-rebuild build \
          --keep-failed \
          --cores 2 \
          --max-jobs 1 \

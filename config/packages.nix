@@ -221,6 +221,7 @@
       xsel
       gnumeric
       tmux
+      kitty # terminal emulator, hopefully good for Claude
       acpi # show battery status
       gnome-disk-utility
 

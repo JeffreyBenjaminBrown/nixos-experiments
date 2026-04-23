@@ -1,3 +1,4 @@
+*.out
 *~
 .emacs.desktop*
 /rebuild-branches.log
