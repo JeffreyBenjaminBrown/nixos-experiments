@@ -17,6 +17,8 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-a5r8HrR2x8NdC8E1fz+4fuEk+2CGDTYcJdIVZfX9hCA=";
   };
 
+  patches = [ ./poll-hup-invalid.patch ];
+
   nativeBuildInputs = [ cmake pkg-config ];
   buildInputs = [ udev ];
 

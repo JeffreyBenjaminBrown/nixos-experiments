@@ -1,0 +1,29 @@
+From 3be9a0fc0fbef7cad5d44afe978685d3311fb8b2 Mon Sep 17 00:00:00 2001
+From: Codex <codex@local>
+Date: Fri, 15 May 2026 03:00:00 +0000
+Subject: [PATCH] Treat poll hangups as input errors
+
+On Linux, a disconnected or invalid tty can make poll return immediately
+with an error condition. Treat hangups and invalid descriptors like
+POLLERR so callers can tear down the device instead of continuing around
+the event loop.
+---
+ src/platform/linux.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/platform/linux.c b/src/platform/linux.c
+index 129835d..081bba8 100644
+--- a/src/platform/linux.c
++++ b/src/platform/linux.c
+@@ -31,7 +31,7 @@ int monome_platform_wait_for_input(monome_t *monome, uint_t msec) {
+ 	if( !poll(fds, 1, msec) )
+ 		return 1;
+ 
+-	if (fds->revents & POLLERR)
++	if (fds->revents & (POLLHUP | POLLERR | POLLNVAL))
+ 		return -1;
+ 
+ 	return 0;
+-- 
+2.50.1
+

@@ -1,0 +1,52 @@
+From 0b279c7f569d28186fadab1257c4fbe0dc2c551e Mon Sep 17 00:00:00 2001
+From: Codex <codex@local>
+Date: Fri, 15 May 2026 03:00:00 +0000
+Subject: [PATCH] Handle invalid poll descriptors in device loop
+
+poll(2) reports invalid descriptors through POLLNVAL in revents. Since
+POLLNVAL is not an errno return from poll itself, ignoring it can leave
+serialosc-device waking immediately and spinning after a device or IPC fd
+becomes invalid.
+
+Treat invalid descriptors as fatal. A monome device fd error follows the
+existing disconnect path; errors on the OSC socket or supervisor IPC fd
+make the process fail so it can be restarted by its supervisor.
+---
+ src/serialosc-device/event_loop/poll.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/src/serialosc-device/event_loop/poll.c b/src/serialosc-device/event_loop/poll.c
+index 976c73f..6cb7322 100644
+--- a/src/serialosc-device/event_loop/poll.c
++++ b/src/serialosc-device/event_loop/poll.c
+@@ -39,6 +39,12 @@ recv_msg(struct sosc_state *state, int ipc_fd)
+ 	}
+ }
+ 
++static int
++fd_error(short revents)
++{
++	return revents & (POLLHUP | POLLERR | POLLNVAL);
++}
++
+ int
+ sosc_event_loop(struct sosc_state *state)
+ {
+@@ -71,9 +77,13 @@ sosc_event_loop(struct sosc_state *state)
+ 			}
+ 
+ 		/* is the monome still connected? */
+-		if (fds[0].revents & (POLLHUP | POLLERR))
++		if (fd_error(fds[0].revents))
+ 			break;
+ 
++		if (fd_error(fds[1].revents)
++				|| (state->ipc_in_fd > -1 && fd_error(fds[2].revents)))
++			return 1;
++
+ 		/* is there data available for reading from the monome? */
+ 		if (fds[0].revents & POLLIN)
+ 			monome_event_handle_next(state->monome);
+-- 
+2.50.1
+

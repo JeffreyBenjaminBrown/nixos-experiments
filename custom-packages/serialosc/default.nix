@@ -25,6 +25,8 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-zglwhRXKJCvVwGIj+72ZUUxzhHaFHVggMrJunDcY2UE=";
   };
 
+  patches = [ ./poll-invalid-fds.patch ];
+
   # `git` is a nativeBuildInput because the upstream wscript calls
   # `git rev-parse` unconditionally and only catches CalledProcessError
   # (not FileNotFoundError). With git present, the call fails cleanly
