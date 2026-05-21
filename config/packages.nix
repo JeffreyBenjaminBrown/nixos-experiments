@@ -79,6 +79,7 @@
       ### explore system ##
       #####################
       cpufrequtils
+      fetchutils # for 'temp', which prints CPU temperature
       pkg-config # lets packages know things about other packages
       dmidecode # to learn about system RAM
       i2c-tools # includes decode-dimms
