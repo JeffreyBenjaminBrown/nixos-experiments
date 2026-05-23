@@ -173,6 +173,7 @@
       cabal-install
       rustup # for rust
       cargo  # for rust
+      rust-analyzer # Rust language server for Eglot/xref references
 
       zlib
       zlib.dev
