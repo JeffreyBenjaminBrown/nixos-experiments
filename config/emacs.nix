@@ -48,6 +48,7 @@ in
         # https://discourse.nixos.org/t/emacs-python-mode-marked-as-broken-cant-rebuild-nixos-config/12674/2
       haskell-mode
       idris-mode # also in melpa-stable
+      elisp-refs # semantic Emacs Lisp references, unlike grep/xref fallback
       rust-mode
       scala-mode
       psc-ide         # PureScript
@@ -92,6 +93,7 @@ in
 
     ]) ++ (with epkgs.elpaPackages; [
       csv-mode
+      eglot # LSP xref backend; Emacs also includes this in recent versions
       undo-tree
       xclip # for copy-paste from `emacs -nw` (within Bash) to other apps
 
