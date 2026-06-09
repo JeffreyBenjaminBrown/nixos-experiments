@@ -15,6 +15,10 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./audio-configuration.nix
+      ./pipewire-upgrade.nix  # bump pipewire/wireplumber past the channel's
+                              # 1.2.6 so the container's 1.6.3 clients (beep
+                              # hook, synths) aren't stalled by a server too old
+                              # to schedule their async nodes.
       ./packages.nix
       ./monome.nix
       # ./emacs.nix # This is imported from packages.nix, not here.
