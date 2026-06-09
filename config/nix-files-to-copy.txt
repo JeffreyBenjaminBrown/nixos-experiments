@@ -2,4 +2,5 @@ configuration.nix
 emacs.nix
 packages.nix
 audio-configuration.nix
+pipewire-upgrade.nix
 monome.nix
