@@ -38,10 +38,10 @@ with pkgs; {
   # These settings give user services and desktop apps
   # permission to use RT scheduling and lock memory.
   # Apps must explicitly request RT to use it; normal apps are unaffected.
-  systemd.user.extraConfig = ''
-    DefaultLimitRTPRIO=99
-    DefaultLimitMEMLOCK=infinity
-  '';
+  systemd.user.settings.Manager = {
+    DefaultLimitRTPRIO = 99;
+    DefaultLimitMEMLOCK = "infinity";
+  };
   systemd.services."user@".serviceConfig = {
     LimitRTPRIO = "infinity";
     LimitMEMLOCK = "infinity";

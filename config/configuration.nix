@@ -45,7 +45,7 @@
     homeBinInPath = true; # that is, ~/bin
   };
 
-  nixpkgs.config.allowUnfree = true; # for Spotify, maybe Chrome
+  nixpkgs.config.allowUnfree = true; # for Spotify, ?Steam, ?Chrome
   virtualisation.docker = {
     enable = true;
     # Just run `docker exec -u 0` to get around this stuff.
