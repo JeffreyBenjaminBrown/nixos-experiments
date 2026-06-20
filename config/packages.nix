@@ -30,7 +30,7 @@
       kdePackages.ark
       borgbackup
       rclone # sync a clone to a (big commercial) cloud
-      encfs
+      gocryptfs
       dos2unix
       pandoc
       corefonts # to build Mikhal's code, which hasn't worked yet
@@ -169,7 +169,7 @@
       #
       # ghc
       # haskellPackages.ghc_9_10_1 # failed
-      haskell.compiler.ghc9102
+      haskell.compiler.ghc9124
       cabal-install
       rustup # for rust
       cargo  # for rust
@@ -211,7 +211,7 @@
       capture              # screen capture (video, I think)
       screenkey            # show what I'm typing on the screen
       lsof # for testing pulse audio, per https://nixos.wiki/wiki/PulseAudio
-      obs-studio             # Screen record.
+      obs-studio           # Screen record.
       cheese
 
       ### misc ###
