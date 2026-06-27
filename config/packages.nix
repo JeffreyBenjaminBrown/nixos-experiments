@@ -231,7 +231,6 @@
       libreoffice-fresh
       unoconv # shell script for converting docs using libreoffice
       firefox
-      google-chrome
       spotify
       winetricks
       wineWow64Packages.staging
