@@ -129,7 +129,7 @@
 
   services.libinput.enable = true; # touchpad support
 
-  time.timeZone = "America/Bogota";
+  time.timeZone = "America/Los_Angeles";
 
   # User accounts.
   # TODO : Don't forget to set a password with ‘passwd’.
