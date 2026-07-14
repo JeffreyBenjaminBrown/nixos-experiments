@@ -41,6 +41,8 @@
       "/lib/vst2" "/lib/vst3" "/lib/clap" "lib/lv2" ];
     variables = {
       # LV2_PATH = "/run/current-system/sw/lib/lv2";
+      XCURSOR_THEME = "Adwaita";
+      XCURSOR_SIZE = "72";
       EDITOR = "mg"; };
     homeBinInPath = true; # that is, ~/bin
   };
