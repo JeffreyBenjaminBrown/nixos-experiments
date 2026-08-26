@@ -22,12 +22,19 @@ if [ ! -x "$HERE/result/bin/serialosc-device" ]; then
   echo "ERROR: patched serialosc did not build; see $BUILD_OUT"
   exit 1
 fi
-if ! grep -q 'Checking for working poll().*: yes' "$BUILD_OUT"; then
-  echo "ERROR: build succeeded but did not select the poll event loop."
-  grep 'Checking for working poll()' "$BUILD_OUT" || true
+if grep -q 'Checking for working poll().*: no' "$BUILD_OUT"; then
+  echo "ERROR: the build explicitly selected the select event loop."
+  grep 'Checking for working poll()' "$BUILD_OUT"
+  exit 1
+elif grep -q 'Checking for working poll().*: yes' "$BUILD_OUT"; then
+  grep 'Checking for working poll()' "$BUILD_OUT"
+elif grep -aFq 'error in poll()' "$HERE/result/bin/serialosc-device" \
+    && ! grep -aFq 'error in select()' "$HERE/result/bin/serialosc-device"; then
+  echo "The Nix cache omitted configure output; binary inspection confirms poll.c."
+else
+  echo "ERROR: cached binary does not identify the poll event loop."
   exit 1
 fi
-grep 'Checking for working poll()' "$BUILD_OUT"
 echo "built result: $(readlink -f "$HERE/result")"
 
 echo
