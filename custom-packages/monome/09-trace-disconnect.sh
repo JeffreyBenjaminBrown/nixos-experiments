@@ -56,13 +56,9 @@ systemctl --user stop serialoscd.service || exit 1
 
 : > "$TRACE"
 echo
-echo "UNPLUG THE MONOME WHEN THE BEEP SOUNDS."
+echo "Get ready to unplug the monome."
 echo "The trace has a hard 15-second limit."
-if [ -x "$HERE/../../../my-dot-claude/hooks/beep-if-main-agent.sh" ]; then
-  printf '{}' | "$HERE/../../../my-dot-claude/hooks/beep-if-main-agent.sh" beep-harsh || true
-elif command -v pw-play >/dev/null 2>&1 && [ -e /home/sound/beep-harsh.wav ]; then
-  pw-play /home/sound/beep-harsh.wav >/dev/null 2>&1 &
-fi
+read -r -p "Press Enter, then unplug it immediately: "
 
 # Keep strace in the foreground so serialosc-device inherits the terminal as
 # stdin.  A background job in a non-interactive shell gets /dev/null instead;

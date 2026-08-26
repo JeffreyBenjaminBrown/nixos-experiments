@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build, install, and live-test the targeted serialosc disconnect fix.
-# Run on the NixOS host from any directory. The script beeps when it is time
-# to unplug the monome and records its findings beside this file.
+# Run on the NixOS host from any directory. The script prints explicit plug
+# and unplug prompts and records its findings beside this file.
 
 set -uo pipefail
 
@@ -52,22 +52,28 @@ if [ -z "$supervisor_pid" ] || [ "$supervisor_pid" = 0 ]; then
 fi
 echo "supervisor process: $supervisor_pid"
 
-echo
-echo "PLUG THE MONOME IN NOW. The script will wait for it."
-if [ -x "$REPO_ROOT/../my-dot-claude/hooks/beep-if-main-agent.sh" ]; then
-  printf '{}' | "$REPO_ROOT/../my-dot-claude/hooks/beep-if-main-agent.sh" beep-glorious || true
-fi
-
-device_path=""
-for _ in $(seq 1 20); do
+find_device_path() {
   for candidate in /dev/serial/by-id/* /dev/ttyACM* /dev/ttyUSB*; do
     if [ -e "$candidate" ]; then
-      device_path="$(readlink -f "$candidate")"
-      break 2
+      readlink -f "$candidate"
+      return 0
     fi
   done
-  sleep 0.5
-done
+  return 1
+}
+
+echo
+device_path="$(find_device_path || true)"
+if [ -n "$device_path" ]; then
+  echo "The monome is already plugged in: $device_path"
+else
+  echo "PLUG THE MONOME IN NOW. The script will wait for it."
+  for _ in $(seq 1 20); do
+    device_path="$(find_device_path || true)"
+    [ -n "$device_path" ] && break
+    sleep 0.5
+  done
+fi
 if [ -z "$device_path" ]; then
   echo "ERROR: no monome serial device appeared after 10 seconds."
   exit 1
@@ -109,13 +115,8 @@ echo "device process before unplug:"
 ps -o pid,ppid,stat,pcpu,etime,cmd -p "$device_pid"
 
 echo
-echo "[4/4] UNPLUG THE MONOME WHEN THE BEEP SOUNDS"
+echo "[4/4] UNPLUG THE MONOME NOW"
 echo "The script will wait up to 20 seconds."
-if [ -x "$REPO_ROOT/../my-dot-claude/hooks/beep-if-main-agent.sh" ]; then
-  printf '{}' | "$REPO_ROOT/../my-dot-claude/hooks/beep-if-main-agent.sh" beep-harsh || true
-elif command -v pw-play >/dev/null 2>&1 && [ -e /home/sound/beep-harsh.wav ]; then
-  pw-play /home/sound/beep-harsh.wav >/dev/null 2>&1 &
-fi
 
 unplugged=0
 for _ in $(seq 1 40); do
