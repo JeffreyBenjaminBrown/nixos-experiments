@@ -49,7 +49,7 @@ let
   newpkgs = import
     (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/${ref}.tar.gz")
     {
-      system = pkgs.system;
+      system = pkgs.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
 in {

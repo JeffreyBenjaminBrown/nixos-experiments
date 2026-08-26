@@ -25,7 +25,7 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-zglwhRXKJCvVwGIj+72ZUUxzhHaFHVggMrJunDcY2UE=";
   };
 
-  patches = [ ./poll-invalid-fds.patch ];
+  patches = [ ./disconnect-cpu-loop.patch ];
 
   # `git` is a nativeBuildInput because the upstream wscript calls
   # `git rev-parse` unconditionally and only catches CalledProcessError
