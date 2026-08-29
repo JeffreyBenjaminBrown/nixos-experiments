@@ -1,0 +1,47 @@
+From: Jeffrey Benjamin Brown <jeffbrown.the@gmail.com>
+Subject: [PATCH] Fix disconnect loop when the poll probe falls back to select
+
+The working-poll configure test calls open(), but does not include the header
+that declares it.  Modern compilers reject the implicit declaration under
+-Werror, causing a false negative and selecting event_loop/select.c even on
+Linux systems with a working poll().
+
+Include fcntl.h so the intended poll backend is selected.  Also make the
+select fallback leave its event loop when libmonome reports a read error;
+select's exceptional descriptor set does not reliably report a tty hangup,
+while the readable set remains ready at EOF and otherwise causes a CPU spin.
+---
+ src/serialosc-device/event_loop/select.c | 5 +++--
+ wscript                                  | 1 +
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/serialosc-device/event_loop/select.c b/src/serialosc-device/event_loop/select.c
+index 785f2ee..5ac9910 100644
+--- a/src/serialosc-device/event_loop/select.c
++++ b/src/serialosc-device/event_loop/select.c
+@@ -83,8 +83,9 @@ sosc_event_loop(struct sosc_state *state)
+ 			return 1;
+ 
+ 		/* is there data available for reading from the monome? */
+-		if (FD_ISSET(monome_fd, &rfds))
+-			monome_event_handle_next(state->monome);
++		if (FD_ISSET(monome_fd, &rfds)
++				&& monome_event_handle_next(state->monome) < 0)
++			break;
+ 
+ 		/* how about from OSC? */
+ 		if (FD_ISSET(osc_fd, &rfds))
+diff --git a/wscript b/wscript
+index 71ee80e..caf5829 100644
+--- a/wscript
++++ b/wscript
+@@ -21,6 +21,7 @@ def check_poll(conf):
+ 
+ 	code = """
+ 		#include <stdlib.h>
++		#include <fcntl.h>
+ 		#include <poll.h>
+ 
+ 		int main(int argc, char **argv) {
+-- 
+2.50.1

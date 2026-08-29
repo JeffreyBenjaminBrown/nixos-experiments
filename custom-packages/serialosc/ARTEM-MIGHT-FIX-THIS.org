@@ -1,0 +1,427 @@
+His fix could break this.
+I made some vibecode to fix a problem wherein serialosc would cycle forever
+when I disconnect a monome.
+
+* Result: see discussion here
+https://github.com/monome/serialosc/pull/88#issuecomment-5442507713
+
+* Some process: What Codex did <2026-08-26 Wed>-ish
+
+#+TITLE: serialosc disconnect CPU loop: findings and replies to Artem
+#+DATE: 2026-08-26
+
+** what Jeff asked Codex
+Aside from this branch, the rest of this document is by Codex.
+*** jeff speaking
+I let it run for a couple minutes. Laptop got very slow. Emacs somehow got up to 40% of a core, then 80. Was vying with strace and serialosc. I killed emacs. Then measured again; top had the other two like this:
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 141881 jeff      20   0   11280   5064   4344 R  80.4   0.0   1:59.37 strace
+ 141884 jeff      20   0    5780   3656   3408 t  35.2   0.0   0:47.62 serialosc-devic
+
+Finally I killed your script (Ctrl-C). It printed some stuff to the screen:
+*** what it printed
+jeff 2026-08-25 22:49:41 ~/code/midi/worktrees/main$
+jeff 2026-08-25 23:03:01 ~/code/midi/worktrees/main$   cd /home/jeff/code/midi/worktrees/main
+jeff 2026-08-25 23:03:01 ~/code/midi/worktrees/main$   nix-shell -p strace --run nix-jbb/custom-packages/monome/09-trace-disconnect.sh
+serialosc disconnect trace: 2026-08-25T23:03:04-07:00
+host: jbb-hp24-oled
+device: /dev/ttyUSB0
+program: /run/current-system/sw/bin/serialosc-device
+stopping serialoscd.service so the traced process has exclusive access
+sosc_zeroconf_init(): couldn't load libdns_sd.so
+��`Y
+    ��`Y\m0000102\P
+monome 256\P�4\P\P
+UNPLUG THE MONOME NOW. (Capture continues for 12 seconds.)
+serialosc-device is still alive after unplug; recording process state:
+    PID    PPID STAT %CPU     ELAPSED WCHAN                    CMD
+ 141881  141872 R+   79.6       00:15 -                        strace -f -tt -T -yy -s 128 -e trace=poll,ppoll,read,write,close -o /home/jeff/code/midi/worktrees/main/nix-jbb/custom-packages/monome/09-trace-disconnect.strace /run/current-system/sw/bin/serialosc-device /dev/ttyUSB0
+ 141884  141881 t+   36.1       00:15 ptrace_stop              /run/current-system/sw/bin/serialosc-devic  /dev/ttyUSB0
+
+
+
+^C
+last 80 traced syscalls:
+141884 23:07:36.079297 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000004>
+141884 23:07:36.079313 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000004>
+141884 23:07:36.079330 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000004>
+141884 23:07:36.079354 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000004>
+141884 23:07:36.079370 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000004>
+141884 23:07:36.079388 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000004>
+141884 23:07:36.079411 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000004>
+141884 23:07:36.079429 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000004>
+141884 23:07:36.079448 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079469 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079484 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079499 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079520 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079534 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000004>
+141884 23:07:36.079550 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079571 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079585 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079601 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079622 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079636 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079653 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000004>
+141884 23:07:36.079676 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000007>
+141884 23:07:36.079694 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079712 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079733 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079747 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079762 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079783 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079797 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079813 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079834 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079848 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079864 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079885 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079899 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079914 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079935 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.079950 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.079965 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.079989 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080003 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080018 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080038 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080052 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080067 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080087 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080101 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080116 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080136 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080154 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080169 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080189 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080203 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080219 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080239 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080253 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080268 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080288 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080302 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080317 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080337 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080351 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080366 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080386 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080400 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080415 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080435 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080449 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080464 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080487 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080501 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080517 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080538 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080553 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080569 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080589 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080604 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25) = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}]) <0.000003>
+141884 23:07:36.080620 read(0</dev/null<char 1:3>>, "", 32) = 0 <0.000003>
+141884 23:07:36.080641 read(3</dev/ttyUSB0>(deleted), "", 1) = 0 <0.000003>
+141884 23:07:36.080655 poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25
+full outputs:
+  /home/jeff/code/midi/worktrees/main/nix-jbb/custom-packages/monome/09-trace-disconnect.out
+  /home/jeff/code/midi/worktrees/main/nix-jbb/custom-packages/monome/09-trace-disconnect.strace
+serialoscd.service will now be restarted
+jeff 2026-08-25 23:07:36 ~/code/midi/worktrees/main$
+** Short conclusion
+
+PR [[https://github.com/monome/serialosc/pull/88][serialosc #88]] does not fix the bug on this machine.  Its added
+=POLLNVAL= and supervisor/OSC-descriptor checks are not supported by the
+evidence, and the affected Nix build does not compile =event_loop/poll.c= at
+all.  (This describes the original broken build; the local repair described
+below now compiles =poll.c= and has passed a physical unplug test.)
+
+The trace identified this chain:
+
+1. serialosc's configure probe incorrectly reports that =poll()= does not work,
+   so serialosc builds =event_loop/select.c=.
+2. The monome is unplugged.  Linux reports the grid tty as readable/hung up,
+   but it does not put this condition in =select()='s exceptional-descriptor
+   set.
+3. The select event loop calls =monome_event_handle_next()=.
+4. libmonome's internal one-descriptor =poll()= sees exactly =0x19=:
+   =POLLIN | POLLERR | POLLHUP=.  There is no =POLLNVAL=.
+5. libmonome returns an error, but serialosc's select event loop ignores the
+   return value.  It immediately repeats, consuming a core.
+
+This is remarkably close to [[https://github.com/monome/serialosc/issues/10][serialosc issue #10]] from 2013.  In that issue
+Artem confirmed that the problem occurred when serialosc mistakenly built the
+select event loop and disappeared when the poll event loop was used.
+
+** Installed repair and live verification
+
+The local Nix package now applies
+=nix-jbb/custom-packages/serialosc/disconnect-cpu-loop.patch=.  It makes both
+targeted changes:
+
+1. adds =#include <fcntl.h>= to the configure probe, so a modern compiler
+   correctly selects =event_loop/poll.c=; and
+2. makes the =select.c= fallback exit when =monome_event_handle_next()=
+   reports a read error.
+
+The obsolete =poll-invalid-fds.patch= is no longer applied.  On 2026-08-26 the
+new package built as
+=/nix/store/m3klixhf6wacc66x5i677mpx441nfb5g-serialosc-1.4.7= and was switched
+into the live NixOS system.  The uncached build log said
+=Checking for working poll(): yes= and compiled =event_loop/poll.c=; a later
+cached-build check confirmed the same backend directly from the binary.
+
+The end-to-end test then observed:
+
+#+begin_src text
+device process before unplug:
+156146  156137  S  0.0  .../serialosc-device /dev/ttyUSB0
+
+device node disappeared; checking whether serialosc-device exits
+PASS: serialosc-device 156146 exited promptly after unplug.
+
+serialosc [m0000102]: disconnected, exiting
+#+end_src
+
+Thus the original CPU-loop problem is solved on this machine.  The full test
+record is
+=nix-jbb/custom-packages/monome/10-install-and-test-disconnect-fix.out=.
+The same rebuild also verified that changing =pkgs.system= to
+=pkgs.stdenv.hostPlatform.system= removed the Nix evaluation warning.
+
+** Suggested reply on serialosc PR #88
+
+This is ready to paste.  I would be candid that the old patch was generated
+without an adequately isolated reproduction, but I would not use
+"vibe-coded" as a substitute for the technical correction.
+
+#+begin_quote
+Thanks for following up, and sorry for the long delay.  You were right to ask
+for a more specific account.  My original patch was AI-assisted and I
+submitted it before isolating which fd and flag were actually involved.  I
+have now reproduced the problem under strace, and the evidence does not
+support the broad changes in this PR.
+
+I am not getting POLLNVAL.  On unplug, the monome tty fd returns 0x19,
+POLLIN|POLLERR|POLLHUP, exactly as you observed.  I also found no case in which
+the OSC or supervisor fd becomes invalid, so I cannot justify those checks.
+
+The important detail is that my Nix build is not using serialosc's poll event
+loop.  Its configure output says:
+
+    Checking for working poll(): no (will use select())
+
+The poll test calls open() without including <fcntl.h>.  With a modern compiler
+and -Werror, the implicit declaration makes the test fail, even though poll()
+works.  Adding <fcntl.h> makes the test compile and pass.
+
+In the resulting select event loop, unplug makes the monome fd readable, but
+the exceptional fd_set does not catch the hangup.  serialosc calls
+monome_event_handle_next(); libmonome's internal 25 ms poll sees
+POLLIN|POLLERR|POLLHUP and returns an error, but select.c ignores the return
+value and loops.  The repeating trace is:
+
+    read(3</dev/ttyUSB0>(deleted), "", 1) = 0
+    poll([{fd=3, events=POLLIN}], 1, 25)
+        = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}])
+
+This also seems to explain why you could not reproduce it: a build whose poll
+probe succeeds uses poll.c, whose existing POLLHUP|POLLERR check already
+handles 0x19.  It also looks like a recurrence of #10, where select.c versus
+poll.c was the deciding factor.
+
+So I think this PR should not be merged as written.  The targeted fixes appear
+to be (1) include <fcntl.h> in the working-poll configure test, and (2), for a
+robust fallback, make select.c exit when monome_event_handle_next() returns a
+negative value.  I have now applied those two changes locally and verified a
+physical unplug: the device process exited promptly and the supervisor logged
+"disconnected, exiting".  I am happy to replace this PR with that smaller
+change, or to close it if you would prefer a fresh PR.
+#+end_quote
+
+** Direct answers to Artem's questions
+
+*** Which descriptor?
+
+The monome device descriptor, fd 3 in the capture, referring to the removed
+=/dev/ttyUSB0=.  It was not the liblo OSC socket and not the supervisor IPC
+descriptor.
+
+*** Which flag check is missing?
+
+For the observed problem, none is missing from serialosc's *poll* event loop.
+That loop already checks =POLLHUP | POLLERR=, and the kernel returned both.
+
+The running binary had compiled the *select* event loop instead.  Its
+exceptional-descriptor check did not signal this tty hangup.  The missing
+behavior is to respect the negative return from =monome_event_handle_next()=.
+
+*** Is POLLNVAL involved?
+
+No.  Every captured post-unplug result had
+=POLLIN | POLLERR | POLLHUP= (=0x19=) and no =POLLNVAL=.
+
+*** When does the supervisor fd become invalid?
+
+There is no demonstrated case in this bug.  The checks added for =fds[1]= and
+=fds[2]= in PR #88 were speculation and should be removed.
+
+*** Why did the original two patches seem to improve CPU use?
+
+They were applied together, the service was rebuilt/restarted, and the result
+was not isolated by patch or event-loop backend.  The present evidence cannot
+attribute that observation to either patch.  In particular, serialosc #88
+changes =poll.c= while the Nix build log proves that this system built
+=select.c=.
+
+** Evidence
+
+*** Live-device trace, 2026-08-25 local time
+
+The traced device was a monome 256, serial =m0000102=, at =/dev/ttyUSB0=.
+After unplug, the trace repeated these operations at essentially zero latency:
+
+#+begin_src text
+read(3</dev/ttyUSB0>(deleted), "", 1) = 0
+poll([{fd=3</dev/ttyUSB0>(deleted), events=POLLIN}], 1, 25)
+  = 1 ([{fd=3, revents=POLLIN|POLLERR|POLLHUP}])
+#+end_src
+
+The grid descriptor is the only descriptor in that =poll()= call and the
+25 ms timeout matches libmonome's =monome_platform_wait_for_input()= call from
+=monome_platform_read()=.  The process continued spinning until interrupted.
+
+The small console record remains at
+=nix-jbb/custom-packages/monome/09-trace-disconnect.out=.  The raw trace grew to
+1.3 GiB because the failed cleanup allowed the tight loop to run for several
+minutes; after preserving the decisive lines above, it was deleted.
+
+*** Build log
+
+Both =nix-jbb/custom-packages/monome/03-build-serialosc.out= and
+=07-fix-zeroconf.out= contain:
+
+#+begin_src text
+Checking for working poll()              : no (will use select())
+#+end_src
+
+serialosc's [[https://github.com/monome/serialosc/blob/main/wscript][current =wscript=]] uses =open("/dev/null", 1)= in that test but
+includes only =stdlib.h= and =poll.h=.  =open()= is declared by =fcntl.h=.
+Reproducing the probe with =-std=c99 -Wall -Werror= fails with:
+
+#+begin_src text
+error: implicit declaration of function 'open' [-Wimplicit-function-declaration]
+#+end_src
+
+Adding =#include <fcntl.h>= makes the same test compile and exit successfully.
+I also applied that one-line change to a clean checkout of serialosc 1.4.7 and
+reran =./waf configure= in the container; the result changed to
+=Checking for working poll(): yes=.  Configuration later stopped because that
+ad-hoc checkout lacked the container's libudev development environment, after
+the poll probe had already passed.
+
+*** Source-level path
+
+The relevant upstream files are:
+
+- [[https://github.com/monome/serialosc/blob/main/wscript][serialosc/wscript]]: selects poll versus select based on the faulty probe.
+- [[https://github.com/monome/serialosc/blob/main/src/serialosc-device/event_loop/poll.c][event_loop/poll.c]]: already exits for =POLLHUP | POLLERR= on the
+  monome fd.
+- [[https://github.com/monome/serialosc/blob/main/src/serialosc-device/event_loop/select.c][event_loop/select.c]]: calls =monome_event_handle_next()= but discards its
+  return value.
+- [[https://github.com/monome/libmonome/blob/main/src/platform/linux.c][libmonome/src/platform/linux.c]]: its internal wait helper already treats
+  =POLLERR= as an error.
+
+** Recommended upstream changes
+
+*** Fix the configure probe
+
+#+begin_src diff
+diff --git a/wscript b/wscript
+--- a/wscript
++++ b/wscript
+@@
+ 	code = """
+ 		#include <stdlib.h>
++		#include <fcntl.h>
+ 		#include <poll.h>
+#+end_src
+
+This restores the intended poll backend on Linux with modern compilers.  On
+this device, the existing poll event-loop check is sufficient for the captured
+=0x19= state.
+
+*** Make the select fallback terminate on a libmonome read error
+
+#+begin_src diff
+diff --git a/src/serialosc-device/event_loop/select.c b/src/serialosc-device/event_loop/select.c
+--- a/src/serialosc-device/event_loop/select.c
++++ b/src/serialosc-device/event_loop/select.c
+@@
+-		if (FD_ISSET(monome_fd, &rfds))
+-			monome_event_handle_next(state->monome);
++		if (FD_ISSET(monome_fd, &rfds)
++				&& monome_event_handle_next(state->monome) < 0)
++			break;
+#+end_src
+
+This is the direct defense against the captured loop.  It also makes the
+fallback use the error signal libmonome already supplies instead of assuming
+that =select()='s exceptional set represents device disconnects.
+
+It would be reasonable to make =poll.c= check the handler return too, for the
+small race where the device disappears after the outer =poll()= but before the
+read.  That is separate from, and much narrower than, treating errors on all
+three descriptors as one condition.
+
+** What to do with the two open PRs
+
+*** serialosc #88
+
+Do not defend or merge its present form.  Reply with the correction above,
+then either:
+
+- replace its commit with the two targeted changes, if Artem prefers; or
+- close it and submit a fresh PR whose history and description match the
+  evidence.
+
+The latter is cleaner, but the maintainer's preference matters more than the
+mechanics.
+
+*** libmonome #89
+
+[[https://github.com/monome/libmonome/pull/89][libmonome #89]] adds =POLLHUP= and =POLLNVAL= to an existing =POLLERR=
+check.  That is plausible defensive hardening, but it did not cause or fix the
+captured failure: the capture included =POLLERR=, which upstream libmonome
+already handles.  Its PR description should therefore retract the claim that
+it fixed this particular CPU loop.  Unless someone can demonstrate a
+=POLLHUP=-only or =POLLNVAL= case, closing it is also reasonable.
+
+** Local Nix implications
+
+The serialosc derivation now applies =disconnect-cpu-loop.patch= instead of
+=poll-invalid-fds.patch=.  It has been built, installed, and tested as recorded
+above.  The separate libmonome hardening patch remains applied, but it cannot
+account for the change in behavior: it was already present in the broken
+system, while the serialosc backend change was the new delta that made the
+unplug test pass.
+
+Future rebuilds that stage this =nix-jbb= tree with =bash/copy.sh= will retain
+the repair.  Once upstream accepts an equivalent fix, the local patch can be
+removed when the package is updated to a revision containing it.
+
+** About the tracing mishap
+
+The first tracing script launched =strace= in the background and then failed
+to reap it.  That was my error.  It also caused the direct child to inherit
+=/dev/null= as stdin, which serialosc interpreted as an IPC descriptor; those
+=read(0)= calls in the trace are a test-harness artifact.  They do not alter the
+device result: fd 3 independently became readable on unplug and generated the
+captured =POLLIN | POLLERR | POLLHUP= cycle.
+
+The trace script now keeps the traced process in the foreground, waits for an
+explicit Enter key instead of an audio cue, and enforces a 15-second =timeout=
+with a two-second kill grace.  The end-to-end verifier identifies only an
+actual =serialosc-device= child of the current systemd supervisor, rather than
+matching command-line text belonging to =strace=.  No further unplug
+experiment is necessary to answer Artem's questions.
