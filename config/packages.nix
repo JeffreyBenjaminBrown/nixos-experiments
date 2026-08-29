@@ -8,6 +8,7 @@
       ###############
       (import ./emacs.nix { inherit pkgs; })
         # Fun fact: Does not rely on the `with pkgs` statement.
+      neovim
       mg
 
       ### storage, versioning, formatting ###
@@ -87,6 +88,7 @@
       xev # to view keycodes corresponding keyboard keys
       xmodmap # to remap keycodes (in ~/.xmodmap)
       xhost # to allow X11 connections (e.g. from Docker)
+      bluetui # for Bluetooth
 
 #      # These are both to read an iPhone. See
 #      #   https://nixos.wiki/wiki/IOS
@@ -124,7 +126,6 @@
       # android-studio
       # androidenv.androidPkgs_9_0.androidsdk
 
-      erlang
       perl  # Perl 5, required by the Emacs `erlang` package
       jq
 
