@@ -35,6 +35,7 @@ in
       yasnippet
 
     ]) ++ (with epkgs.melpaPackages; [
+      undo-fu-session # skg uses this to archive when reload goes sideways
       nix-mode
       native-complete # Tab-completion in *shell* buffers.
 

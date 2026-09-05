@@ -230,7 +230,7 @@
 
       ### big | sketchy | unfree ###
       ##############################
-      libreoffice-fresh
+      libreoffice-stable
       unoconv # shell script for converting docs using libreoffice
       firefox
       spotify

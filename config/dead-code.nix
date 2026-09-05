@@ -9,6 +9,16 @@
     }))
   ];
 
+  programs.steam = {
+    enable = true;
+
+    # Open ports for ...
+    remotePlay.openFirewall = true; # Steam Remote Play
+    dedicatedServer.openFirewall = true; # Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true;
+      # Steam Local Network Game Transfers
+  };
+
   hardware.pulseaudio.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
