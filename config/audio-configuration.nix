@@ -8,11 +8,29 @@
 
 {pkgs, ...}:
 
+let
+  # Keep the costly RT kernel stable while ordinary channel updates refresh
+  # userspace.  Run bash/update-kernel-pin.sh when deliberately updating it.
+  kernelNixpkgsVersion = "26.11pre1064150.d2f679497988";
+  kernelNixpkgsSha256 = "sha256-q/WSLUzcry6IHERr2wZ/Si63RvoHyez7AZ6P+oLDJ5k=";
+  kernelNixpkgsUrl =
+    "https://releases.nixos.org/nixos/unstable/nixos-${kernelNixpkgsVersion}/nixexprs.tar.xz";
+
+  kernelPkgs = import (builtins.fetchTarball {
+    url = kernelNixpkgsUrl;
+    sha256 = kernelNixpkgsSha256;
+  }) {
+    config = pkgs.config;
+    system = pkgs.stdenv.hostPlatform.system;
+  };
+in
+
 with pkgs; {
 
   musnix = {
     enable = true;
     kernel.realtime = true;
+    kernel.packages = kernelPkgs.linuxPackages;
     das_watchdog.enable = true; # kills RT processes that hang the system
     alsaSeq.enable = false;
 

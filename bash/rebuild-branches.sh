@@ -6,6 +6,8 @@
 #   bash/my-switch-config.sh xfce
 #   bash/my-switch-config.sh kde
 
+echo "NOTE: Updating KDE is disabled."
+
 rebuild_branch () {
     local branch="$1"
     local profile_name="$2"
@@ -24,22 +26,19 @@ rebuild_branch () {
 }
 
 # Ask BEFORE redirecting stdout to the log, so the prompt is visible.
-# Updating the channel can pull a new kernel source; with musnix's
-# realtime kernel there's no binary cache, so a channel update often
-# triggers a multi-hour, laptop-overheating full kernel rebuild.
-read -r -p "Update nix channel? Doing so may trigger a slow kernel rebuild. [y/N] " reply
+# The RT kernel is separately pinned in audio-configuration.nix, so a channel
+# update does not move it.  bash/update-kernel-pin.sh updates that pin.
+read -r -p "Update nix channel? [y/N] " reply
 case "$reply" in
     [yY]|[yY][eE][sS]) update_channel=1 ;;
     *)                 update_channel=0 ;;
 esac
 
-exec &> ~/code/midi/nix/rebuild-branches.log
+exec &> ~/nix/jbb/rebuild-branches.log
 
 if [[ "$update_channel" == 1 ]]; then
     sudo nix-channel --update nixos
 fi
-cd ~/code/midi/nix/
-echo ""
 
 rebuild_branch "xfce" "xfce"
-rebuild_branch "kde"  "kde"
+# rebuild_branch "kde"  "kde"

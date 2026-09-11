@@ -12,16 +12,20 @@
   #  services.usbmuxd.enable = true;
 
   imports =
-    [ # Include the results of the hardware scan.
+    [ # Includes the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # NixOS uses the LTS Linux kernel by default.
+      # Musnix overrides the kernel to the RT one
+      #   when kernel.realtime = true.
+      # Its Nixpkgs snapshot is pinned separately in audio-configuration.nix, so
+      # normal channel updates do not move it.  Use bash/update-kernel-pin.sh to
+      # deliberately update the RT kernel pin.
       ./audio-configuration.nix
-      ./pipewire-upgrade.nix  # bump pipewire/wireplumber past the channel's
-                              # 1.2.6 so the container's 1.6.3 clients (beep
-                              # hook, synths) aren't stalled by a server too old
-                              # to schedule their async nodes.
+
       ./packages.nix
       ./monome.nix
-      # ./emacs.nix # This is imported from packages.nix, not here.
+      # ./emacs.nix   # Emacs packages are imported from packages.nix, not here.
     ];
 
   environment = {
@@ -161,28 +165,6 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # NixOS uses the LTS Linux kernel by default.
-  # Musnix overrides the kernel to the RT one
-  #   when kernel.realtime = true.
-  # If musnix weren't doing that, this would use a more recent kernel:
-  #   boot.kernelPackages = pkgs.linuxPackages_latest;
-  #
-  # PITFALL: To avoid surprise RT kernel rebuilds (which take a long
-  # time), don't run `sudo nix-channel --update` unless you're
-  # prepared for a rebuild. Changes to boot.kernelParams,
-  # boot.extraModprobeConfig, boot.blacklistedKernelModules, and
-  # boot.kernelModules do NOT trigger kernel recompilation — only
-  # channel updates (new kernel source) or boot.kernelPatches changes do.
-  #
-  # To pin nixpkgs and prevent ANY channel drift, uncomment and
-  # adjust the following (you'll need to compute the sha256 once with
-  # `nix-prefetch-url --unpack <url>`):
-  #
-  #   nixpkgs.source = builtins.fetchTarball {
-  #     url = "https://github.com/NixOS/nixpkgs/archive/c06b4ae3d659.tar.gz";
-  #     sha256 = ""; # fill in via nix-prefetch-url --unpack <url>
-  #   };
 
   # PITFALL: Probably not to modify.
   # This value determines the NixOS release from which the default
