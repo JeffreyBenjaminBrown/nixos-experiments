@@ -19,7 +19,7 @@
       # Musnix overrides the kernel to the RT one
       #   when kernel.realtime = true.
       # Its Nixpkgs snapshot is pinned separately in audio-configuration.nix, so
-      # normal channel updates do not move it.  Use bash/update-kernel-pin.sh to
+      # normal channel updates do not move it. Use bash/update-kernel-pin.sh to
       # deliberately update the RT kernel pin.
       ./audio-configuration.nix
 
@@ -126,7 +126,12 @@
 
   services.libinput.enable = true; # touchpad support
 
-  time.timeZone = "America/Los_Angeles";
+  # America/Los_Angeles
+  # America/New_York
+  # America/Bogota
+  # Europe/Zurich
+  # Europe/Istanbul
+  time.timeZone =  "America/Los_Angeles";
 
   # User accounts.
   # TODO : Don't forget to set a password with ‘passwd’.

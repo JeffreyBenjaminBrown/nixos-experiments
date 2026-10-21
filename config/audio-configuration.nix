@@ -11,8 +11,8 @@
 let
   # Keep the costly RT kernel stable while ordinary channel updates refresh
   # userspace.  Run bash/update-kernel-pin.sh when deliberately updating it.
-  kernelNixpkgsVersion = "26.11pre1064150.d2f679497988";
-  kernelNixpkgsSha256 = "sha256-q/WSLUzcry6IHERr2wZ/Si63RvoHyez7AZ6P+oLDJ5k=";
+  kernelNixpkgsVersion = "26.11pre1097682.02c087f3fe67";
+  kernelNixpkgsSha256 = "168zmlk7lbrdirdw4cjf04cj247rf5acakmk5qpplf6k3i9i0gwa";
   kernelNixpkgsUrl =
     "https://releases.nixos.org/nixos/unstable/nixos-${kernelNixpkgsVersion}/nixexprs.tar.xz";
 
