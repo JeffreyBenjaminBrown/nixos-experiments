@@ -155,7 +155,7 @@
       memcached    # Requirement for Agora.
       libmemcached # C/C++ library. Requirement for Agora.
       libssh2      # a C library needed by Lumatone
-      purescript
+      # purescript
       # spago # purescript package manager, marked broken
       nodejs_24
       typescript
@@ -240,7 +240,7 @@
       #### audio, important ###
       #########################
       a2jmidid
-      audacity # good for editing samples
+      # audacity # good for editing samples
       # Reaper is wrapped in systemd-run so it gets RT scheduling
       # (LimitRTPRIO=99, LimitMEMLOCK=infinity). On X11, KDE
       # doesn't give launched apps these limits otherwise.
