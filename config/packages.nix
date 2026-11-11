@@ -1,5 +1,15 @@
 { pkgs, ... }:
 
+let
+  # WORKAROUND (2026-11-11): nixpkgs' patchelf 0.19 corrupts Reaper's
+  # binary, so it segfaults in the dynamic loader before main().
+  # https://github.com/NixOS/nixpkgs/issues/576412
+  # https://github.com/NixOS/nixpkgs/pull/584391 (this same fix, for nixpkgs)
+  # Once that PR is in your channel, delete this and use pkgs.reaper.
+  reaper = pkgs.reaper.overrideAttrs (old: {
+    patchelfFlags = [ "--page-size" "65536" ];
+  });
+in
 {
   environment.systemPackages =
     with pkgs; [
@@ -262,7 +272,7 @@
             -E XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" \
             -E DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
             -E HOME="$HOME" \
-            ${pkgs.reaper}/bin/reaper "$@"
+            ${reaper}/bin/reaper "$@"
         ''} %U";
         icon = "cockos-reaper";
         categories = [ "AudioVideo" "Audio" ];
